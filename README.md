@@ -1,7 +1,11 @@
 # gl_flutter
 
-Application de scan de bouffe pour vérifier si tu meurs pas en la mangeant
+Application de scan de bouffe pour vérifier si tu meurs pas en la mangeant.
 
+## Crédits
+
+Nathan RANAIVO RAVOAJA: nathan.ranaivo-ravoaja@isen-ouest.yncrea.fr
+s
 ## Getting Started
 
 This project is a starting point for a Flutter application.
