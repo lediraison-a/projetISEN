@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'gl_flutter demo',
+      title: 'MyHomePage',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -114,7 +114,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => SuccessfullLoginScreen()
+                                builder: (context) => ScanScreen()
                             )
                         );
                       }
@@ -193,6 +193,58 @@ class SuccessfullLoginScreen extends StatelessWidget {
                           "Annuler",
                           false,
                           ScanMode.QR);
+                    },
+                    child: const Text('Scanner un code-barre'),
+                  ),
+                  Text("Contenu du code-barres: $_barcodeText"),
+                ]
+            )
+        )
+    );
+  }
+}
+
+class ScanScreen extends StatefulWidget {
+  const ScanScreen({super.key});
+  //final String title;
+
+  @override
+  State<ScanScreen> createState() => _ScanScreenState();
+}
+
+class _ScanScreenState extends State<ScanScreen> {
+  String _scanBarcode = "";
+
+  Future<void> barcodeScan() async {
+    String barcodeScanRes;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
+          '#ff6666', 'Cancel', true, ScanMode.QR);
+      print(barcodeScanRes);
+    } on PlatformException {
+      barcodeScanRes = 'Failed to get platform version.';
+    }
+    if (!mounted) return;  setState(() {
+      _scanBarcode = barcodeScanRes;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: const Text('ScanScreen'),
+        ),
+        body: Center(
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text("Contenu du code-barres: $_scanBarcode"),
+                  ElevatedButton(
+                    onPressed: () async {
+                      barcodeScan();
                     },
                     child: const Text('Scanner un code-barre'),
                   ),
