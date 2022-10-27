@@ -89,10 +89,13 @@ class SuccessfullLoginScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            const Text(
+              "Authentification réussie."
+            ),
             ElevatedButton(
               onPressed: () {
               },
-              child: const Text('Do nothing'),
+              child: const Text('Scanner un code-barre'),
             ),
           ]
         )
