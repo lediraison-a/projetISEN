@@ -19,6 +19,7 @@ import firebase from 'firebase/compat/app'
 import * as firebaseui from 'firebaseui'
 import { useUserContext } from '@/stores/userContext'
 import { onMounted } from 'vue'
+import router from '@/router'
 
 const userContext = useUserContext()
 
@@ -33,7 +34,13 @@ onMounted(() => {
 })
 
 function logOut() {
-  userContext.unset()
+  firebase
+    .auth()
+    .signOut()
+    .then(() => {
+      userContext.unset()
+      router.push('/')
+    })
 }
 
 function signIn() {
@@ -73,9 +80,15 @@ function signIn() {
 }
 
 .auth-link {
-  margin: 3px;
-  padding: 2px;
+  margin: 2px;
+  padding: 3px;
   cursor: pointer;
+  border: solid var(--color-text) 1px;
+  border-radius: 0.5rem;
+}
+
+.auth-link:hover {
+  background-color: var(--color-background-mute);
 }
 
 .auth-info {

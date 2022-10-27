@@ -17,10 +17,10 @@ export const useUserContext = defineStore('userContext', () => {
   }
 
   return {
-    set,
-    unset,
     email,
     uid,
     isConnected,
+    set,
+    unset,
   }
 })
