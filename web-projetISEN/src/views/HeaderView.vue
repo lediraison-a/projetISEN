@@ -1,12 +1,12 @@
 <template>
   <div>
-    <div class="homeLink">
+    <div class="home-link">
       <router-link to="/">
         {{ appName }}
       </router-link>
     </div>
-    <div class="navLinks"></div>
-    <div class="connectLinks">
+    <div class="nav-links"></div>
+    <div class="connect-links">
       <UserAuth />
     </div>
   </div>
@@ -25,11 +25,11 @@ const appName = inject('appName')
   justify-content: start;
 }
 
-.homeLink {
+.home-link {
   font-size: x-large;
 }
 
-.connectLinks {
+.connect-links {
   right: 1rem;
   position: absolute;
 }
