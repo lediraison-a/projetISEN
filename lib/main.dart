@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.green,
       ),
       home: const MyHomePage(title: 'gl_flutter demo'),
     );
@@ -47,12 +47,77 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class UnsuccessfullLoginScreen extends StatelessWidget {
+  const UnsuccessfullLoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('UnsuccessfullLoginScreen'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const Text("Identifiants invalides."),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text("Réessayer"),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class SuccessfullLoginScreen extends StatelessWidget {
+  const SuccessfullLoginScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('SuccessfullLoginScreen'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            ElevatedButton(
+              onPressed: () {
+              },
+              child: const Text('Do nothing'),
+            ),
+          ]
+        )
+      )
+    );
+  }
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+
+  bool mock_login(String username, String password){
+    if (username == 'test' && password == 'test'){
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
+  final usernameTextController = TextEditingController();
+  final passwordTextController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    // This method is rerun every time setState is called
     //
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
@@ -71,34 +136,49 @@ class _MyHomePageState extends State<MyHomePage> {
             SizedBox(
               height: 250,
               width: 250,
-              //child: const DecoratedBox(
-              //  decoration: const BoxDecoration(
-               //     color: Colors.red
-                //),
-              //),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: const <Widget>[
-                  //Text("Nom d\'utilisateur"),
+                children: <Widget>[
                   TextField(
+                    controller: usernameTextController,
                     obscureText: false,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Nom d\'utilisateur',
                     ),
                   ),
-                  //Text("Mot de passe"),
-                  SizedBox( height: 15.0, ),
+                  const SizedBox( height: 15.0, ),
                   TextField(
+                    controller: passwordTextController,
                     obscureText: true,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Mot de passe',
                     ),
                   ),
                   ElevatedButton(
-                    onPressed: null,
+                    onPressed: () {
+                      // Auth mock :
+                      bool success = mock_login(usernameTextController.text,
+                          passwordTextController.text);
+                      if(success){
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const SuccessfullLoginScreen()
+                            )
+                        );
+                      }
+                      else {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const UnsuccessfullLoginScreen()
+                            )
+                        );
+                      }
+                    },
                     child: const Text('Login'),
                   ),
                 ],
