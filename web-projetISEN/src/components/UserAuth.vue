@@ -80,16 +80,19 @@ function signIn() {
 }
 
 .auth-link {
-  margin: 2px;
-  padding: 3px;
+  padding: 3px 8px;
   cursor: pointer;
-  border: solid var(--color-text) 1px;
-  border-radius: 0.5rem;
+  border: solid var(--color-border) 2px;
+  border-radius: 0.375em;
   background-color: var(--color-background);
+  -webkit-box-shadow: 0 0 13px -8px rgba(0, 0, 0, 0.37);
+  box-shadow: 0 0 13px -8px rgba(0, 0, 0, 0.37);
+  transition: 150ms;
 }
 
 .auth-link:hover {
   background-color: var(--color-background-mute);
+  transition: 150ms;
 }
 
 .auth-info {

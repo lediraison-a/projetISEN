@@ -36,8 +36,8 @@ const appName = inject('appName')
   padding-left: 2rem;
   justify-content: start;
   background-color: var(--color-background-soft);
-  -webkit-box-shadow: 0px 0px 19px 0px rgba(0,0,0,0.15);
-  box-shadow: 0px 0px 19px 0px rgba(0,0,0,0.15);
+  z-index: 10;
+  border-bottom: solid var(--color-border) 1px;
 }
 
 .home-link {
@@ -50,18 +50,17 @@ const appName = inject('appName')
   padding: 1rem;
 }
 
-.home-link nav-link {
+.home-link {
   padding: 0.2rem;
 }
 
 .nav-link {
   font-size: larger;
   padding: 0.5rem;
-  text-decoration: underline var(--color-heading);
 }
 
 .connect-links {
-  right: 1rem;
+  right: 0.5rem;
   position: absolute;
 }
 </style>
