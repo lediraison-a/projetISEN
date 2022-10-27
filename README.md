@@ -3,7 +3,7 @@
 ## équipe
 
 - Nathan Le Duot
-- Nathan Rainaivo
+- Nathan Ranaivo
 - Alban Le Diraison
 - Mathis Guillarmou
 - Alban Le Diraison
