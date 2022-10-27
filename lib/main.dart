@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 void main() {
   runApp(const MyApp());
@@ -167,43 +168,6 @@ class UnsuccessfullLoginScreen extends StatelessWidget {
   }
 }
 
-class SuccessfullLoginScreen extends StatelessWidget {
-  SuccessfullLoginScreen({super.key});
-
-  String _barcodeText = "";
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text('SuccessfullLoginScreen'),
-        ),
-        body: Center(
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const Text(
-                      "Authentification réussie."
-                  ),
-                  ElevatedButton(
-                    onPressed: () async {
-                      _barcodeText = await FlutterBarcodeScanner.scanBarcode(
-                          "#008000",
-                          "Annuler",
-                          false,
-                          ScanMode.QR);
-                    },
-                    child: const Text('Scanner un code-barre'),
-                  ),
-                  Text("Contenu du code-barres: $_barcodeText"),
-                ]
-            )
-        )
-    );
-  }
-}
-
 class ScanScreen extends StatefulWidget {
   const ScanScreen({super.key});
   //final String title;
@@ -220,14 +184,29 @@ class _ScanScreenState extends State<ScanScreen> {
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
       barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
-          '#ff6666', 'Cancel', true, ScanMode.QR);
+          '#ff6666', 'Annuler', true, ScanMode.QR);
       print(barcodeScanRes);
     } on PlatformException {
       barcodeScanRes = 'Failed to get platform version.';
     }
-    if (!mounted) return;  setState(() {
+    if (!mounted) return;
+    setState(() {
       _scanBarcode = barcodeScanRes;
     });
+  }
+
+  // Continuous scan
+  Future<void> startBarcodeScanStream() async {
+    /*FlutterBarcodeScanner.getBarcodeStreamReceiver(
+        '#ff6666', 'Cancel', true, ScanMode.BARCODE)!
+        .listen((barcode) => print(barcode));*/
+    FlutterBarcodeScanner.getBarcodeStreamReceiver(
+        '#ff6666', 'Annuler', true, ScanMode.BARCODE)!
+        .listen((barcode) => Fluttertoast.showToast(
+                                    msg: barcode,
+                                    toastLength: Toast.LENGTH_SHORT,
+                                    )
+        );
   }
 
   @override
@@ -242,12 +221,24 @@ class _ScanScreenState extends State<ScanScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text("Contenu du code-barres: $_scanBarcode"),
-                  ElevatedButton(
-                    onPressed: () async {
-                      barcodeScan();
-                    },
-                    child: const Text('Scanner un code-barre'),
-                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () async {
+                          barcodeScan();
+                        },
+                        child: const Text('Scan unique'),
+                      ),
+                      ElevatedButton(
+                        onPressed: () async {
+                          startBarcodeScanStream();
+                        },
+                        child: const Text('Scan continu'),
+                      ),
+                    ],
+                  )
                 ]
             )
         )
