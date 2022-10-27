@@ -1,5 +1,7 @@
 <template>
-  <div>Home</div>
+  <div>
+    <div>Connect</div>
+  </div>
 </template>
 
 <script setup></script>

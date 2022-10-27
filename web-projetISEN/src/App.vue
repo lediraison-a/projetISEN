@@ -24,9 +24,7 @@ import HeaderView from './views/HeaderView.vue'
 
 .app-view {
   left: 0;
-  width: 100vw;
   top: 2rem;
   position: absolute;
 }
-
 </style>
