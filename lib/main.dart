@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:flutter/services.dart';
 
 void main() {
   runApp(const MyApp());
@@ -45,63 +47,6 @@ class MyHomePage extends StatefulWidget {
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class UnsuccessfullLoginScreen extends StatelessWidget {
-  const UnsuccessfullLoginScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('UnsuccessfullLoginScreen'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const Text("Identifiants invalides."),
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text("Réessayer"),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class SuccessfullLoginScreen extends StatelessWidget {
-  const SuccessfullLoginScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('SuccessfullLoginScreen'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const Text(
-              "Authentification réussie."
-            ),
-            ElevatedButton(
-              onPressed: () {
-              },
-              child: const Text('Scanner un code-barre'),
-            ),
-          ]
-        )
-      )
-    );
-  }
 }
 
 class _MyHomePageState extends State<MyHomePage> {
@@ -169,7 +114,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const SuccessfullLoginScreen()
+                                builder: (context) => SuccessfullLoginScreen()
                             )
                         );
                       }
@@ -190,6 +135,70 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         )
       ),
+    );
+  }
+}
+
+class UnsuccessfullLoginScreen extends StatelessWidget {
+  const UnsuccessfullLoginScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('UnsuccessfullLoginScreen'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const Text("Identifiants invalides."),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text("Réessayer"),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class SuccessfullLoginScreen extends StatelessWidget {
+  SuccessfullLoginScreen({super.key});
+
+  String _barcodeText = "";
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: const Text('SuccessfullLoginScreen'),
+        ),
+        body: Center(
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const Text(
+                      "Authentification réussie."
+                  ),
+                  ElevatedButton(
+                    onPressed: () async {
+                      _barcodeText = await FlutterBarcodeScanner.scanBarcode(
+                          "#008000",
+                          "Annuler",
+                          false,
+                          ScanMode.QR);
+                    },
+                    child: const Text('Scanner un code-barre'),
+                  ),
+                ]
+            )
+        )
     );
   }
 }
