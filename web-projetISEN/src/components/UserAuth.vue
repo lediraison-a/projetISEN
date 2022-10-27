@@ -31,6 +31,9 @@ onMounted(() => {
       userContext.set(email, uid)
     }
   })
+  if (!userContext.isConnected) {
+    router.push('/')
+  }
 })
 
 function logOut() {
@@ -54,6 +57,7 @@ function signIn() {
         const uid = authResult.user.uid
         const email = authResult.user.email
         userContext.set(email, uid)
+        router.push('/user')
         return false
       },
     },
@@ -64,15 +68,11 @@ function signIn() {
       },
     ],
     signInFlow: 'popup',
-    signInSuccessUrl: '/',
   })
 }
 </script>
 
 <style scoped>
-.user-auth {
-}
-
 .auth-links {
   display: flex;
   flex-direction: row;
@@ -85,6 +85,7 @@ function signIn() {
   cursor: pointer;
   border: solid var(--color-text) 1px;
   border-radius: 0.5rem;
+  background-color: var(--color-background);
 }
 
 .auth-link:hover {
@@ -94,6 +95,7 @@ function signIn() {
 .auth-info {
   margin: 3px;
   padding: 2px;
+  color: var(--color-heading);
 }
 
 .auth-popup {
@@ -107,5 +109,8 @@ function signIn() {
   position: fixed;
   left: 0;
   z-index: 20;
+}
+
+#firebaseui-auth-container {
 }
 </style>

@@ -1,0 +1,98 @@
+
+.firebaseui-container > form > * {
+    padding: 0.5rem;
+}
+
+.firebaseui-container::before {
+    content: "";
+    position: fixed;
+    min-width: 100vw;
+    min-height: calc(100vh - 3rem);
+    top: 3rem;
+    left: 0;
+    z-index: -1;
+    background-color: var(--color-background);
+}
+
+.firebaseui-container {
+    padding: 1rem;
+    min-width: 20rem;
+    /* border: solid var(--color-text) 1px; */
+    background-color: var(--color-background-mute);
+    border-radius: 0.5rem;
+    -webkit-box-shadow: 0px 0px 43px 10px rgba(0,0,0,0.24);
+    box-shadow: 0px 0px 43px 10px rgba(0,0,0,0.24);
+}
+
+.firebaseui-input, .firebaseui-input-invalid, .firebaseui-textfield > input{
+    background-color: var(--color-background);
+    color: var(--color-text);
+    border-radius: .375em;
+    border: none;
+    padding: 0.3rem;
+    -webkit-box-shadow: 0px 0px 19px 0px rgba(0,0,0,0.15);
+    box-shadow: 0px 0px 19px 0px rgba(0,0,0,0.15);
+
+}
+
+.firebaseui-input:focus, .firebaseui-input-invalid:focus, .firebaseui-textfield .is-focused {
+    outline: solid hsla(160, 100%, 37%, 1) 2px;
+    -webkit-box-shadow: 0px 0px 19px 0px rgba(0,0,0,0.15);
+    box-shadow: 0px 0px 19px 0px rgba(0,0,0,0.15);
+}
+
+.firebaseui-button {
+    background-color: hsla(160, 100%, 37%, 1);
+    border-width: 0;
+    color: var(--vt-c-text-light-1);
+    cursor: pointer;
+    justify-content: center;
+    padding: calc(.5em - 1px) 1em;
+    text-align: center;
+    white-space: nowrap;
+    border-radius: .375em;
+    font-size: medium;
+    -webkit-box-shadow: 0px 0px 19px 0px rgba(0,0,0,0.15);
+    box-shadow: 0px 0px 19px 0px rgba(0,0,0,0.15);
+}
+
+.firebaseui-textfield {
+    background-color: var(--color-background-mute);
+    color: var(--color-text);
+    padding-bottom: 0.5rem;
+    width: min-content;
+}
+
+.firebaseui-form-links {
+    padding-bottom: 0.5rem;
+}
+
+.firebaseui-label {
+    margin-right: 0.5rem;
+}
+
+.firebaseui-button.firebaseui-id-secondary-link {
+    background-color: var(--color-background);
+    /* border: solid var(--color-text) 1px; */
+    color: var(--color-text);
+    cursor: pointer;
+    justify-content: center;
+    padding: calc(.3em - 1px) 0.5em;
+    text-align: center;
+    white-space: nowrap;
+    border-radius: .375em;
+    font-size: medium;
+    -webkit-box-shadow: 0px 0px 19px 0px rgba(0,0,0,0.15);
+    box-shadow: 0px 0px 19px 0px rgba(0,0,0,0.15);
+}
+
+.firebaseui-form-actions > * {
+    margin-left: 0.5rem;
+
+}
+
+.firebaseui-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}

@@ -35,6 +35,9 @@ const appName = inject('appName')
   align-items: center;
   padding-left: 2rem;
   justify-content: start;
+  background-color: var(--color-background-soft);
+  -webkit-box-shadow: 0px 0px 19px 0px rgba(0,0,0,0.15);
+  box-shadow: 0px 0px 19px 0px rgba(0,0,0,0.15);
 }
 
 .home-link {
