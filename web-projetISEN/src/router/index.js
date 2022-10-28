@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import DownloadView from '../views/DownloadView.vue'
 import UserView from '../views/UserView.vue'
-import LoginPage from '../components/LoginPage.vue'
+import SignIn from '../components/SignIn.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -23,9 +23,9 @@ const router = createRouter({
       component: DownloadView,
     },
     {
-      path: '/login',
-      name: 'login',
-      component: LoginPage,
+      path: '/signin',
+      name: 'signin',
+      component: SignIn,
     },
   ],
 })

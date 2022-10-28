@@ -1,7 +1,7 @@
 <template>
   <div class="user-auth">
     <div v-if="!userContext.isConnected" class="auth-links">
-      <div class="auth-link" @click="router.push('/login')">Sign in</div>
+      <div class="auth-link" @click="router.push('/signin')">Sign in</div>
     </div>
     <div v-else class="auth-links">
       <div class="auth-info">{{ userContext.email }}</div>
@@ -25,11 +25,10 @@ onMounted(() => {
       const uid = user.uid
       const email = user.email
       userContext.set(email, uid)
+    } else {
+      router.push('/')
     }
   })
-  if (!userContext.isConnected) {
-    router.push('/')
-  }
 })
 
 function logOut() {
