@@ -9,9 +9,8 @@
 <script setup>
 import HeaderView from './views/HeaderView.vue'
 </script>
-<style>
-@import '@/style/firebaseui.css';
-@import '@/style/appStyle.css';
+<style scoped>
+@import '@/assets/appStyle.css';
 
 .app-header {
   width: 100%;
@@ -30,6 +29,7 @@ import HeaderView from './views/HeaderView.vue'
   left: 0;
   top: 3rem;
   position: absolute;
-  z-index: -1;
+  min-width: 100vw;
+  min-height: calc(100vh - 3rem);
 }
 </style>

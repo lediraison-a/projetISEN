@@ -1,7 +1,21 @@
 <template>
-  <div>Home</div>
+  <div class="home-content">
+    <div class="btn-start app-btn-primary">
+      <router-link to="/login">Sign in to get started</router-link>
+    </div>
+  </div>
 </template>
-
 <script setup></script>
+<style scoped>
+.home-content {
+  height: calc(100vh - 3rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-<style scoped></style>
+.btn-start {
+  font-size: large;
+  font-weight: bold;
+}
+</style>

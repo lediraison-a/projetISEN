@@ -20,6 +20,7 @@
     border: solid var(--color-border) 1px;
     background-color: var(--color-background-mute);
     border-radius: 0.5rem;
+    max-width: calc(100vw - 2rem);
 }
 
 .firebaseui-input, .firebaseui-input-invalid, .firebaseui-textfield > input{
@@ -85,7 +86,6 @@
 
 .firebaseui-form-actions > * {
     margin-left: 0.5rem;
-
 }
 
 .firebaseui-form-actions {
