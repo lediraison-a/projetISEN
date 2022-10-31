@@ -20,7 +20,7 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 
-	// firebase
+	// jwt auth
 	// https://medium.com/comsystoreply/authentication-with-firebase-auth-and-spring-security-fcb2c1dc96d
 	implementation 'org.springframework.security:spring-security-oauth2-resource-server:5.7.4'
 	implementation 'org.springframework.security:spring-security-oauth2-jose:5.7.4'
