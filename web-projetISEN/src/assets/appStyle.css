@@ -1,0 +1,18 @@
+.app-btn-primary {
+    background-color: hsla(160, 100%, 37%, 1);
+    border-width: 0;
+    color: var(--vt-c-text-light-1);
+    cursor: pointer;
+    justify-content: center;
+    padding: calc(.5em - 1px) 1em;
+    text-align: center;
+    white-space: nowrap;
+    border-radius: .375em;
+    font-size: medium;
+    -webkit-box-shadow: 0 0 13px -8px rgba(0,0,0,0.37);
+    box-shadow: 0 0 13px -8px rgba(0,0,0,0.37);
+}
+
+.app-btn {
+
+}
