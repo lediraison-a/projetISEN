@@ -25,6 +25,7 @@ onMounted(() => {
     callbacks: {
       signInSuccessWithAuthResult: function (authResult, redirectUrl) {
         console.log(redirectUrl)
+        console.log(authResult.user)
         const uid = authResult.user.uid
         const email = authResult.user.email
         userContext.set(email, uid)
