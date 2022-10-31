@@ -7,9 +7,15 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Configuration
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+    private static final String[] AUTH_WHITE_LIST = {
+            "/swagger-ui/**",
+            "/v3/api-docs/**",
+    };
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+                .antMatchers(AUTH_WHITE_LIST).permitAll()
                 .anyRequest()
                 .authenticated();
 

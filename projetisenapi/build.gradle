@@ -33,7 +33,7 @@ dependencies {
 	implementation 'org.openapitools:jackson-databind-nullable:0.2.4'
 
 	// swagger
-	implementation 'io.springfox:springfox-boot-starter:3.0.0'
+	implementation 'org.springdoc:springdoc-openapi-ui:1.6.12'
 }
 
 tasks.named('test') {
@@ -44,4 +44,9 @@ openApiGenerate {
 	inputSpec = "$rootDir/src/main/resources/specs/ProjetIsenApi.json"
 	outputDir = "$buildDir/generated"
 	generatorName = "spring"
+	apiPackage = "com.isen.projetisenapi.api"
+	modelPackage = "com.isen.projetisenapi.api.models"
+	configOptions = [
+		interfaceOnly: "true",
+	]
 }
