@@ -14,7 +14,7 @@ repositories {
 	mavenCentral()
 }
 
-sourceSets.main.java.srcDirs = ["$buildDir/generated","src/main/java"]
+sourceSets.main.java.srcDirs = ["$buildDir/generated/src/main/java","src/main/java"]
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
@@ -28,7 +28,12 @@ dependencies {
 	implementation 'org.springframework.security:spring-security-oauth2-resource-server:5.7.4'
 	implementation 'org.springframework.security:spring-security-oauth2-jose:5.7.4'
 
-	implementation 'io.springfox:springfox-boot-starter:3.0.0'
+	// generated openapi
+	implementation 'org.springframework.boot:spring-boot-starter-validation:2.7.5'
+	implementation 'org.openapitools:jackson-databind-nullable:0.2.4'
+
+	// swagger
+	implementation 'org.springdoc:springdoc-openapi-ui:1.6.12'
 }
 
 tasks.named('test') {
@@ -38,5 +43,10 @@ tasks.named('test') {
 openApiGenerate {
 	inputSpec = "$rootDir/src/main/resources/specs/ProjetIsenApi.json"
 	outputDir = "$buildDir/generated"
-	generatorName = "java"
+	generatorName = "spring"
+	apiPackage = "com.isen.projetisenapi.api"
+	modelPackage = "com.isen.projetisenapi.api.models"
+	configOptions = [
+		interfaceOnly: "true",
+	]
 }
