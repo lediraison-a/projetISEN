@@ -14,6 +14,8 @@ repositories {
 	mavenCentral()
 }
 
+sourceSets.main.java.srcDirs = ["$buildDir/generated","src/main/java"]
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -25,6 +27,8 @@ dependencies {
 	// https://medium.com/comsystoreply/authentication-with-firebase-auth-and-spring-security-fcb2c1dc96d
 	implementation 'org.springframework.security:spring-security-oauth2-resource-server:5.7.4'
 	implementation 'org.springframework.security:spring-security-oauth2-jose:5.7.4'
+
+	implementation 'io.springfox:springfox-boot-starter:3.0.0'
 }
 
 tasks.named('test') {
