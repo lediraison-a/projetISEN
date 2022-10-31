@@ -1,4 +1,4 @@
 package com.isen.projetisenapi.dao.firebase;
 
-public interface firebaseDao {
+public interface FirebaseDao {
 }
