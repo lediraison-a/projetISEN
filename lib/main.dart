@@ -5,7 +5,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -56,12 +55,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
-  bool mock_login(String username, String password){
-    if (username == 'test' && password == 'test'){
+  bool mock_login(String username, String password) {
+    if (username == 'test' && password == 'test') {
       return true;
-    }
-    else {
+    } else {
       return false;
     }
   }
@@ -83,64 +80,61 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            SizedBox(
-              height: 250,
-              width: 250,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  TextField(
-                    controller: usernameTextController,
-                    obscureText: false,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Nom d\'utilisateur',
-                    ),
+          child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          SizedBox(
+            height: 250,
+            width: 250,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                TextField(
+                  controller: usernameTextController,
+                  obscureText: false,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Nom d\'utilisateur',
                   ),
-                  const SizedBox( height: 15.0, ),
-                  TextField(
-                    controller: passwordTextController,
-                    obscureText: true,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Mot de passe',
-                    ),
+                ),
+                const SizedBox(
+                  height: 15.0,
+                ),
+                TextField(
+                  controller: passwordTextController,
+                  obscureText: true,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Mot de passe',
                   ),
-                  ElevatedButton(
-                    onPressed: () {
-                      // Auth mock :
-                      bool success = mock_login(usernameTextController.text,
-                          passwordTextController.text);
-                      if(success){
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ScanScreen()
-                            )
-                        );
-                      }
-                      else {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const UnsuccessfullLoginScreen()
-                            )
-                        );
-                      }
-                    },
-                    child: const Text('Login'),
-                  ),
-                ],
-              ),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    // Auth mock :
+                    bool success = mock_login(usernameTextController.text,
+                        passwordTextController.text);
+                    if (success) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ScanScreen()));
+                    } else {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  const UnsuccessfullLoginScreen()));
+                    }
+                  },
+                  child: const Text('Login'),
+                ),
+              ],
             ),
-          ],
-        )
-      ),
+          ),
+        ],
+      )),
     );
   }
 }
@@ -206,12 +200,11 @@ class _ScanScreenState extends State<ScanScreen> {
         '#ff6666', 'Cancel', true, ScanMode.BARCODE)!
         .listen((barcode) => print(barcode));*/
     FlutterBarcodeScanner.getBarcodeStreamReceiver(
-        '#ff6666', 'Annuler', true, ScanMode.BARCODE)!
+            '#ff6666', 'Annuler', true, ScanMode.BARCODE)!
         .listen((barcode) => Fluttertoast.showToast(
-                                    msg: barcode,
-                                    toastLength: Toast.LENGTH_SHORT,
-                                    )
-        );
+              msg: barcode,
+              toastLength: Toast.LENGTH_SHORT,
+            ));
   }
 
   @override
@@ -225,28 +218,25 @@ class _ScanScreenState extends State<ScanScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text("Contenu du code-barres: $_scanBarcode"),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      ElevatedButton(
-                        onPressed: () async {
-                          barcodeScan();
-                        },
-                        child: const Text('Scan unique'),
-                      ),
-                      ElevatedButton(
-                        onPressed: () async {
-                          startBarcodeScanStream();
-                        },
-                        child: const Text('Scan continu'),
-                      ),
-                    ],
-                  )
-                ]
-            )
-        )
-    );
+              Text("Contenu du code-barres: $_scanBarcode"),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    onPressed: () async {
+                      barcodeScan();
+                    },
+                    child: const Text('Scan unique'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () async {
+                      startBarcodeScanStream();
+                    },
+                    child: const Text('Scan continu'),
+                  ),
+                ],
+              )
+            ])));
   }
 }
