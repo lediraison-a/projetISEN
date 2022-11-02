@@ -1,5 +1,6 @@
 package com.isen.projetisenapi.repository.openfood;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -8,11 +9,12 @@ public class OpenFoodDaoImpl implements OpenFoodDao {
 
     private final WebClient webClient;
 
-    private final String BASE_URI = "https://world.openfoodfacts.org";
+    @Value("${dao.openfood.url}")
+    private String apiBaseUri;
     private final String GET_PRODUCT_URI = "/api/v2/product/{barcode}";
 
     public OpenFoodDaoImpl() {
-        this.webClient = WebClient.create(BASE_URI);
+        this.webClient = WebClient.create(apiBaseUri);
     }
 
     @Override

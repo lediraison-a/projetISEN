@@ -19,12 +19,14 @@ public class UserService {
         this.openFoodDao = openFoodDao;
     }
 
-    public void getUserAllergens(String userId) {
+    public List<String> getUserAllergens(String userId) {
+        List<String> userAllergens = null;
         try {
-            var allergens = firestoreDao.getUserAllergens(userId);
+            userAllergens = firestoreDao.getUserAllergens(userId);
         } catch (Exception e) {
 
         }
+        return userAllergens;
     }
 
     public void setUserAllergens(String userId, List<String> allergens) {
@@ -35,21 +37,17 @@ public class UserService {
         }
     }
 
-    public void isUserAllergique(String userId, String barcode) {
+    public List<String> getProductUserAllergens(String userId, String barcode) {
+        List<String> productUserAllergens = null;
         try {
-            var allergens = firestoreDao.getUserAllergens(userId);
+            var userAllergens = firestoreDao.getUserAllergens(userId);
             var product = new Product(openFoodDao.getProduct(barcode));
-            var isAllergique = false;
-            var allergenOk = "";
-            for (String allergen : allergens) {
-                if (product.getAllergens().contains(allergen)) {
-                    allergenOk = allergen;
-                    isAllergique = true;
-                    break;
-                }
-            }
+            productUserAllergens = product
+                    .getAllergens()
+                    .stream().filter(userAllergens::contains).toList();
         } catch (Exception e) {
 
         }
+        return productUserAllergens;
     }
 }
