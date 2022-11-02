@@ -91,6 +91,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   final usernameTextController = TextEditingController();
   final passwordTextController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -158,6 +159,13 @@ class _MyHomePageState extends State<MyHomePage> {
                         email: usernameTextController.text,
                         password: passwordTextController.text,
                         context: context);
+
+                    if (firebaseUser == null) {
+                      print("firebaseUser null");
+                    } else {
+                      print(
+                          "firebaseUser ${usernameTextController.text} connected");
+                    }
                   },
                   child: const Text('Login'),
                 ),
