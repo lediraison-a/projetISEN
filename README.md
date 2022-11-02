@@ -1,4 +1,4 @@
-![Dish = Radish](/DossierFinal-projetISEN/IMG/logo.png)
+![Dish = Radish](/Dish/IMG/logo.png)
 # Dish
  1. Présentation du projet
  2. Dates clés
