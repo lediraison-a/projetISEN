@@ -18,19 +18,20 @@ import java.util.concurrent.ExecutionException;
 
 @Repository
 public class FirestoreDaoImpl implements FirestoreDao {
-
-    private final Firestore db;
-
     @Value("${dao.firestore.authFilepath}")
     private static String authFilepath;
-    private static final String PROJECT_ID = "projetisen-dd64c";
+    @Value("${dao.firestore.projectId}")
+    private static String projectId = "projetisen-dd64c";
     private static final String COLLECTION = "allergens";
+    private static final String ALLERGENS_FIELD_NAME = "allergens";
+
+    private final Firestore db;
 
     public FirestoreDaoImpl() throws IOException {
         var serviceAccount = new FileInputStream(authFilepath);
         var firestoreOptions =
                 FirestoreOptions.getDefaultInstance().toBuilder()
-                        .setProjectId(PROJECT_ID)
+                        .setProjectId(projectId)
                         .setCredentials(GoogleCredentials.fromStream(serviceAccount))
                         .build();
         this.db = firestoreOptions.getService();
@@ -41,14 +42,14 @@ public class FirestoreDaoImpl implements FirestoreDao {
         var query = db.collection(COLLECTION).document(userId);
         var querySnapshot = query.get();
         var document = querySnapshot.get();
-        return (List<String>) document.get(COLLECTION);
+        return (List<String>) document.get(ALLERGENS_FIELD_NAME);
     }
 
     @Override
     public void setUserAllergens(String userId, List<String> allergens) throws ExecutionException, InterruptedException {
         var query = db.collection(COLLECTION).document(userId);
         Map<String, Object> data = new HashMap<>();
-        data.put(COLLECTION, allergens);
+        data.put(ALLERGENS_FIELD_NAME, allergens);
         query.set(data).get();
     }
 }

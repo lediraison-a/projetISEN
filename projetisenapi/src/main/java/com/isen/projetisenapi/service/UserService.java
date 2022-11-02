@@ -31,7 +31,11 @@ public class UserService {
 
     public void setUserAllergens(String userId, List<String> allergens) {
         try {
-            firestoreDao.setUserAllergens(userId, allergens);
+            var userAllergens = allergens
+                    .stream()
+                    .map(String::toLowerCase)
+                    .toList();
+            firestoreDao.setUserAllergens(userId, userAllergens);
         } catch (Exception e) {
 
         }
@@ -40,11 +44,17 @@ public class UserService {
     public List<String> getProductUserAllergens(String userId, String barcode) {
         List<String> productUserAllergens = null;
         try {
-            var userAllergens = firestoreDao.getUserAllergens(userId);
+            var userAllergens = firestoreDao.getUserAllergens(userId)
+                    .stream()
+                    .map(String::toLowerCase)
+                    .toList();
             var product = new Product(openFoodDao.getProduct(barcode));
             productUserAllergens = product
-                    .getAllergens()
-                    .stream().filter(userAllergens::contains).toList();
+                    .getAllergensImported()
+                    .stream()
+                    .map(String::toLowerCase)
+                    .filter(userAllergens::contains)
+                    .toList();
         } catch (Exception e) {
 
         }
