@@ -34,6 +34,13 @@ dependencies {
 
 	// swagger
 	implementation 'org.springdoc:springdoc-openapi-ui:1.6.12'
+
+	// webclient
+	implementation 'org.springframework.boot:spring-boot-starter-webflux:2.7.5'
+
+	// assert J
+	testImplementation 'org.assertj:assertj-core:3.23.1'
+
 }
 
 tasks.named('test') {
