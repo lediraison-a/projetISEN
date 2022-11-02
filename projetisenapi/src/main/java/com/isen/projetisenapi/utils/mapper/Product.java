@@ -1,4 +1,4 @@
-package com.isen.projetisenapi.utils.mappers;
+package com.isen.projetisenapi.utils.mapper;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;

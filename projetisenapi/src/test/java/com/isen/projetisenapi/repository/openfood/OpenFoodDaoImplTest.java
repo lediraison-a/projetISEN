@@ -1,7 +1,7 @@
-package com.isen.projetisenapi.dao.openfood;
+package com.isen.projetisenapi.repository.openfood;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.isen.projetisenapi.utils.mappers.Product;
+import com.isen.projetisenapi.utils.mapper.Product;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

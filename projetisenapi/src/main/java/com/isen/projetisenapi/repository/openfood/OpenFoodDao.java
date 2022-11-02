@@ -1,4 +1,4 @@
-package com.isen.projetisenapi.dao.openfood;
+package com.isen.projetisenapi.repository.openfood;
 
 public interface OpenFoodDao {
 
