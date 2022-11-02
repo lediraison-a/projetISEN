@@ -4,6 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'validator.dart'; //email & password validator
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -63,6 +65,30 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
+  static Future<User?> signInUsingEmailPassword({
+    required String email,
+    required String password,
+    required BuildContext context,
+  }) async {
+    FirebaseAuth auth = FirebaseAuth.instance;
+    User? user;
+
+    try {
+      UserCredential userCredential = await auth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      user = userCredential.user;
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        print('No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        print('Wrong password provided.');
+      }
+    }
+    return user;
+  }
+
   final usernameTextController = TextEditingController();
   final passwordTextController = TextEditingController();
 
@@ -111,8 +137,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
                 ElevatedButton(
-                  onPressed: () {
-                    // Auth mock :
+                  onPressed: () async {
+                    /*// Auth mock :
                     bool success = mock_login(usernameTextController.text,
                         passwordTextController.text);
                     if (success) {
@@ -126,7 +152,12 @@ class _MyHomePageState extends State<MyHomePage> {
                           MaterialPageRoute(
                               builder: (context) =>
                                   const UnsuccessfullLoginScreen()));
-                    }
+                    }*/
+                    print("Login button pressed");
+                    User? firebaseUser = await signInUsingEmailPassword(
+                        email: usernameTextController.text,
+                        password: passwordTextController.text,
+                        context: context);
                   },
                   child: const Text('Login'),
                 ),
