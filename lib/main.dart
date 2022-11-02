@@ -39,14 +39,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  bool mock_login(String username, String password) {
-    if (username == 'test' && password == 'test') {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
   static Future<User?> signInUsingEmailPassword({
     required String email,
     required String password,
@@ -120,21 +112,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 ElevatedButton(
                   onPressed: () async {
-                    /*// Auth mock :
-                    bool success = mock_login(usernameTextController.text,
-                        passwordTextController.text);
-                    if (success) {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ScanScreen()));
-                    } else {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  const UnsuccessfullLoginScreen()));
-                    }*/
                     print("Login button pressed");
                     User? firebaseUser = await signInUsingEmailPassword(
                         email: usernameTextController.text,
@@ -190,7 +167,7 @@ class UnsuccessfullLoginScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: Text("Réessayer"),
+              child: const Text("Réessayer"),
             )
           ],
         ),
