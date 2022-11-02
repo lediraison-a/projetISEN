@@ -21,9 +21,18 @@ class OpenFoodDaoImplTest {
         var barcode = "3017620422003";
         var productName = "Nutella";
         var allergens = List.of("en:milk", "en:nuts", "en:soybeans");
+        var allergensImported = List.of("Lait", "Fruits à coque", "Soja");
         var product = new Product(openFoodDao.getProduct(barcode));
         assertThat(product).isNotNull()
-                .extracting(Product::getBarcode, Product::getProductName, Product::getAllergens)
-                .contains(barcode, productName, allergens);
+                .extracting(
+                        Product::getBarcode,
+                        Product::getProductName,
+                        Product::getAllergens,
+                        Product::getAllergensImported)
+                .contains(
+                        barcode,
+                        productName,
+                        allergens,
+                        allergensImported);
     }
 }

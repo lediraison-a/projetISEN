@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -29,6 +30,10 @@ public class Product {
                 .stream(rootNode.get("product").get("allergens_tags").spliterator(), false)
                 .map(JsonNode::asText)
                 .collect(Collectors.toList());
+    }
+
+    public List<String> getAllergensImported() {
+        return Arrays.asList(rootNode.get("product").get("allergens_imported").asText().split(", "));
     }
 
 }
