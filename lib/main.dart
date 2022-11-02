@@ -14,6 +14,8 @@ Future<void> main() async {
 }
 
 class MyApp extends StatelessWidget {
+  static User? firebaseUser;
+
   const MyApp({super.key});
 
   // This widget is the root of your application.
@@ -162,9 +164,19 @@ class _MyHomePageState extends State<MyHomePage> {
 
                     if (firebaseUser == null) {
                       print("firebaseUser null");
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  const UnsuccessfullLoginScreen()));
                     } else {
                       print(
                           "firebaseUser ${usernameTextController.text} connected");
+                      MyApp.firebaseUser = firebaseUser;
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const ScanScreen()));
                     }
                   },
                   child: const Text('Login'),
@@ -257,6 +269,7 @@ class _ScanScreenState extends State<ScanScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+              Text("Bonjour ${MyApp.firebaseUser?.email}"),
               Text("Contenu du code-barres: $_scanBarcode"),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
