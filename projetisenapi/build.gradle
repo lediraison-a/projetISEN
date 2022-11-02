@@ -41,6 +41,11 @@ dependencies {
 	// assert J
 	testImplementation 'org.assertj:assertj-core:3.23.1'
 
+	// firebase
+	implementation 'com.google.cloud:google-cloud-firestore:3.7.0'
+	// implementation 'com.google.firebase:firebase-admin:9.1.0'
+
+
 }
 
 tasks.named('test') {
