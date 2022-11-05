@@ -60,6 +60,6 @@ openApiGenerate {
 	modelPackage = "com.isen.projetisenapi.api.models"
 	configOptions = [
 		interfaceOnly: "true",
+		skipDefaultInterface: "true"
 	]
 }
-targetCompatibility = JavaVersion.VERSION_17

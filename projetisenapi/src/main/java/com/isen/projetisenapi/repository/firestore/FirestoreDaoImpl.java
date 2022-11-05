@@ -18,16 +18,15 @@ import java.util.concurrent.ExecutionException;
 
 @Repository
 public class FirestoreDaoImpl implements FirestoreDao {
-    @Value("${dao.firestore.authFilepath}")
-    private static String authFilepath;
-    @Value("${dao.firestore.projectId}")
-    private static String projectId = "projetisen-dd64c";
     private static final String COLLECTION = "allergens";
     private static final String ALLERGENS_FIELD_NAME = "allergens";
 
     private final Firestore db;
 
-    public FirestoreDaoImpl() throws IOException {
+    public FirestoreDaoImpl(
+            @Value("${dao.firestore.authFilepath}") String authFilepath,
+            @Value("${dao.firestore.projectId}") String projectId
+    ) throws IOException {
         var serviceAccount = new FileInputStream(authFilepath);
         var firestoreOptions =
                 FirestoreOptions.getDefaultInstance().toBuilder()

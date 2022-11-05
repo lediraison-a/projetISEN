@@ -9,16 +9,13 @@ public class OpenFoodDaoImpl implements OpenFoodDao {
 
     private final WebClient webClient;
 
-    @Value("${dao.openfood.url}")
-    private String apiBaseUri;
-    private final String GET_PRODUCT_URI = "/api/v2/product/{barcode}";
-
-    public OpenFoodDaoImpl() {
+    public OpenFoodDaoImpl(@Value("${dao.openfood.url}") String apiBaseUri) {
         this.webClient = WebClient.create(apiBaseUri);
     }
 
     @Override
     public String getProduct(String barcode) {
+        String GET_PRODUCT_URI = "/api/v2/product/{barcode}";
         return webClient.get()
                 .uri(GET_PRODUCT_URI, barcode)
                 .retrieve()
