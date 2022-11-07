@@ -9,8 +9,6 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatNoException;
-import static org.assertj.core.api.InstanceOfAssertFactories.LIST;
 
 @SpringBootTest
 class FirestoreDaoImplTest {
@@ -23,7 +21,6 @@ class FirestoreDaoImplTest {
         var userId = "fn4L91yEbzTbYDwgvqv0mjrLt9E2";
         var allergens = firestoreDao.getUserAllergens(userId);
         assertThat(allergens).isNotNull().contains("Lait");
-
     }
 
     @Test

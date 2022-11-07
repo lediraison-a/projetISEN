@@ -14,45 +14,6 @@
         }
     },
     "paths": {
-        "/product/{barcode}/allergens": {
-            "get": {
-                "parameters": [
-                    {
-                        "name": "barcode",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "in": "path",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "string"
-                                    }
-                                }
-                            }
-                        },
-                        "description": "get product allergens"
-                    }
-                }
-            },
-            "parameters": [
-                {
-                    "name": "barcode",
-                    "schema": {
-                        "type": "integer"
-                    },
-                    "in": "path",
-                    "required": true
-                }
-            ]
-        },
         "/user/allergens": {
             "get": {
                 "responses": {
@@ -120,10 +81,112 @@
                     "required": true
                 }
             ]
+        },
+        "/product/{barcode}": {
+            "get": {
+                "parameters": [
+                    {
+                        "name": "barcode",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/product"
+                                }
+                            }
+                        },
+                        "description": "get product info"
+                    }
+                }
+            },
+            "parameters": [
+                {
+                    "name": "barcode",
+                    "schema": {
+                        "type": "string"
+                    },
+                    "in": "path",
+                    "required": true
+                }
+            ]
+        },
+        "/product/{barcode}/allergens": {
+            "get": {
+                "parameters": [
+                    {
+                        "name": "barcode",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "get product allergens"
+                    }
+                }
+            },
+            "parameters": [
+                {
+                    "name": "barcode",
+                    "schema": {
+                        "type": "string"
+                    },
+                    "in": "path",
+                    "required": true
+                }
+            ]
         }
     },
     "components": {
-
+        "schemas": {
+            "product": {
+                "description": "",
+                "required": [
+                    "name",
+                    "barcode",
+                    "allergens"
+                ],
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "barcode": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "allergens": {
+                        "description": "",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
     },
     "tags": [
         {

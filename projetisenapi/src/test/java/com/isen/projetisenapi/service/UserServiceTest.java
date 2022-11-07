@@ -14,17 +14,22 @@ class UserServiceTest {
 
     @Test
     void getUserAllergens() {
+        var userId = "fn4L91yEbzTbYDwgvqv0mjrLt9E2";
+        assertThat(userService.getUserAllergens(userId)).contains("Lait");
     }
 
     @Test
     void setUserAllergens() {
+        var userId = "fn4L91yEbzTbYDwgvqv0mjrLt9E2";
+//        Assertions.assertThatCode(() -> userService.setUserAllergens(userId, List.of("Lait"))
+//                .doesNotThrowAnyException();
     }
 
     @Test
     void getProductUserAllergens() {
-        var userId = "";
-        var barcode = "";
+        var userId = "fn4L91yEbzTbYDwgvqv0mjrLt9E2";
+        var barcode = "3017620422003";
         var productUserAllergens = userService.getProductUserAllergens(userId, barcode);
-        assertThat(productUserAllergens).contains("Lait");
+        assertThat(productUserAllergens).contains("lait");
     }
 }

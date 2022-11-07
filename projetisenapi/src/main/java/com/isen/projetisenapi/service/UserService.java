@@ -1,8 +1,6 @@
 package com.isen.projetisenapi.service;
 
 import com.isen.projetisenapi.repository.firestore.FirestoreDao;
-import com.isen.projetisenapi.repository.openfood.OpenFoodDao;
-import com.isen.projetisenapi.utils.mapper.Product;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,11 +10,11 @@ public class UserService {
 
     private final FirestoreDao firestoreDao;
 
-    private final OpenFoodDao openFoodDao;
+    private final ProductService productService;
 
-    public UserService(FirestoreDao firestoreDao, OpenFoodDao openFoodDao) {
+    public UserService(FirestoreDao firestoreDao, ProductService productService) {
         this.firestoreDao = firestoreDao;
-        this.openFoodDao = openFoodDao;
+        this.productService = productService;
     }
 
     public List<String> getUserAllergens(String userId) {
@@ -31,11 +29,7 @@ public class UserService {
 
     public void setUserAllergens(String userId, List<String> allergens) {
         try {
-            var userAllergens = allergens
-                    .stream()
-                    .map(String::toLowerCase)
-                    .toList();
-            firestoreDao.setUserAllergens(userId, userAllergens);
+            firestoreDao.setUserAllergens(userId, allergens);
         } catch (Exception e) {
 
         }
@@ -48,8 +42,7 @@ public class UserService {
                     .stream()
                     .map(String::toLowerCase)
                     .toList();
-            var product = new Product(openFoodDao.getProduct(barcode));
-            productUserAllergens = product
+            productUserAllergens = productService.getProductInfo(barcode)
                     .getAllergensImported()
                     .stream()
                     .map(String::toLowerCase)
