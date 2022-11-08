@@ -24,6 +24,7 @@ const userContext = useUserContext()
 const links = [
   ['/user', 'user'],
   ['/download', 'download app'],
+  ['/qna', 'Q & A'],
 ]
 
 const appName = import.meta.env.VITE_APP_TITLE
