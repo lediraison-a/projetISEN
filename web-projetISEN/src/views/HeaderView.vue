@@ -16,7 +16,6 @@
   </div>
 </template>
 <script setup>
-import { inject } from 'vue'
 import UserAuth from '../components/UserAuth.vue'
 import { useUserContext } from '@/stores/userContext'
 
@@ -27,7 +26,7 @@ const links = [
   ['/download', 'download app'],
 ]
 
-const appName = inject('appName')
+const appName = import.meta.env.VITE_APP_TITLE
 </script>
 <style scoped>
 .app-header {
