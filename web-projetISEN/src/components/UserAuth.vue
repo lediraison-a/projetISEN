@@ -5,7 +5,7 @@
     </div>
     <div v-else class="auth-links">
       <div class="auth-info">{{ userContext.email }}</div>
-      <div class="auth-link" @click="userContext.logout">Log out</div>
+      <div class="auth-link" @click="userContext.userLogout">Log out</div>
     </div>
   </div>
 </template>
@@ -22,7 +22,7 @@ const userContext = useUserContext()
 onMounted(() => {
   firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
-      userContext.set(user)
+      userContext.userSetInfo(user)
       firebase
         .auth()
         .currentUser.getIdTokenResult()

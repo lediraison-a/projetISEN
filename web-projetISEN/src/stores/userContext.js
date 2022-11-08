@@ -8,12 +8,12 @@ export const useUserContext = defineStore('userContext', () => {
   const uid = ref('')
   const isConnected = computed(() => email.value && uid.value)
 
-  function set(user) {
+  function userSetInfo(user) {
     uid.value = user.uid
     email.value = user.email
   }
 
-  async function logout() {
+  async function userLogout() {
     firebase
       .auth()
       .signOut()
@@ -37,8 +37,8 @@ export const useUserContext = defineStore('userContext', () => {
     email,
     uid,
     isConnected,
-    set,
-    logout,
+    userSetInfo,
+    userLogout,
     getToken,
   }
 })
