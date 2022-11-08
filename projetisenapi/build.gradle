@@ -43,9 +43,6 @@ dependencies {
 
 	// firebase
 	implementation 'com.google.cloud:google-cloud-firestore:3.7.0'
-	// implementation 'com.google.firebase:firebase-admin:9.1.0'
-
-
 }
 
 tasks.named('test') {
@@ -62,4 +59,16 @@ openApiGenerate {
 		interfaceOnly: "true",
 		skipDefaultInterface: "true"
 	]
+}
+
+bootRun {
+	dependsOn tasks.openApiGenerate
+}
+
+war {
+	manifest {
+		attributes(
+				'Main-Class': 'com.isen.projetisenapi.ProjetisenapiApplication'
+		)
+	}
 }
