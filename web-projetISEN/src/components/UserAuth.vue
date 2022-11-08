@@ -5,7 +5,7 @@
     </div>
     <div v-else class="auth-links">
       <div class="auth-info">{{ userContext.email }}</div>
-      <div class="auth-link" @click="logOut">Log out</div>
+      <div class="auth-link" @click="userContext.logout">Log out</div>
     </div>
   </div>
 </template>
@@ -22,24 +22,16 @@ const userContext = useUserContext()
 onMounted(() => {
   firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
-      const uid = user.uid
-      const email = user.email
-      userContext.set(email, uid)
+      userContext.set(user)
+      firebase
+        .auth()
+        .currentUser.getIdTokenResult()
+        .then((value) => console.log(value.token))
     } else {
       router.push('/')
     }
   })
 })
-
-function logOut() {
-  firebase
-    .auth()
-    .signOut()
-    .then(() => {
-      userContext.unset()
-      router.push('/')
-    })
-}
 </script>
 
 <style scoped>

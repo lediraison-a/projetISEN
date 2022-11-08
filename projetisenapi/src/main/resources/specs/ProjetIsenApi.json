@@ -1,0 +1,201 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "ProjetIsenApi",
+        "version": "1.0.0",
+        "description": "Api used to collect data on food, especially allergens",
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "name": "ISEN"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    },
+    "paths": {
+        "/user/allergens": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "get user allergens"
+                    }
+                }
+            },
+            "put": {
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "update user allergens"
+                    }
+                }
+            }
+        },
+        "/user/product/{barcode}/allergens": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "get user and product matching allergens"
+                    }
+                }
+            },
+            "parameters": [
+                {
+                    "name": "barcode",
+                    "schema": {
+                        "type": "string"
+                    },
+                    "in": "path",
+                    "required": true
+                }
+            ]
+        },
+        "/product/{barcode}": {
+            "get": {
+                "parameters": [
+                    {
+                        "name": "barcode",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/product"
+                                }
+                            }
+                        },
+                        "description": "get product info"
+                    }
+                }
+            },
+            "parameters": [
+                {
+                    "name": "barcode",
+                    "schema": {
+                        "type": "string"
+                    },
+                    "in": "path",
+                    "required": true
+                }
+            ]
+        },
+        "/product/{barcode}/allergens": {
+            "get": {
+                "parameters": [
+                    {
+                        "name": "barcode",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "get product allergens"
+                    }
+                }
+            },
+            "parameters": [
+                {
+                    "name": "barcode",
+                    "schema": {
+                        "type": "string"
+                    },
+                    "in": "path",
+                    "required": true
+                }
+            ]
+        }
+    },
+    "components": {
+        "schemas": {
+            "product": {
+                "description": "",
+                "required": [
+                    "name",
+                    "barcode",
+                    "allergens"
+                ],
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "barcode": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "allergens": {
+                        "description": "",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "user",
+            "description": ""
+        },
+        {
+            "name": "product",
+            "description": ""
+        }
+    ]
+}

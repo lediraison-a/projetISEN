@@ -1,19 +1,36 @@
 import { computed, ref } from 'vue'
 import { defineStore } from 'pinia'
+import firebase from 'firebase/compat/app'
+import router from '@/router'
 
 export const useUserContext = defineStore('userContext', () => {
   const email = ref('')
   const uid = ref('')
   const isConnected = computed(() => email.value && uid.value)
 
-  function set(userEmail, userUid) {
-    uid.value = userUid
-    email.value = userEmail
+  function set(user) {
+    uid.value = user.uid
+    email.value = user.email
   }
 
-  function unset() {
-    uid.value = ''
-    email.value = ''
+  async function logout() {
+    firebase
+      .auth()
+      .signOut()
+      .then(() => {
+        email.value = ''
+        uid.value = ''
+        router.push('/')
+      })
+  }
+
+  async function getToken() {
+    let token = ''
+    await firebase
+      .auth()
+      .currentUser.getIdTokenResult()
+      .then((value) => (token = value))
+    return token
   }
 
   return {
@@ -21,6 +38,7 @@ export const useUserContext = defineStore('userContext', () => {
     uid,
     isConnected,
     set,
-    unset,
+    logout,
+    getToken,
   }
 })
