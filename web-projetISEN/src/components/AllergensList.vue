@@ -32,17 +32,18 @@ const userAllergens = useUserAllergens()
   border-radius: 0.6rem;
   background-color: var(--color-background-soft);
   padding: 0.4rem;
-  margin: 1rem;
   display: flex;
-  gap: 0.2rem;
+  gap: 0.3rem;
   flex-wrap: wrap;
+  margin: 1rem 0;
+  border: solid var(--color-border) 1px;
 }
 
 .allergen-item,
 .add-allergen-item {
   cursor: pointer;
-  background-color: cadetblue;
-  border-radius: 0.4rem;
+  background-color: var(--primary);
+  border-radius: 0.375em;
   min-width: fit-content;
   display: flex;
   align-items: center;
@@ -58,17 +59,19 @@ const userAllergens = useUserAllergens()
   align-items: center;
 }
 
-.delete-btn, .add-btn {
+.delete-btn,
+.add-btn {
   padding: 0.2rem;
   border-radius: 0 0.4rem 0.4rem 0;
 }
 
 .allergen-label {
-  font-size: large;
+  font-size: medium;
   padding: 0 0.4rem;
 }
 
-.delete-btn:hover, .add-allergen-item:hover {
+.delete-btn:hover,
+.add-allergen-item:hover {
   background-color: red;
 }
 

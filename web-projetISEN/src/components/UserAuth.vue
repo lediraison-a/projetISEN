@@ -1,11 +1,17 @@
 <template>
   <div class="user-auth">
     <div v-if="!userContext.isConnected" class="auth-links">
-      <div class="auth-link" @click="router.push('/signin')">Sign in</div>
+      <div class="auth-link" @click="router.push('/signin')">
+        <img src="src/assets/icons/login.svg" />
+        Sign in
+      </div>
     </div>
     <div v-else class="auth-links">
       <div class="auth-info">{{ userContext.email }}</div>
-      <div class="auth-link" @click="userContext.userLogout">Log out</div>
+      <div class="auth-link" @click="userContext.userLogout">
+        <img src="src/assets/icons/logout.svg" />
+        Log out
+      </div>
     </div>
   </div>
 </template>
@@ -50,11 +56,18 @@ onMounted(() => {
   -webkit-box-shadow: 0 0 13px -8px rgba(0, 0, 0, 0.37);
   box-shadow: 0 0 13px -8px rgba(0, 0, 0, 0.37);
   transition: 250ms;
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
 }
 
 .auth-link:hover {
   background-color: var(--color-background-mute);
   transition: 250ms;
+}
+
+.auth-link > img {
+  height: 18px;
 }
 
 .auth-info {

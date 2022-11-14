@@ -23,13 +23,20 @@ import HeaderView from './views/HeaderView.vue'
 
 .app-content {
   height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
 }
 
 .app-view {
-  left: 0;
   top: 3rem;
-  position: absolute;
-  min-width: 100vw;
+  position: relative;
+  width: 100vw;
+  max-width: 85rem;
+  border-left: solid var(--color-border) 1px;
+  border-right: solid var(--color-border) 1px;
   min-height: calc(100vh - 3rem);
+  margin-left: auto;
+  margin-right: auto;
 }
 </style>

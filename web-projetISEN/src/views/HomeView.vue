@@ -1,9 +1,9 @@
 <template>
   <div class="home-content">
     <div class="btn-start app-btn-primary">
-      <router-link to="/signin" class="signin-link"
-        >Sign in to get started</router-link
-      >
+      <router-link to="/signin" class="signin-link">
+        Sign in to get started
+      </router-link>
     </div>
   </div>
 </template>
