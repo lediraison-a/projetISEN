@@ -25,11 +25,18 @@ export const useUserContext = defineStore('userContext', () => {
   }
 
   async function getToken() {
+    function getCurrentUser(auth) {
+      return new Promise((resolve, reject) => {
+        const unsubscribe = auth.onAuthStateChanged((user) => {
+          unsubscribe()
+          resolve(user)
+        }, reject)
+      })
+    }
+
+    const currentUser = await getCurrentUser(firebase.auth())
     let token = ''
-    await firebase
-      .auth()
-      .currentUser.getIdTokenResult()
-      .then((value) => (token = value))
+    await currentUser.getIdTokenResult().then((value) => (token = value.token))
     return token
   }
 
