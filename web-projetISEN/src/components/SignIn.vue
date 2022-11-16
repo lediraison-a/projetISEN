@@ -8,7 +8,7 @@
 import { onMounted, onUnmounted } from 'vue'
 import firebase from 'firebase/compat/app'
 import * as firebaseui from 'firebaseui'
-import { useUserContext } from '@/stores/userContext'
+import { useUserContext } from '@/stores/userContextStore'
 import router from '@/router'
 
 const userContext = useUserContext()

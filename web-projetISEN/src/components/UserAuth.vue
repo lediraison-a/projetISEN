@@ -19,7 +19,7 @@
 <script setup>
 // https://firebase.google.com/docs/auth/web/firebaseui?authuser=0
 import firebase from 'firebase/compat/app'
-import { useUserContext } from '@/stores/userContext'
+import { useUserContext } from '@/stores/userContextStore'
 import { onMounted } from 'vue'
 import router from '@/router'
 

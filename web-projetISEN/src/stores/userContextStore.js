@@ -6,11 +6,13 @@ import router from '@/router'
 export const useUserContext = defineStore('userContext', () => {
   const email = ref('')
   const uid = ref('')
+  const name = ref('')
   const isConnected = computed(() => email.value && uid.value)
 
   function userSetInfo(user) {
     uid.value = user.uid
     email.value = user.email
+    name.value = user.displayName
   }
 
   async function userLogout() {
@@ -20,6 +22,7 @@ export const useUserContext = defineStore('userContext', () => {
       .then(() => {
         email.value = ''
         uid.value = ''
+        name.value = ''
         router.push('/')
       })
   }
@@ -43,6 +46,7 @@ export const useUserContext = defineStore('userContext', () => {
   return {
     email,
     uid,
+    name,
     isConnected,
     userSetInfo,
     userLogout,

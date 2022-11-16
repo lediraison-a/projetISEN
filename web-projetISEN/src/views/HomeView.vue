@@ -1,6 +1,7 @@
 <template>
   <div class="home-content">
     <div class="btn-start app-btn-primary">
+      <img src="src/assets/icons/login.svg" />
       <router-link to="/signin" class="signin-link">
         Sign in to get started
       </router-link>

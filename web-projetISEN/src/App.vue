@@ -5,9 +5,11 @@
       <RouterView></RouterView>
     </div>
   </div>
+  <AppAlert />
 </template>
 <script setup>
 import HeaderView from './views/HeaderView.vue'
+import AppAlert from '@/components/AppAlert.vue'
 </script>
 <style scoped>
 @import '@/assets/appStyle.css';

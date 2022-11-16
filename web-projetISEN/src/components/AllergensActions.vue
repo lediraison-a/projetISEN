@@ -1,18 +1,18 @@
 <template>
   <div class="actions">
-    <div class="app-btn-primary" @click="userAllergens.fetchUserAllergens">
+    <div class="app-btn" @click="userAllergens.fetchUserAllergens">
       <img src="src/assets/icons/cancel.svg" />
-      Cancel
+      Cancel changes
     </div>
     <div class="app-btn-primary" @click="userAllergens.updateUserAllergens">
       <img src="src/assets/icons/save.svg" />
-      Save
+      Save changes
     </div>
   </div>
 </template>
 
 <script setup>
-import { useUserAllergens } from '@/stores/userAllergens'
+import { useUserAllergens } from '@/stores/userAllergensStore'
 
 const userAllergens = useUserAllergens()
 </script>

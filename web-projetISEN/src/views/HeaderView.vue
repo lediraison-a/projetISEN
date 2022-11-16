@@ -17,7 +17,7 @@
 </template>
 <script setup>
 import UserAuth from '../components/UserAuth.vue'
-import { useUserContext } from '@/stores/userContext'
+import { useUserContext } from '@/stores/userContextStore'
 
 const userContext = useUserContext()
 
