@@ -132,7 +132,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
                       firebaseUser
                           .getIdTokenResult(true)
-                          .then((value) => print(value));
+                          .then((value) => print(value.token));
 
                       MyApp.firebaseUser = firebaseUser;
                       // ignore: use_build_context_synchronously
