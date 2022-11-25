@@ -20,12 +20,16 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.cors().and().authorizeRequests()
+        http
+                .cors()
+                .and()
+                .authorizeRequests()
                 .antMatchers(AUTH_WHITE_LIST).permitAll()
                 .anyRequest()
                 .authenticated();
 
-        http.oauth2ResourceServer()
+        http
+                .oauth2ResourceServer()
                 .jwt();
     }
 

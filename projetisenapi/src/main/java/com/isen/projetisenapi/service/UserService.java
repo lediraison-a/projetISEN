@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -25,6 +26,9 @@ public class UserService {
         List<String> userAllergens = null;
         try {
             userAllergens = firestoreDao.getUserAllergens(userId);
+            if (userAllergens == null) {
+                return new ArrayList<>();
+            }
         } catch (Exception e) {
             LOG.error(e.getMessage());
         }
