@@ -12,6 +12,8 @@ Future<void> main() async {
   runApp(const MyApp());
 }
 
+String? firebaseToken = "";
+
 class MyApp extends StatelessWidget {
   static User? firebaseUser;
 
@@ -129,10 +131,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     } else {
                       print(
                           "firebaseUser ${usernameTextController.text} connected");
-
+                      /*
                       firebaseUser
                           .getIdTokenResult(true)
-                          .then((value) => print(value.token));
+                          .then((value) => print(value.token));*/
 
                       MyApp.firebaseUser = firebaseUser;
                       // ignore: use_build_context_synchronously
@@ -226,7 +228,9 @@ class _ScanScreenState extends State<ScanScreen> {
     User? firebaseUser = MyApp.firebaseUser;
     firebaseUser
         ?.getIdTokenResult(true)
-        .then((value) => print("firebaseToken: ${value.token}"));
+        .then((value) {
+          firebaseToken = value.token;
+        });
     return "a";
   }
 
