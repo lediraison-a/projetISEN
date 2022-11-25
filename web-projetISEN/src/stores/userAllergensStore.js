@@ -26,7 +26,7 @@ export const useUserAllergens = defineStore('userAllergens', () => {
       .then((response) => response.text())
       .then((result) => (allergens.value = JSON.parse(result)))
       .catch((error) => {
-        console.log('error', error)
+        console.log('error', error.message)
         appAlert.setAlertErrorTimed('Error fetching user allergens', 3500)
       })
   }

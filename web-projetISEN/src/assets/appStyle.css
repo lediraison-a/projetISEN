@@ -22,6 +22,25 @@
     border: solid var(--primary) 2px;
 }
 
+
+.app-btn-warning {
+    background-color: var(--color-background);
+    color: var(--error);
+    cursor: pointer;
+    justify-content: center;
+    padding: calc(.5em - 1px) 0.5rem;
+    text-align: center;
+    white-space: nowrap;
+    border-radius: .375em;
+    font-size: medium;
+    -webkit-box-shadow: 0 0 13px -8px rgba(0,0,0,0.37);
+    box-shadow: 0 0 13px -8px rgba(0,0,0,0.37);
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+    border: solid var(--error) 2px;
+}
+
 .app-btn-primary:hover {
     filter: brightness(115%);
 }
@@ -52,7 +71,7 @@
     box-shadow: 0 0 13px -8px rgba(0,0,0,0.37);
 }
 
-.app-btn:hover {
+.app-btn:hover, .app-btn-warning:hover {
     background-color: var(--color-background-mute);
 }
 
