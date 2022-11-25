@@ -9,7 +9,6 @@ import router from './router'
 import './assets/main.css'
 
 const app = createApp(App)
-app.provide('appName', 'projet ISEN')
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDs2K_h-zFhTblDrfnUtssyURLWa69F3D0',

@@ -30,13 +30,11 @@
     padding: 0.3rem;
     -webkit-box-shadow: 0 0 13px -8px rgba(0,0,0,0.37);
     box-shadow: 0 0 13px -8px rgba(0,0,0,0.37);
-    transition: 100ms;
     border: solid var(--color-border) 2px;
 }
 
 .firebaseui-input:focus, .firebaseui-input-invalid:focus, .firebaseui-textfield .is-focused {
     outline: solid hsla(160, 100%, 37%, 1) 2px;
-    transition: 100ms;
 }
 
 .firebaseui-button {
@@ -52,6 +50,10 @@
     font-size: medium;
     -webkit-box-shadow: 0 0 13px -8px rgba(0,0,0,0.37);
     box-shadow: 0 0 13px -8px rgba(0,0,0,0.37);
+}
+
+.firebaseui-button:hover {
+    filter: brightness(115%);
 }
 
 .firebaseui-textfield {

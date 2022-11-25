@@ -8,7 +8,7 @@
 import { onMounted, onUnmounted } from 'vue'
 import firebase from 'firebase/compat/app'
 import * as firebaseui from 'firebaseui'
-import { useUserContext } from '@/stores/userContext'
+import { useUserContext } from '@/stores/userContextStore'
 import router from '@/router'
 
 const userContext = useUserContext()
@@ -25,9 +25,7 @@ onMounted(() => {
     callbacks: {
       signInSuccessWithAuthResult: function (authResult, redirectUrl) {
         console.log(redirectUrl)
-        const uid = authResult.user.uid
-        const email = authResult.user.email
-        userContext.set(email, uid)
+        userContext.userSetInfo(authResult.user)
         router.push('/user')
         return false
       },

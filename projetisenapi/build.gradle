@@ -3,15 +3,18 @@ plugins {
 	id 'io.spring.dependency-management' version '1.1.0'
 	id 'java'
 	id 'war'
+	id "org.openapi.generator" version "6.2.0"
 }
 
 group = 'com.isen'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+sourceCompatibility = "17"
 
 repositories {
 	mavenCentral()
 }
+
+sourceSets.main.java.srcDirs = ["$buildDir/generated/src/main/java","src/main/java"]
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
@@ -19,8 +22,53 @@ dependencies {
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
+
+	// jwt auth
+	// https://medium.com/comsystoreply/authentication-with-firebase-auth-and-spring-security-fcb2c1dc96d
+	implementation 'org.springframework.security:spring-security-oauth2-resource-server:5.7.4'
+	implementation 'org.springframework.security:spring-security-oauth2-jose:5.7.4'
+
+	// generated openapi
+	implementation 'org.springframework.boot:spring-boot-starter-validation:2.7.5'
+	implementation 'org.openapitools:jackson-databind-nullable:0.2.4'
+
+	// swagger
+	implementation 'org.springdoc:springdoc-openapi-ui:1.6.12'
+
+	// webclient
+	implementation 'org.springframework.boot:spring-boot-starter-webflux:2.7.5'
+
+	// assert J
+	testImplementation 'org.assertj:assertj-core:3.23.1'
+
+	// firebase
+	implementation 'com.google.cloud:google-cloud-firestore:3.7.0'
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+openApiGenerate {
+	inputSpec = "$rootDir/src/main/resources/specs/ProjetIsenApi.json"
+	outputDir = "$buildDir/generated"
+	generatorName = "spring"
+	apiPackage = "com.isen.projetisenapi.api"
+	modelPackage = "com.isen.projetisenapi.api.models"
+	configOptions = [
+		interfaceOnly: "true",
+		skipDefaultInterface: "true"
+	]
+}
+
+bootRun {
+	dependsOn tasks.openApiGenerate
+}
+
+war {
+	manifest {
+		attributes(
+				'Main-Class': 'com.isen.projetisenapi.ProjetisenapiApplication'
+		)
+	}
 }
