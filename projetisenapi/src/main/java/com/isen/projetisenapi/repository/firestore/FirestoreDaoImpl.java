@@ -3,6 +3,9 @@ package com.isen.projetisenapi.repository.firestore;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.firestore.Firestore;
 import com.google.cloud.firestore.FirestoreOptions;
+import com.isen.projetisenapi.service.ProductService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
@@ -18,6 +21,7 @@ import java.util.concurrent.ExecutionException;
 
 @Repository
 public class FirestoreDaoImpl implements FirestoreDao {
+    private static final Logger LOG = LoggerFactory.getLogger(FirestoreDaoImpl.class);
     private static final String COLLECTION = "allergens";
     private static final String ALLERGENS_FIELD_NAME = "allergens";
 
@@ -38,6 +42,7 @@ public class FirestoreDaoImpl implements FirestoreDao {
 
     @Override
     public List<String> getUserAllergens(String userId) throws ExecutionException, InterruptedException {
+        LOG.info("getUserAllergens {}", userId);
         var query = db.collection(COLLECTION).document(userId);
         var querySnapshot = query.get();
         var document = querySnapshot.get();
@@ -46,6 +51,7 @@ public class FirestoreDaoImpl implements FirestoreDao {
 
     @Override
     public void setUserAllergens(String userId, List<String> allergens) throws ExecutionException, InterruptedException {
+        LOG.info("setUserAllergens {}", userId);
         var query = db.collection(COLLECTION).document(userId);
         Map<String, Object> data = new HashMap<>();
         data.put(ALLERGENS_FIELD_NAME, allergens);

@@ -4,12 +4,16 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.isen.projetisenapi.models.ProductInfo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
 import java.util.stream.StreamSupport;
 
 public class ProductMapper {
+    private static Logger LOG = LoggerFactory.getLogger(ProductMapper.class);
     public static ProductInfo getProductInfo(String productJson) throws JsonProcessingException {
+        LOG.info("getProductInfo {}", productJson);
         var rootNode = new ObjectMapper().readTree(productJson);
 
 

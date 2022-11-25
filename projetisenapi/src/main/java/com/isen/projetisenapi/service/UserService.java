@@ -1,6 +1,8 @@
 package com.isen.projetisenapi.service;
 
 import com.isen.projetisenapi.repository.firestore.FirestoreDao;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -8,6 +10,7 @@ import java.util.List;
 @Service
 public class UserService {
 
+    private static final Logger LOG = LoggerFactory.getLogger(UserService.class);
     private final FirestoreDao firestoreDao;
 
     private final ProductService productService;
@@ -18,24 +21,27 @@ public class UserService {
     }
 
     public List<String> getUserAllergens(String userId) {
+        LOG.info("getUserAllergens {}", userId);
         List<String> userAllergens = null;
         try {
             userAllergens = firestoreDao.getUserAllergens(userId);
         } catch (Exception e) {
-
+            LOG.error(e.getMessage());
         }
         return userAllergens;
     }
 
     public void setUserAllergens(String userId, List<String> allergens) {
+        LOG.info("setUserAllergens {}", userId);
         try {
             firestoreDao.setUserAllergens(userId, allergens);
         } catch (Exception e) {
-
+            LOG.error(e.getMessage());
         }
     }
 
     public List<String> getProductUserAllergens(String userId, String barcode) {
+        LOG.info("getProductUserAllergens {} {}", userId, barcode);
         List<String> productUserAllergens = null;
         try {
             var userAllergens = firestoreDao.getUserAllergens(userId)
@@ -49,7 +55,7 @@ public class UserService {
                     .filter(userAllergens::contains)
                     .toList();
         } catch (Exception e) {
-
+            LOG.error(e.getMessage());
         }
         return productUserAllergens;
     }
