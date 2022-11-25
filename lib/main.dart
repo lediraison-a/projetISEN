@@ -129,6 +129,11 @@ class _MyHomePageState extends State<MyHomePage> {
                     } else {
                       print(
                           "firebaseUser ${usernameTextController.text} connected");
+
+                      firebaseUser
+                          .getIdTokenResult(true)
+                          .then((value) => print(value));
+
                       MyApp.firebaseUser = firebaseUser;
                       // ignore: use_build_context_synchronously
                       Navigator.push(
