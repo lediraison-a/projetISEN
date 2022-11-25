@@ -192,7 +192,9 @@ class ScanScreen extends StatefulWidget {
 class _ScanScreenState extends State<ScanScreen> {
   String _scanBarcode = "";
 
+  // Unique scan
   Future<void> barcodeScan() async {
+    queryAllergens();
     String barcodeScanRes;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
@@ -216,6 +218,16 @@ class _ScanScreenState extends State<ScanScreen> {
               msg: barcode,
               toastLength: Toast.LENGTH_SHORT,
             ));
+  }
+
+  // Query API
+  // TODO: appropriately get value.token
+  String queryAllergens() {
+    User? firebaseUser = MyApp.firebaseUser;
+    firebaseUser
+        ?.getIdTokenResult(true)
+        .then((value) => print("firebaseToken: ${value.token}"));
+    return "a";
   }
 
   @override
