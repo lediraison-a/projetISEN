@@ -5,12 +5,21 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+// TODO:
+//    - fonction mot de passe oublié
+//    - taper l'API
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(const MyApp());
 }
+
+String barcodeNutella = "3017620422003";
+String apiBaseUrl = "http://projetisenapi.zazadago.fr/";
 
 String? firebaseToken = "";
 
@@ -194,15 +203,61 @@ class ScanScreen extends StatefulWidget {
 class _ScanScreenState extends State<ScanScreen> {
   String _scanBarcode = "";
 
+  // Tester un call sur l'api
+  Future<void> testAllergies(String? firebaseToken, String barcodeScanRes) async {
+    var headers = {
+      'accept': 'application/json',
+      'Authorization': 'Bearer $firebaseToken'
+    };
+
+    // get user allergens
+    var request = http.Request('GET', Uri.parse('${apiBaseUrl}api/v1/user/allergens'));
+    request.headers.addAll(headers);
+    http.StreamedResponse response = await request.send();
+    if (response.statusCode == 200) {
+      // response.stream.bytesToString() = allergènes de l'utilisateur
+      var responseString = json.decode(await response.stream.bytesToString());
+      print("User allergens: $responseString");
+    }
+    else {
+      print(response.reasonPhrase);
+    }
+
+    // get product allergens
+    var productRequestHeaders = {
+        'accept': 'application/json',
+        'Authorization': 'Bearer $firebaseToken'
+      };
+      var productRequest = http.Request('GET', Uri.parse('${apiBaseUrl}api/v1/product/$barcodeScanRes'));
+
+      productRequest.headers.addAll(productRequestHeaders);
+
+      http.StreamedResponse productResponse = await productRequest.send();
+
+      if (productResponse.statusCode == 200) {
+        String productResponseString = await productResponse.stream.bytesToString();
+        Map valueMap = json.decode(productResponseString);
+        var valuesReturned = valueMap.values.toList();
+        String productName = valuesReturned[0];
+        String productBarcode = valuesReturned[1];
+        List productAllergens = valuesReturned[2];
+        print("Product allergens: $productAllergens");
+      }
+      else {
+        print(productResponse.reasonPhrase);
+      }
+
+  }
+
   // Unique scan
   Future<void> barcodeScan() async {
-    queryAllergens();
     String barcodeScanRes;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
       barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
           '#ff6666', 'Annuler', true, ScanMode.QR);
       print(barcodeScanRes);
+      queryAllergens(barcodeScanRes);
     } on PlatformException {
       barcodeScanRes = 'Failed to get platform version.';
     }
@@ -223,13 +278,14 @@ class _ScanScreenState extends State<ScanScreen> {
   }
 
   // Query API
-  // TODO: appropriately get value.token
-  String queryAllergens() {
+  String queryAllergens(String barcodeScanRes) {
     User? firebaseUser = MyApp.firebaseUser;
     firebaseUser
         ?.getIdTokenResult(true)
         .then((value) {
           firebaseToken = value.token;
+          print("firebaseToken $firebaseToken");
+          testAllergies(firebaseToken, barcodeScanRes);
         });
     return "a";
   }
