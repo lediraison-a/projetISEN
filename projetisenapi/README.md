@@ -2,7 +2,11 @@
 
 ## Start project 
 
+place the authorization file (projetisen-dd64c-firebase-adminsdk-d0aq1-b3f1a453eb.json) in /srv/projetisenapi
+
 ```shell
+./gradlew openApiGenerate
+
 ./gradlew bootRun
 ```
 
