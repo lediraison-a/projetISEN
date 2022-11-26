@@ -10,7 +10,7 @@ import 'dart:convert';
 
 // TODO:
 //    - fonction mot de passe oublié
-//    - taper l'API
+//    - design
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -203,8 +203,13 @@ class ScanScreen extends StatefulWidget {
 class _ScanScreenState extends State<ScanScreen> {
   String _scanBarcode = "";
 
-  // Tester un call sur l'api
+  // Allergen test
   Future<void> testAllergies(String? firebaseToken, String barcodeScanRes) async {
+
+    List userAllergens = [];
+    List productAllergens = [];
+    bool isSafeToEat = true;
+    
     var headers = {
       'accept': 'application/json',
       'Authorization': 'Bearer $firebaseToken'
@@ -216,8 +221,10 @@ class _ScanScreenState extends State<ScanScreen> {
     http.StreamedResponse response = await request.send();
     if (response.statusCode == 200) {
       // response.stream.bytesToString() = allergènes de l'utilisateur
-      var responseString = json.decode(await response.stream.bytesToString());
-      print("User allergens: $responseString");
+      userAllergens = json.decode(await response.stream.bytesToString());
+      // convert to lowercase
+      userAllergens = userAllergens.map((allergen)=>allergen.toLowerCase()).toList();
+      print("User allergens: $userAllergens");
     }
     else {
       print(response.reasonPhrase);
@@ -229,24 +236,52 @@ class _ScanScreenState extends State<ScanScreen> {
         'Authorization': 'Bearer $firebaseToken'
       };
       var productRequest = http.Request('GET', Uri.parse('${apiBaseUrl}api/v1/product/$barcodeScanRes'));
-
       productRequest.headers.addAll(productRequestHeaders);
-
       http.StreamedResponse productResponse = await productRequest.send();
-
       if (productResponse.statusCode == 200) {
         String productResponseString = await productResponse.stream.bytesToString();
         Map valueMap = json.decode(productResponseString);
         var valuesReturned = valueMap.values.toList();
         String productName = valuesReturned[0];
         String productBarcode = valuesReturned[1];
-        List productAllergens = valuesReturned[2];
+        productAllergens = valuesReturned[2];
+        // convert to lowercase
+        productAllergens = productAllergens.map((allergen)=>allergen.toLowerCase()).toList();
         print("Product allergens: $productAllergens");
       }
       else {
         print(productResponse.reasonPhrase);
       }
 
+    // Comparison logic
+    userAllergens.forEach((element) {
+      if (productAllergens.contains(element)){
+        isSafeToEat = false;
+      }
+    });
+
+    if(isSafeToEat){
+      Fluttertoast.showToast(
+        msg: "Vas-y mange gros porc",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0
+    );
+    }
+    else{
+      Fluttertoast.showToast(
+        msg: "Mange pas ça tu vas crever",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0
+    );
+    }
   }
 
   // Unique scan
@@ -255,8 +290,7 @@ class _ScanScreenState extends State<ScanScreen> {
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
       barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
-          '#ff6666', 'Annuler', true, ScanMode.QR);
-      print(barcodeScanRes);
+          '#ff6666', 'Annuler', true, ScanMode.BARCODE);
       queryAllergens(barcodeScanRes);
     } on PlatformException {
       barcodeScanRes = 'Failed to get platform version.';
@@ -271,10 +305,9 @@ class _ScanScreenState extends State<ScanScreen> {
   Future<void> startBarcodeScanStream() async {
     FlutterBarcodeScanner.getBarcodeStreamReceiver(
             '#ff6666', 'Annuler', true, ScanMode.BARCODE)!
-        .listen((barcode) => Fluttertoast.showToast(
-              msg: barcode,
-              toastLength: Toast.LENGTH_SHORT,
-            ));
+        .listen((barcode) {
+          queryAllergens(barcode);
+        });
   }
 
   // Query API
