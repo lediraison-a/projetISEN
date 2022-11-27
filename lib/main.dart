@@ -204,83 +204,83 @@ class _ScanScreenState extends State<ScanScreen> {
   String _scanBarcode = "";
 
   // Allergen test
-  Future<void> testAllergies(String? firebaseToken, String barcodeScanRes) async {
-
+  Future<void> testAllergies(
+      String? firebaseToken, String barcodeScanRes) async {
     List userAllergens = [];
     List productAllergens = [];
     bool isSafeToEat = true;
-    
+
     var headers = {
       'accept': 'application/json',
       'Authorization': 'Bearer $firebaseToken'
     };
 
     // get user allergens
-    var request = http.Request('GET', Uri.parse('${apiBaseUrl}api/v1/user/allergens'));
+    var request =
+        http.Request('GET', Uri.parse('${apiBaseUrl}api/v1/user/allergens'));
     request.headers.addAll(headers);
     http.StreamedResponse response = await request.send();
     if (response.statusCode == 200) {
       // response.stream.bytesToString() = allergènes de l'utilisateur
       userAllergens = json.decode(await response.stream.bytesToString());
       // convert to lowercase
-      userAllergens = userAllergens.map((allergen)=>allergen.toLowerCase()).toList();
+      userAllergens =
+          userAllergens.map((allergen) => allergen.toLowerCase()).toList();
       print("User allergens: $userAllergens");
-    }
-    else {
+    } else {
       print(response.reasonPhrase);
     }
 
     // get product allergens
     var productRequestHeaders = {
-        'accept': 'application/json',
-        'Authorization': 'Bearer $firebaseToken'
-      };
-      var productRequest = http.Request('GET', Uri.parse('${apiBaseUrl}api/v1/product/$barcodeScanRes'));
-      productRequest.headers.addAll(productRequestHeaders);
-      http.StreamedResponse productResponse = await productRequest.send();
-      if (productResponse.statusCode == 200) {
-        String productResponseString = await productResponse.stream.bytesToString();
-        Map valueMap = json.decode(productResponseString);
-        var valuesReturned = valueMap.values.toList();
-        String productName = valuesReturned[0];
-        String productBarcode = valuesReturned[1];
-        productAllergens = valuesReturned[2];
-        // convert to lowercase
-        productAllergens = productAllergens.map((allergen)=>allergen.toLowerCase()).toList();
-        print("Product allergens: $productAllergens");
-      }
-      else {
-        print(productResponse.reasonPhrase);
-      }
+      'accept': 'application/json',
+      'Authorization': 'Bearer $firebaseToken'
+    };
+    var productRequest = http.Request(
+        'GET', Uri.parse('${apiBaseUrl}api/v1/product/$barcodeScanRes'));
+    productRequest.headers.addAll(productRequestHeaders);
+    http.StreamedResponse productResponse = await productRequest.send();
+    if (productResponse.statusCode == 200) {
+      String productResponseString =
+          await productResponse.stream.bytesToString();
+      Map valueMap = json.decode(productResponseString);
+      var valuesReturned = valueMap.values.toList();
+      String productName = valuesReturned[0];
+      String productBarcode = valuesReturned[1];
+      productAllergens = valuesReturned[2];
+      // convert to lowercase
+      productAllergens =
+          productAllergens.map((allergen) => allergen.toLowerCase()).toList();
+      print("Product allergens: $productAllergens");
+    } else {
+      print(productResponse.reasonPhrase);
+    }
 
     // Comparison logic
     userAllergens.forEach((element) {
-      if (productAllergens.contains(element)){
+      if (productAllergens.contains(element)) {
         isSafeToEat = false;
       }
     });
 
-    if(isSafeToEat){
+    if (isSafeToEat) {
       Fluttertoast.showToast(
-        msg: "Vas-y mange gros porc",
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.CENTER,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Colors.red,
-        textColor: Colors.white,
-        fontSize: 16.0
-    );
-    }
-    else{
+          msg: "Vas-y mange gros porc",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0);
+    } else {
       Fluttertoast.showToast(
-        msg: "Mange pas ça tu vas crever",
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.CENTER,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Colors.red,
-        textColor: Colors.white,
-        fontSize: 16.0
-    );
+          msg: "Mange pas ça tu vas crever",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0);
     }
   }
 
@@ -306,20 +306,18 @@ class _ScanScreenState extends State<ScanScreen> {
     FlutterBarcodeScanner.getBarcodeStreamReceiver(
             '#ff6666', 'Annuler', true, ScanMode.BARCODE)!
         .listen((barcode) {
-          queryAllergens(barcode);
-        });
+      queryAllergens(barcode);
+    });
   }
 
   // Query API
   String queryAllergens(String barcodeScanRes) {
     User? firebaseUser = MyApp.firebaseUser;
-    firebaseUser
-        ?.getIdTokenResult(true)
-        .then((value) {
-          firebaseToken = value.token;
-          print("firebaseToken $firebaseToken");
-          testAllergies(firebaseToken, barcodeScanRes);
-        });
+    firebaseUser?.getIdTokenResult(true).then((value) {
+      firebaseToken = value.token;
+      print("firebaseToken $firebaseToken");
+      testAllergies(firebaseToken, barcodeScanRes);
+    });
     return "a";
   }
 
