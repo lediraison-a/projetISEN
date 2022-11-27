@@ -20,6 +20,6 @@ class AllergenServiceTest {
     @Test
     void getAllergens() {
         var allergens = allergenService.getAllergens();
-        assertThat(allergens).isInstanceOf(List.class).asList().isNotEmpty();
+        assertThat(allergens).asList().isNotEmpty();
     }
 }
