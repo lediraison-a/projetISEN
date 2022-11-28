@@ -124,7 +124,7 @@
                     {
                         "name": "barcode",
                         "schema": {
-                            "type": "string"
+                            "type": "integer"
                         },
                         "in": "path",
                         "required": true
@@ -156,6 +156,28 @@
                     "required": true
                 }
             ]
+        },
+        "/allergen": {
+            "get": {
+                "tags": [
+                    "allergen"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "get all allergens"
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -195,6 +217,10 @@
         },
         {
             "name": "product",
+            "description": ""
+        },
+        {
+            "name": "allergen",
             "description": ""
         }
     ]
