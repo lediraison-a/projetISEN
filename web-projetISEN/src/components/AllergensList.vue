@@ -48,6 +48,7 @@
               @keydown.enter="
                 selectSuggestionIndex(componentData.suggestionSelected)
               "
+              @input="componentData.suggestionSelected = 0"
             />
             <div
               class="allergens-suggestion"
