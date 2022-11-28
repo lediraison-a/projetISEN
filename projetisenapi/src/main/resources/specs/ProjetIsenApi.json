@@ -124,7 +124,7 @@
                     {
                         "name": "barcode",
                         "schema": {
-                            "type": "integer"
+                            "type": "string"
                         },
                         "in": "path",
                         "required": true
@@ -157,7 +157,7 @@
                 }
             ]
         },
-        "/allergen": {
+        "/allergens": {
             "get": {
                 "tags": [
                     "allergen"

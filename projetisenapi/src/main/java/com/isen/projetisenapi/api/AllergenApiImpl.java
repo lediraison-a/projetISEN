@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import java.util.List;
 
 @Controller
-public class AllergenApiImpl extends AbstractApi implements AllergenApi {
+public class AllergenApiImpl extends AbstractApi implements AllergensApi {
 
     private final AllergenService allergenService;
 
@@ -16,7 +16,7 @@ public class AllergenApiImpl extends AbstractApi implements AllergenApi {
     }
 
     @Override
-    public ResponseEntity<List<String>> allergenGet() {
+    public ResponseEntity<List<String>> allergensGet() {
         return ResponseEntity.ok(allergenService.getAllergens());
     }
 }
