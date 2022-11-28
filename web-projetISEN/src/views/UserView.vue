@@ -16,12 +16,15 @@ import { useUserAllergens } from '@/stores/userAllergensStore'
 import AllergensList from '@/components/AllergensList.vue'
 import AllergensActions from '@/components/AllergensActions.vue'
 import AccountActions from '@/components/AccountActions.vue'
+import { useAllergens } from '@/stores/allergensStore'
 
 const userAllergens = useUserAllergens()
 
+const allergensStore = useAllergens()
+
 onMounted(async () => {
   await userAllergens.fetchUserAllergens()
-  console.log(userAllergens.allergens)
+  await allergensStore.fetchAllergens()
 })
 </script>
 

@@ -37,6 +37,9 @@
             class="app-input allergen-text-input"
             v-model="allergenInput"
           />
+          <div class="allergens-suggestion">
+            <div class="suggestion-item">Lait</div>
+          </div>
           <div class="app-btn" @click="popupVisible = false">
             <img src="src/assets/icons/cancel.svg" />
             Cancel
@@ -71,6 +74,10 @@ function addAllergen() {
 </script>
 
 <style scoped>
+.allergens-suggestion {
+  display: none;
+}
+
 .popup-add-allergen {
   margin-top: 1rem;
   display: flex;

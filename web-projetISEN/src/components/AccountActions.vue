@@ -48,7 +48,6 @@ const confirmData = reactive({
   confirmLabel: 'Yes',
 })
 
-
 function onRequestNewPassword() {
   hasToConfirm.value = true
   confirmFunc = userContext.sendEmailReset

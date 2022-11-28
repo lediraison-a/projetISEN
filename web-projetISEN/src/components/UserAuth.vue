@@ -7,7 +7,7 @@
       </div>
     </div>
     <div v-else class="auth-links">
-      <div class="auth-info">{{ userContext.email }}</div>
+      <div class="auth-info">{{ userContext.name }}</div>
       <div class="auth-link" @click="userContext.userLogout">
         <img src="src/assets/icons/logout.svg" />
         Log out

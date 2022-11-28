@@ -2,6 +2,7 @@
   <div>
     <div class="home-link">
       <router-link to="/">
+        <img src="src/assets/icons/logo/Logo%20Dark.svg" />
         {{ appName }}
       </router-link>
     </div>
@@ -30,6 +31,18 @@ const links = [
 const appName = import.meta.env.VITE_APP_TITLE
 </script>
 <style scoped>
+@media screen and (max-width: 900px) {
+  .nav-links {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .nav-links {
+    display: flex;
+  }
+}
+
 .app-header {
   display: flex;
   align-items: center;
@@ -45,7 +58,6 @@ const appName = import.meta.env.VITE_APP_TITLE
 }
 
 .nav-links {
-  display: flex;
   align-items: center;
   padding: 1rem;
 }
@@ -62,5 +74,15 @@ const appName = import.meta.env.VITE_APP_TITLE
 .connect-links {
   right: 0.5rem;
   position: absolute;
+}
+
+img {
+  height: 38px;
+}
+
+a {
+  display: flex;
+  gap: 0.3rem;
+  justify-content: center;
 }
 </style>

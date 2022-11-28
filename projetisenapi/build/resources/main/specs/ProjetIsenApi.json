@@ -157,7 +157,7 @@
                 }
             ]
         },
-        "/allergen": {
+        "/allergens": {
             "get": {
                 "tags": [
                     "allergen"

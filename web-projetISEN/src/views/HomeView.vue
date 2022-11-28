@@ -1,14 +1,26 @@
 <template>
   <div class="home-content">
-    <div class="btn-start app-btn-primary">
+    <div class="app-btn-primary" v-if="!userContext.isConnected">
       <img src="src/assets/icons/login.svg" />
-      <router-link to="/signin" class="signin-link">
-        Sign in to get started
-      </router-link>
+      <router-link to="/signin"> Sign in to get started </router-link>
+    </div>
+    <div v-else class="btn-start-connected">
+      <div class="app-btn-primary">
+        <img src="src/assets/icons/edit.svg" />
+        <router-link to="/user">Edit your allergens</router-link>
+      </div>
+      <div class="app-btn-primary">
+        <img src="src/assets/icons/download.svg" />
+        <router-link to="/download">Download the app</router-link>
+      </div>
     </div>
   </div>
 </template>
-<script setup></script>
+<script setup>
+import { useUserContext } from '@/stores/userContextStore'
+
+const userContext = useUserContext()
+</script>
 <style scoped>
 .home-content {
   height: calc(100vh - 3rem);
@@ -17,12 +29,16 @@
   align-items: center;
 }
 
-.btn-start {
+a {
+  color: var(--vt-c-text-light-1);
   font-size: large;
-  font-weight: bold;
 }
 
-.signin-link {
-  color: var(--vt-c-text-light-1);
+.btn-start-connected {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
 }
 </style>
