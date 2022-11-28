@@ -19,8 +19,8 @@
       </div>
       <div
         class="add-allergen-item"
-        @click="popupVisible = true"
-        v-if="!popupVisible"
+        @click="openAddPopup"
+        v-if="!componentData.popupVisible"
       >
         <div class="allergen-label">add an allergen</div>
         <div class="add-btn">
@@ -28,19 +28,48 @@
         </div>
       </div>
     </div>
-    <div class="popup-add-allergen" v-if="popupVisible">
+    <div
+      class="popup-add-allergen"
+      :class="componentData.popupVisible ? 'popup-visible' : 'popup-hidden'"
+    >
       <div class="popup-content">
         <div>Add an allergen</div>
         <div class="allergen-input">
-          <input
-            type="text"
-            class="app-input allergen-text-input"
-            v-model="allergenInput"
-          />
-          <div class="allergens-suggestion">
-            <div class="suggestion-item">Lait</div>
+          <div class="allergen-input-area">
+            <input
+              id="inputV"
+              @focusin="componentData.inputFocus = true"
+              type="text"
+              class="app-input allergen-text-input"
+              v-model="componentData.allergenInput"
+              placeholder="an allergen"
+              @keydown.down="moveSelectedSuggestion(1)"
+              @keydown.up="moveSelectedSuggestion(-1)"
+              @keydown.enter="
+                selectSuggestionIndex(componentData.suggestionSelected)
+              "
+            />
+            <div
+              class="allergens-suggestion"
+              v-if="componentData.inputFocus && suggestions.length > 0"
+            >
+              <div
+                class="suggestion-item"
+                v-for="(suggestion, i) in suggestions"
+                :key="i"
+                @click="selectSuggestionIndex(i)"
+                @mouseover="componentData.suggestionSelected = i"
+                :class="
+                  componentData.suggestionSelected === i
+                    ? 'suggestion-item-selected'
+                    : ''
+                "
+              >
+                {{ suggestion }}
+              </div>
+            </div>
           </div>
-          <div class="app-btn" @click="popupVisible = false">
+          <div class="app-btn" @click="componentData.popupVisible = false">
             <img src="src/assets/icons/cancel.svg" />
             Cancel
           </div>
@@ -55,35 +84,118 @@
 </template>
 <script setup>
 import { useUserAllergens } from '@/stores/userAllergensStore'
-import { ref } from 'vue'
-
-const popupVisible = ref(false)
-const allergenInput = ref('')
+import { computed, reactive } from 'vue'
+import { useAllergens } from '@/stores/allergensStore'
 
 const userAllergens = useUserAllergens()
+const allergensStore = useAllergens()
+
+const componentData = reactive({
+  popupVisible: false,
+  allergenInput: '',
+  inputFocus: false,
+  suggestionSelected: 0,
+})
+
+const suggestions = computed(() => {
+  let suggestions = allergensStore.allergens
+    .filter((v) => !userAllergens.allergens.includes(v))
+    .filter((v) =>
+      v
+        .toLowerCase()
+        .startsWith(componentData.allergenInput.trim().toLowerCase())
+    )
+  if (
+    suggestions.length === 1 &&
+    suggestions[0] === componentData.allergenInput.trim()
+  ) {
+    suggestions = []
+  }
+  return suggestions
+})
+
+function selectSuggestionIndex(index) {
+  componentData.allergenInput = suggestions.value[index]
+  componentData.suggestionSelected = 0
+}
+
+function moveSelectedSuggestion(num) {
+  componentData.suggestionSelected += num
+  if (componentData.suggestionSelected < 0) {
+    componentData.suggestionSelected = 0
+  } else if (componentData.suggestionSelected >= suggestions.value.length) {
+    componentData.suggestionSelected = suggestions.value.length - 1
+  }
+}
 
 function addAllergen() {
-  if (!allergenInput.value.trim()) {
-    allergenInput.value = ''
+  if (!componentData.allergenInput.trim()) {
+    componentData.allergenInput = ''
     return
   }
-  userAllergens.addAllergen(allergenInput.value)
-  popupVisible.value = false
-  allergenInput.value = ''
+  componentData.inputFocus = false
+  userAllergens.addAllergen(componentData.allergenInput)
+  componentData.popupVisible = false
+  componentData.allergenInput = ''
+}
+
+function openAddPopup() {
+  componentData.popupVisible = true
 }
 </script>
 
 <style scoped>
 .allergens-suggestion {
-  display: none;
+  position: absolute;
+  top: calc(100% - 0.6rem);
+  background-color: var(--color-background);
+  z-index: 3;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.6rem 0.2rem 0.2rem 0.2rem;
+  border-left: solid var(--color-border) 2px;
+  border-right: solid var(--color-border) 2px;
+  border-bottom: solid var(--color-border) 2px;
+  border-radius: 0 0 0.375em 0.375em;
+  box-shadow: -2px 0 0 0 var(--primary), 2px 0 0 0 var(--primary),
+    0 2px 0 0 var(--primary);
+}
+
+.suggestion-item {
+  color: var(--color-text);
+  background-color: var(--color-background-soft);
+  padding: 0.2rem;
+  border-radius: 0.375em;
+  cursor: pointer;
+}
+
+.allergen-input-area {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+}
+
+.suggestion-item-selected {
+  background-color: var(--primary);
+  color: var(--vt-c-text-light-1);
 }
 
 .popup-add-allergen {
   margin-top: 1rem;
-  display: flex;
   justify-content: center;
   align-items: center;
   border-top: solid var(--color-border) 1px;
+}
+
+.popup-hidden {
+  display: none;
+}
+
+.popup-visible {
+  display: flex;
 }
 
 .popup-content {

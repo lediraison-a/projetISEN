@@ -49,7 +49,7 @@
     height: 20px;
 }
 
-.app-btn, .app-btn-primary {
+.app-btn, .app-btn-primary, .app-btn-warning {
     user-select: none;
 }
 

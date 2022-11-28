@@ -9,6 +9,7 @@
         <img src="src/assets/icons/edit.svg" />
         <router-link to="/user">Edit your allergens</router-link>
       </div>
+      <div>or</div>
       <div class="app-btn-primary">
         <img src="src/assets/icons/download.svg" />
         <router-link to="/download">Download the app</router-link>
