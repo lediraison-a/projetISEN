@@ -265,7 +265,7 @@ class _ScanScreenState extends State<ScanScreen> {
 
     if (isSafeToEat) {
       Fluttertoast.showToast(
-          msg: "Vas-y mange gros porc",
+          msg: "C'est safe!",
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
           timeInSecForIosWeb: 1,
@@ -274,7 +274,7 @@ class _ScanScreenState extends State<ScanScreen> {
           fontSize: 16.0);
     } else {
       Fluttertoast.showToast(
-          msg: "Mange pas ça tu vas crever",
+          msg: "Allergènes présents!",
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
           timeInSecForIosWeb: 1,
