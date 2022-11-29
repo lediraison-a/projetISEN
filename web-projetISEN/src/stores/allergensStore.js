@@ -8,6 +8,12 @@ export const useAllergens = defineStore('allergens', () => {
 
   const appAlert = useAppAlert()
 
+  function getAllergensFilteredUser(userAllergens) {
+    return allergens.value
+      .filter((value) => !userAllergens.includes(value))
+      .map((value) => value.trim().toLowerCase())
+  }
+
   async function fetchAllergens() {
     const userContext = useUserContext()
     const token = await userContext.getToken()
@@ -34,5 +40,6 @@ export const useAllergens = defineStore('allergens', () => {
   return {
     allergens,
     fetchAllergens,
+    getAllergensFilteredUser,
   }
 })

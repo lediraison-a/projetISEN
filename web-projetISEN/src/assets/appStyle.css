@@ -130,3 +130,13 @@
     visibility: visible;
     opacity: 1;
 }
+
+::-moz-selection { /* Code for Firefox */
+    color: var(--vt-c-text-light-1);
+    background: var(--primary)
+}
+
+::selection {
+    color: var(--vt-c-text-light-1);
+    background: var(--primary)
+}

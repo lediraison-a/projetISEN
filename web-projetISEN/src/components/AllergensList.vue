@@ -28,17 +28,18 @@
         </div>
       </div>
     </div>
-    <div
-      class="popup-add-allergen"
-      :class="componentData.popupVisible ? 'popup-visible' : 'popup-hidden'"
-    >
+    <div class="popup-add-allergen" v-if="componentData.popupVisible">
       <div class="popup-content">
         <div>Add an allergen</div>
         <div class="allergen-input">
           <div class="allergen-input-area">
             <input
-              id="inputV"
+              ref="input"
               @focusin="componentData.inputFocus = true"
+              @focusout="
+                checkValidInput();
+                componentData.inputFocus = false
+              "
               type="text"
               class="app-input allergen-text-input"
               v-model="componentData.allergenInput"
@@ -58,7 +59,7 @@
                 class="suggestion-item"
                 v-for="(suggestion, i) in suggestions"
                 :key="i"
-                @click="selectSuggestionIndex(i)"
+                @mousedown="selectSuggestionIndex(i)"
                 @mouseover="componentData.suggestionSelected = i"
                 :class="
                   componentData.suggestionSelected === i
@@ -70,7 +71,7 @@
               </div>
             </div>
           </div>
-          <div class="app-btn" @click="componentData.popupVisible = false">
+          <div class="app-btn" @click="cancelAddPopup">
             <img src="src/assets/icons/cancel.svg" />
             Cancel
           </div>
@@ -85,11 +86,13 @@
 </template>
 <script setup>
 import { useUserAllergens } from '@/stores/userAllergensStore'
-import { computed, reactive } from 'vue'
+import { computed, reactive, ref } from 'vue'
 import { useAllergens } from '@/stores/allergensStore'
 
 const userAllergens = useUserAllergens()
 const allergensStore = useAllergens()
+
+const input = ref(null)
 
 const componentData = reactive({
   popupVisible: false,
@@ -98,17 +101,16 @@ const componentData = reactive({
   suggestionSelected: 0,
 })
 
+const allergenInputSanitized = computed(() =>
+  componentData.allergenInput.trim().toLowerCase()
+)
 const suggestions = computed(() => {
-  let suggestions = allergensStore.allergens
-    .filter((v) => !userAllergens.allergens.includes(v))
-    .filter((v) =>
-      v
-        .toLowerCase()
-        .startsWith(componentData.allergenInput.trim().toLowerCase())
-    )
+  let suggestions = allergensStore
+    .getAllergensFilteredUser(userAllergens.allergens)
+    .filter((v) => v.startsWith(allergenInputSanitized.value))
   if (
     suggestions.length === 1 &&
-    suggestions[0] === componentData.allergenInput.trim()
+    suggestions[0] === allergenInputSanitized.value
   ) {
     suggestions = []
   }
@@ -118,6 +120,9 @@ const suggestions = computed(() => {
 function selectSuggestionIndex(index) {
   componentData.allergenInput = suggestions.value[index]
   componentData.suggestionSelected = 0
+  setTimeout(() => {
+    input.value.focus()
+  }, 1)
 }
 
 function moveSelectedSuggestion(num) {
@@ -130,7 +135,7 @@ function moveSelectedSuggestion(num) {
 }
 
 function addAllergen() {
-  if (!componentData.allergenInput.trim()) {
+  if (!allergenInputSanitized.value) {
     componentData.allergenInput = ''
     return
   }
@@ -142,6 +147,25 @@ function addAllergen() {
 
 function openAddPopup() {
   componentData.popupVisible = true
+  setTimeout(() => {
+    input.value.focus()
+  }, 1)
+}
+
+function cancelAddPopup() {
+  componentData.popupVisible = false
+  componentData.suggestionSelected = 0
+  componentData.allergenInput = ''
+}
+
+function checkValidInput() {
+  if (
+    !allergensStore
+      .getAllergensFilteredUser(userAllergens.allergens)
+      .includes(allergenInputSanitized.value)
+  ) {
+    componentData.allergenInput = ''
+  }
 }
 </script>
 
@@ -162,6 +186,12 @@ function openAddPopup() {
   border-radius: 0 0 0.375em 0.375em;
   box-shadow: -2px 0 0 0 var(--primary), 2px 0 0 0 var(--primary),
     0 2px 0 0 var(--primary);
+}
+
+.suggestions-hidden {
+}
+
+.suggestions-show {
 }
 
 .suggestion-item {
@@ -189,6 +219,7 @@ function openAddPopup() {
   justify-content: center;
   align-items: center;
   border-top: solid var(--color-border) 1px;
+  display: flex;
 }
 
 .popup-hidden {
@@ -196,7 +227,6 @@ function openAddPopup() {
 }
 
 .popup-visible {
-  display: flex;
 }
 
 .popup-content {
@@ -215,6 +245,7 @@ function openAddPopup() {
 
 .allergen-text-input {
   width: 100%;
+  height: calc(100%);
 }
 
 .allergens-container {
@@ -251,7 +282,7 @@ function openAddPopup() {
 
 .allergen-item {
   background-color: var(--color-background);
-  outline: solid var(--primary) 2px;
+  border: solid var(--primary) 2px;
 }
 
 .delete-icon {
