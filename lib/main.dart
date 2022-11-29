@@ -34,9 +34,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'MyHomePage',
       theme: ThemeData(
-        primarySwatch: Colors.green,
+        primarySwatch: Colors.pink,
       ),
-      home: const MyHomePage(title: 'gl_flutter demo'),
+      home: const MyHomePage(title: 'Dish'),
     );
   }
 }
@@ -325,15 +325,15 @@ class _ScanScreenState extends State<ScanScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('ScanScreen'),
+          title: const Text('Scanner un produit'),
         ),
         body: Center(
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-              Text("Bonjour ${MyApp.firebaseUser?.uid}"),
-              Text("Contenu du code-barres: $_scanBarcode"),
+              Text("Bonjour ${MyApp.firebaseUser?.displayName} !"),
+              // Text("Contenu du code-barres: $_scanBarcode"),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
