@@ -50,6 +50,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  void doNothing() {
+    String a = "beef";
+  }
+
   static Future<User?> signInUsingEmailPassword({
     required String email,
     required String password,
@@ -121,40 +125,56 @@ class _MyHomePageState extends State<MyHomePage> {
                     labelText: 'Mot de passe',
                   ),
                 ),
-                ElevatedButton(
-                  onPressed: () async {
-                    print("Login button pressed");
-                    User? firebaseUser = await signInUsingEmailPassword(
-                        email: usernameTextController.text,
-                        password: passwordTextController.text,
-                        context: context);
+                const SizedBox(height: 8),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Column(children: [
+                      ElevatedButton(
+                        onPressed: () async {
+                          print("Login button pressed");
+                          User? firebaseUser = await signInUsingEmailPassword(
+                              email: usernameTextController.text,
+                              password: passwordTextController.text,
+                              context: context);
 
-                    if (firebaseUser == null) {
-                      print("firebaseUser null");
-                      // ignore: use_build_context_synchronously
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  const UnsuccessfullLoginScreen()));
-                    } else {
-                      print(
-                          "firebaseUser ${usernameTextController.text} connected");
-                      /*
+                          if (firebaseUser == null) {
+                            print("firebaseUser null");
+                            // ignore: use_build_context_synchronously
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const UnsuccessfullLoginScreen()));
+                          } else {
+                            print(
+                                "firebaseUser ${usernameTextController.text} connected");
+                            /*
                       firebaseUser
                           .getIdTokenResult(true)
                           .then((value) => print(value.token));*/
 
-                      MyApp.firebaseUser = firebaseUser;
-                      // ignore: use_build_context_synchronously
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const ScanScreen()));
-                    }
-                  },
-                  child: const Text('Login'),
-                ),
+                            MyApp.firebaseUser = firebaseUser;
+                            // ignore: use_build_context_synchronously
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const ScanScreen()));
+                          }
+                        },
+                        child: const Text('Login'),
+                      ),
+                    ]),
+                    const SizedBox(width: 10),
+                    Column(children: [
+                      ElevatedButton(
+                        onPressed: doNothing,
+                        child: const Text('Mot de passe oublié'),
+                      ),
+                    ])
+                  ],
+                )
               ],
             ),
           ),
@@ -338,24 +358,26 @@ class _ScanScreenState extends State<ScanScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Column(children: [
-                    Row(children: [
-                      ElevatedButton(
-                        onPressed: () async {
-                          barcodeScan();
-                        },
-                        child: const Text('Scan unique'),
-                      )]
-                    ),
-                    Row(children: [
-                      ElevatedButton(
-                        onPressed: () async {
-                          startBarcodeScanStream();
-                        },
-                        child: const Text('Scan continu'),
-                      ),
-                  ]) 
-                  ],)
+                  Column(
+                    children: [
+                      Row(children: [
+                        ElevatedButton(
+                          onPressed: () async {
+                            barcodeScan();
+                          },
+                          child: const Text('Scan unique'),
+                        )
+                      ]),
+                      Row(children: [
+                        ElevatedButton(
+                          onPressed: () async {
+                            startBarcodeScanStream();
+                          },
+                          child: const Text('Scan continu'),
+                        ),
+                      ])
+                    ],
+                  )
                 ],
               )
             ])));
