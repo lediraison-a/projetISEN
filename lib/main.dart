@@ -338,18 +338,24 @@ class _ScanScreenState extends State<ScanScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  ElevatedButton(
-                    onPressed: () async {
-                      barcodeScan();
-                    },
-                    child: const Text('Scan unique'),
-                  ),
-                  ElevatedButton(
-                    onPressed: () async {
-                      startBarcodeScanStream();
-                    },
-                    child: const Text('Scan continu'),
-                  ),
+                  Column(children: [
+                    Row(children: [
+                      ElevatedButton(
+                        onPressed: () async {
+                          barcodeScan();
+                        },
+                        child: const Text('Scan unique'),
+                      )]
+                    ),
+                    Row(children: [
+                      ElevatedButton(
+                        onPressed: () async {
+                          startBarcodeScanStream();
+                        },
+                        child: const Text('Scan continu'),
+                      ),
+                  ]) 
+                  ],)
                 ],
               )
             ])));
