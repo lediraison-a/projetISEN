@@ -41,6 +41,19 @@ class MyApp extends StatelessWidget {
   }
 }
 
+class ForgottenPasswordScreen extends StatelessWidget {
+  const ForgottenPasswordScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: const Text("Réinitialiser le mot de passe"),
+        ),
+        body: const Center(child: const Text("Ecran mot de passe oublié")));
+  }
+}
+
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
   final String title;
@@ -50,10 +63,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  void doNothing() {
-    String a = "beef";
-  }
-
   static Future<User?> signInUsingEmailPassword({
     required String email,
     required String password,
@@ -169,7 +178,13 @@ class _MyHomePageState extends State<MyHomePage> {
                     const SizedBox(width: 10),
                     Column(children: [
                       ElevatedButton(
-                        onPressed: doNothing,
+                        onPressed: () => {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const ForgottenPasswordScreen()))
+                        },
                         child: const Text('Mot de passe oublié'),
                       ),
                     ])
@@ -265,8 +280,8 @@ class _ScanScreenState extends State<ScanScreen> {
           await productResponse.stream.bytesToString();
       Map valueMap = json.decode(productResponseString);
       var valuesReturned = valueMap.values.toList();
-      String productName = valuesReturned[0];
-      String productBarcode = valuesReturned[1];
+      // String productName = valuesReturned[0];
+      // String productBarcode = valuesReturned[1];
       productAllergens = valuesReturned[2];
       // convert to lowercase
       productAllergens =
@@ -380,8 +395,6 @@ class _ScanScreenState extends State<ScanScreen> {
                   )
                 ],
               )
-            ])
-          )
-        );
+            ])));
   }
 }
