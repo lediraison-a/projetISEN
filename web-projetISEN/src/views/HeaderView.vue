@@ -31,13 +31,13 @@ const links = [
 const appName = import.meta.env.VITE_APP_TITLE
 </script>
 <style scoped>
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 500px) {
   .nav-links {
     display: none;
   }
 }
 
-@media screen and (min-width: 900px) {
+@media screen and (min-width: 500px) {
   .nav-links {
     display: flex;
   }

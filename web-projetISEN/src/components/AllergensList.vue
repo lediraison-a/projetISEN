@@ -75,10 +75,6 @@
             <img src="src/assets/icons/cancel.svg" />
             Cancel
           </div>
-          <div class="app-btn-primary" @click="addAllergen">
-            <img src="src/assets/icons/add_box.svg" />
-            Add
-          </div>
         </div>
       </div>
     </div>
@@ -104,10 +100,19 @@ const componentData = reactive({
 const allergenInputSanitized = computed(() =>
   componentData.allergenInput.trim().toLowerCase()
 )
+
+const allergensFilteredUser = computed(() =>
+  allergensStore.allergens.filter(
+    (v) =>
+      !userAllergens.allergens
+        .map((v) => v.toLowerCase())
+        .includes(v.toLowerCase())
+  )
+)
 const suggestions = computed(() => {
-  let suggestions = allergensStore
-    .getAllergensFilteredUser(userAllergens.allergens)
-    .filter((v) => v.startsWith(allergenInputSanitized.value))
+  let suggestions = allergensFilteredUser.value.filter((v) =>
+    v.toLowerCase().startsWith(allergenInputSanitized.value)
+  )
   if (
     suggestions.length === 1 &&
     suggestions[0] === allergenInputSanitized.value
@@ -119,7 +124,12 @@ const suggestions = computed(() => {
 
 function selectSuggestionIndex(index) {
   componentData.allergenInput = suggestions.value[index]
+  if (!suggestions.value.includes(componentData.allergenInput)) {
+    return
+  }
   componentData.suggestionSelected = 0
+  userAllergens.addAllergen(componentData.allergenInput)
+  componentData.allergenInput = ''
   setTimeout(() => {
     input.value.focus()
   }, 1)
@@ -132,17 +142,6 @@ function moveSelectedSuggestion(num) {
   } else if (componentData.suggestionSelected >= suggestions.value.length) {
     componentData.suggestionSelected = suggestions.value.length - 1
   }
-}
-
-function addAllergen() {
-  if (!allergenInputSanitized.value) {
-    componentData.allergenInput = ''
-    return
-  }
-  componentData.inputFocus = false
-  userAllergens.addAllergen(componentData.allergenInput)
-  componentData.popupVisible = false
-  componentData.allergenInput = ''
 }
 
 function openAddPopup() {
@@ -159,11 +158,7 @@ function cancelAddPopup() {
 }
 
 function checkValidInput() {
-  if (
-    !allergensStore
-      .getAllergensFilteredUser(userAllergens.allergens)
-      .includes(allergenInputSanitized.value)
-  ) {
+  if (!allergensFilteredUser.value.includes(allergenInputSanitized.value)) {
     componentData.allergenInput = ''
   }
 }
