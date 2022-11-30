@@ -9,7 +9,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 // TODO:
-//    - fonction mot de passe oublié
+//    - re-check fonction mot de passe oublié
 //    - design
 
 Future<void> main() async {
@@ -22,6 +22,7 @@ String barcodeNutella = "3017620422003";
 String apiBaseUrl = "http://projetisenapi.zazadago.fr/";
 
 String? firebaseToken = "";
+final FirebaseAuth auth = FirebaseAuth.instance;
 
 class MyApp extends StatelessWidget {
   static User? firebaseUser;
@@ -41,8 +42,19 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class ForgottenPasswordScreen extends StatelessWidget {
+class ForgottenPasswordScreen extends StatefulWidget {
   const ForgottenPasswordScreen({super.key});
+  // final String title;
+
+  @override
+  State<ForgottenPasswordScreen> createState() =>
+      _ForgottenPasswordScreenState();
+}
+
+class _ForgottenPasswordScreenState extends State<ForgottenPasswordScreen> {
+  final mailTextController = TextEditingController();
+
+  void sendResetPasswordMail(String mail) {}
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +62,73 @@ class ForgottenPasswordScreen extends StatelessWidget {
         appBar: AppBar(
           title: const Text("Réinitialiser le mot de passe"),
         ),
-        body: const Center(child: const Text("Ecran mot de passe oublié")));
+        body: Center(
+            child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            SizedBox(
+                height: 250,
+                width: 250,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    // ignore: prefer_const_constructors
+                    TextField(
+                      controller: mailTextController,
+                      obscureText: false,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'Adresse mail',
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10.0,
+                    ),
+                    ElevatedButton(
+                        onPressed: () => {
+                              showDialog<void>(
+                                context: context,
+                                barrierDismissible:
+                                    false, // user must tap button!
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    title: const Text('Confirmation'),
+                                    content: SingleChildScrollView(
+                                      child: ListBody(
+                                        children: const <Widget>[
+                                          Text(
+                                              'Si l\'adresse mail renseignée est associée à un compte existant, un mail contenant les instructions pour réinitialiser son mot de passe lui sera envoyé.'),
+                                          Text('Souhaitez-vous continuer ?'),
+                                        ],
+                                      ),
+                                    ),
+                                    actions: <Widget>[
+                                      TextButton(
+                                        child: const Text("Annuler"),
+                                        onPressed: () =>
+                                            Navigator.of(context).pop(),
+                                      ),
+                                      TextButton(
+                                        child: const Text('Confirmer'),
+                                        onPressed: () {
+                                          auth.sendPasswordResetEmail(
+                                              email: mailTextController.text
+                                              );
+                                          Navigator.of(context).pop();
+                                        },
+                                      ),
+                                    ],
+                                  );
+                                },
+                              )
+                            },
+                        child: const Text("Envoyer"))
+                  ],
+                ))
+          ],
+        )));
   }
 }
 
@@ -68,7 +146,7 @@ class _MyHomePageState extends State<MyHomePage> {
     required String password,
     required BuildContext context,
   }) async {
-    FirebaseAuth auth = FirebaseAuth.instance;
+    // auth = FirebaseAuth.instance;
     User? user;
 
     try {
@@ -159,10 +237,6 @@ class _MyHomePageState extends State<MyHomePage> {
                           } else {
                             print(
                                 "firebaseUser ${usernameTextController.text} connected");
-                            /*
-                      firebaseUser
-                          .getIdTokenResult(true)
-                          .then((value) => print(value.token));*/
 
                             MyApp.firebaseUser = firebaseUser;
                             // ignore: use_build_context_synchronously
