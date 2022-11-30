@@ -171,7 +171,7 @@ class UnsuccessfullLoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('UnsuccessfullLoginScreen'),
+        title: const Text('Erreur d\'authentification'),
       ),
       body: Center(
         child: Column(
@@ -332,7 +332,7 @@ class _ScanScreenState extends State<ScanScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-              Text("Bonjour ${MyApp.firebaseUser?.displayName} !"),
+              Text("Bonjour ${MyApp.firebaseUser?.email} !"),
               // Text("Contenu du code-barres: $_scanBarcode"),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
