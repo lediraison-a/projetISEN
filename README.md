@@ -25,8 +25,8 @@
 ## Equipe
 |Etudiant|Rôle|
 |--|--|
-|Nathan Le Duot||
-|Nathan Ranaivo||
-|Alban Le Diraison||
-|Mathis Guillarmou||
-|Alban Le Rouzic||
+|Nathan Le Duot|Product Owner|
+|Nathan Ranaivo|Dev mobile|
+|Alban Le Diraison|Dev API et Front|
+|Mathis Guillarmou|Dev API|
+|Alban Le Rouzic|Scrum Master|
