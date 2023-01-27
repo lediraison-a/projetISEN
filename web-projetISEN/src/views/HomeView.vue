@@ -24,7 +24,7 @@ const userContext = useUserContext()
 </script>
 <style scoped>
 .home-content {
-  height: calc(100vh - 3rem);
+  height: calc(100vh - 3.5rem);
   display: flex;
   justify-content: center;
   align-items: center;
