@@ -19,7 +19,7 @@ import AppAlert from '@/components/AppAlert.vue'
   position: fixed;
   top: 0;
   left: 0;
-  height: 3rem;
+  height: 3.5rem;
   background-color: var(--color-background-soft);
 }
 
@@ -37,7 +37,7 @@ import AppAlert from '@/components/AppAlert.vue'
   max-width: 85rem;
   border-left: solid var(--color-border) 1px;
   border-right: solid var(--color-border) 1px;
-  min-height: calc(100vh - 3rem);
+  min-height: calc(100vh - 3.5rem);
   margin-left: auto;
   margin-right: auto;
 }

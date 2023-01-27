@@ -2,7 +2,7 @@
   <div>
     <div class="home-link">
       <router-link to="/">
-        <img src="src/assets/icons/logo/Logo%20Dark.svg" />
+        <img src="src/assets/icons/logo/Logo%20Light.svg" />
         {{ appName }}
       </router-link>
     </div>
