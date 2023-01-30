@@ -329,4 +329,12 @@ function checkValidInput() {
   color: var(--vt-c-text-light-1);
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  position: relative;
+  font-weight: normal;
+}
 </style>

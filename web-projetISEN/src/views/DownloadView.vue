@@ -1,15 +1,17 @@
 <template>
   <div class="download-content">
-    <div class="app-btn-primary">
+    <div class="app-btn-primary" @click="download">
       <img src="src/assets/icons/download.svg" />
       <div> Download the .apk file </div>
     </div>
   </div>
 </template>
 
-<script>
-export default {
-  name: 'DownloadView',
+<script setup>
+const apkFile = 'README.md'
+
+const download = () => {
+  window.open(apkFile)
 }
 </script>
 

@@ -3,6 +3,9 @@
     --error: #d06161;
 }
 
+#app {
+    min-height: 100vh;
+}
 
 .app-btn-primary {
     background-color: var(--primary);

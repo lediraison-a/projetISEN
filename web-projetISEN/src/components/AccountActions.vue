@@ -102,7 +102,6 @@ function onAcceptConfirm() {
   border-radius: 0.375em;
   border: solid var(--color-border) 1px;
   padding: 0.8rem;
-  width: 100%;
 }
 
 .icon {
