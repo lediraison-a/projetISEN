@@ -18,7 +18,7 @@ public class OpenFoodDaoImpl implements OpenFoodDao {
     }
 
     @Override
-    public String getProduct(String barcode) {
+    public String getProduct(String barcode) throws RuntimeException {
         LOG.info("getProduct {}", barcode);
         String GET_PRODUCT_URI = "/api/v2/product/{barcode}";
         return webClient.get()

@@ -22,7 +22,8 @@ public class AllergenService {
         var rootNode = new ObjectMapper().readTree(allergensFile);
         allergens = StreamSupport
                 .stream(rootNode.spliterator(), false)
-                .map(jsonNode -> jsonNode.get("name").get("fr").asText())
+                .map(jsonNode -> jsonNode.get("name").get("en").asText())
+                .filter(s -> !s.equals("Aucun"))
                 .toList();
     }
 

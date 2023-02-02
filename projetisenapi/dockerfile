@@ -1,13 +1,4 @@
-# Build stage
-FROM openjdk:17-alpine as build-stage
-WORKDIR /app
-COPY . .
-RUN ./gradlew --no-daemon war
-
-
-# Production stage
-FROM tomcat:9.0.68-jre17 as production-stage
-RUN rm -rf /usr/local/tomcat/webapps/*
-COPY build/libs/projetisenapi-0.0.1-SNAPSHOT-plain.war /usr/local/tomcat/webapps/app.war
+FROM tomcat:9.0.68-jre17
+COPY build/libs/projetisenapi.war /usr/local/tomcat/webapps/projetisenapi.war
 EXPOSE 8080
 CMD ["catalina.sh", "run"]

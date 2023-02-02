@@ -9,6 +9,7 @@
         <img src="src/assets/icons/edit.svg" />
         <router-link to="/user">Edit your allergens</router-link>
       </div>
+      <div>or</div>
       <div class="app-btn-primary">
         <img src="src/assets/icons/download.svg" />
         <router-link to="/download">Download the app</router-link>
@@ -23,7 +24,7 @@ const userContext = useUserContext()
 </script>
 <style scoped>
 .home-content {
-  height: calc(100vh - 3rem);
+  height: calc(100vh - 3.5rem);
   display: flex;
   justify-content: center;
   align-items: center;

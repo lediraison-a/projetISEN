@@ -2,14 +2,14 @@
   <div class="user-auth">
     <div v-if="!userContext.isConnected" class="auth-links">
       <div class="auth-link" @click="router.push('/signin')">
-        <img src="src/assets/icons/login.svg" />
+        <img src="src/assets/icons/login.svg" class="theme-icon" />
         Sign in
       </div>
     </div>
     <div v-else class="auth-links">
       <div class="auth-info">{{ userContext.name }}</div>
       <div class="auth-link" @click="userContext.userLogout">
-        <img src="src/assets/icons/logout.svg" />
+        <img src="src/assets/icons/logout.svg" class="theme-icon" />
         Log out
       </div>
     </div>

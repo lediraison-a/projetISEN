@@ -53,7 +53,7 @@ public class UserService {
                     .map(String::toLowerCase)
                     .toList();
             productUserAllergens = productService.getProductInfo(barcode)
-                    .getAllergensImported()
+                    .getAllergensTags()
                     .stream()
                     .map(String::toLowerCase)
                     .filter(userAllergens::contains)

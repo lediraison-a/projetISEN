@@ -1,18 +1,24 @@
 <template>
   <div>
-    <div class="home-link">
-      <router-link to="/">
-        <img src="src/assets/icons/logo/Logo%20Dark.svg" />
-        {{ appName }}
-      </router-link>
-    </div>
-    <div class="nav-links" v-if="userContext.isConnected">
-      <div class="nav-link" v-for="link in links" :key="link">
-        <router-link :to="link[0]">{{ link[1] }}</router-link>
+    <div class="header-content">
+      <div class="header-content-left">
+        <div class="home-link">
+          <router-link to="/">
+            <img src="src/assets/icons/logo/Logo%20Light.svg" />
+            {{ appName }}
+          </router-link>
+        </div>
+        <div class="nav-links" v-if="userContext.isConnected">
+          <div class="nav-link" v-for="link in links" :key="link">
+            <router-link :to="link[0]">{{ link[1] }}</router-link>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="connect-links">
-      <UserAuth />
+      <div class="header-content-right">
+        <div class="connect-links">
+          <UserAuth />
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -31,22 +37,44 @@ const links = [
 const appName = import.meta.env.VITE_APP_TITLE
 </script>
 <style scoped>
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 500px) {
   .nav-links {
     display: none;
   }
 }
 
-@media screen and (min-width: 900px) {
+@media screen and (min-width: 500px) {
   .nav-links {
     display: flex;
   }
 }
 
+.header-content-left,
+.header-content-right {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  flex-direction: row;
+}
+
+.header-content-right {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.header-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100vw;
+  max-width: 85rem;
+}
+
 .app-header {
   display: flex;
   align-items: center;
-  padding-left: 2rem;
   justify-content: start;
   background-color: var(--color-background-soft);
   z-index: 10;
@@ -69,11 +97,6 @@ const appName = import.meta.env.VITE_APP_TITLE
 .nav-link {
   font-size: larger;
   padding: 0.5rem;
-}
-
-.connect-links {
-  right: 0.5rem;
-  position: absolute;
 }
 
 img {
