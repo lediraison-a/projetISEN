@@ -1,16 +1,17 @@
 version: "3.9"
 services:
-  # web:
-  #   network_mode: host
-  #   build: web-projetISEN
-  #   container_name: dish-web
-  #   ports:
-  #     - "8080:8080"
+
+  web:
+    network_mode: host
+    build: web-projetISEN
+    container_name: dish-web
+    ports:
+      - "8080:80"
 
   api:
     build: projetisenapi
     container_name: dish-api
     ports:
-      - "8081:8080"
+      - "8082:8080"
     volumes:
       - /srv/projetisenapi:/srv/projetisenapi
