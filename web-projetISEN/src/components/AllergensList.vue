@@ -8,7 +8,7 @@
       >
         <div class="allergen-label">{{ allergen }}</div>
         <div class="delete-btn" @click="userAllergens.deleteAllergen(i)">
-          <img class="delete-icon icon theme-icon" src="src/assets/icons/delete.svg" />
+          <img class="delete-icon icon theme-icon" src="/src/assets/icons/delete.svg" />
         </div>
       </div>
       <div
@@ -24,7 +24,7 @@
       >
         <div class="allergen-label allergen-label-add">add an allergen</div>
         <div class="add-btn">
-          <img class="icon" src="src/assets/icons/add_box.svg" />
+          <img class="icon" src="/src/assets/icons/add_box.svg" />
         </div>
       </div>
     </div>
@@ -72,7 +72,7 @@
             </div>
           </div>
           <div class="app-btn" @click="cancelAddPopup">
-            <img src="src/assets/icons/cancel.svg" class="theme-icon" />
+            <img src="/src/assets/icons/cancel.svg" class="theme-icon" />
             Cancel
           </div>
         </div>

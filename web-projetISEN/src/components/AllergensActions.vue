@@ -1,11 +1,11 @@
 <template>
   <div class="actions">
     <div class="app-btn" @click="userAllergens.fetchUserAllergens">
-      <img src="src/assets/icons/cancel.svg" class="theme-icon" />
+      <img src="/src/assets/icons/cancel.svg" class="theme-icon" />
       Cancel changes
     </div>
     <div class="app-btn-primary" @click="userAllergens.updateUserAllergens">
-      <img src="src/assets/icons/save.svg" />
+      <img src="/src/assets/icons/save.svg" />
       Save changes
     </div>
   </div>

@@ -4,7 +4,7 @@
       <div class="header-content-left">
         <div class="home-link">
           <router-link to="/">
-            <img src="src/assets/icons/logo/Logo%20Light.svg" />
+            <img src="/src/assets/icons/logo/LogoLight.svg" />
             {{ appName }}
           </router-link>
         </div>
