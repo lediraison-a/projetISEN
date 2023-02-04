@@ -25,8 +25,16 @@
 <script setup>
 import UserAuth from '../components/UserAuth.vue'
 import { useUserContext } from '@/stores/userContextStore'
+import { useI18n } from 'vue-i18n'
 
 const userContext = useUserContext()
+
+// TODO
+// not working :((
+// https://stackoverflow.com/questions/73078162/vue-use-i18n-within-the-setup-script
+const { t } = useI18n()
+let userLabel = t('message.editAllergens')
+console.log(userLabel)
 
 const links = [
   ['/user', 'User'],

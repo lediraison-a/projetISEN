@@ -4,6 +4,11 @@
       "editAllergens": "Edit your allergens",
       "downloadApp": "Download the app",
       "signInStart": "Sign in to get started"
+    },
+    "header": {
+      "user": "User",
+      "download": "Download",
+      "qna": "Q&A"
     }
   },
   "fr": {
@@ -11,6 +16,11 @@
       "editAllergens": "Renseigner vos allergenes",
       "downloadApp": "Télécharger l'application",
       "signInStart": "Connectez vous pour commencer"
+    },
+    "header": {
+      "user": "Utilisateur",
+      "download": "Téléchargement",
+      "qna": "FAQ"
     }
   }
 }

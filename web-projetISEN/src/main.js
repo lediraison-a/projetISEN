@@ -31,6 +31,7 @@ const i18n = createI18n({
   locale: 'en',
   fallbackLocale: 'fr',
   messages,
+  allowComposition: true,
 })
 app.use(i18n)
 
