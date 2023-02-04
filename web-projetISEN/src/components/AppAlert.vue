@@ -1,7 +1,7 @@
 <template>
   <div class="alert" v-if="appAlert.show" :class="appAlert.level">
-    <img src="src/assets/icons/info.svg" v-if="appAlert.level === 'info'" class="theme-icon" />
-    <img src="src/assets/icons/warning.svg" v-if="appAlert.level === 'error'" class="theme-icon" />
+    <img src="/src/assets/icons/info.svg" v-if="appAlert.level === 'info'" class="theme-icon" />
+    <img src="/src/assets/icons/warning.svg" v-if="appAlert.level === 'error'" class="theme-icon" />
     <div class="alert-message">{{ appAlert.message }}</div>
   </div>
 </template>

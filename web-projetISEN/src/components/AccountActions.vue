@@ -6,18 +6,18 @@
     </div>
     <div class="actions">
       <div class="app-btn" @click="onRequestNewPassword">
-        <img src="src/assets/icons/key.svg" class="theme-icon" />
+        <img src="/src/assets/icons/key.svg" class="theme-icon" />
         Request a password change
       </div>
       <div class="btn-warning app-btn" @click="onDeleteAccount">
-        <img src="src/assets/icons/person_remove.svg" class="theme-icon" />
+        <img src="/src/assets/icons/person_remove.svg" class="theme-icon" />
         Delete account
       </div>
     </div>
     <div class="popup" v-if="hasToConfirm">
       <div class="popup-content">
         <div class="popup-info">
-          <img src="src/assets/icons/warning.svg" class="icon theme-icon" />
+          <img src="/src/assets/icons/warning.svg" class="icon theme-icon" />
           <div class="popup-msg">{{ confirmData.message }}</div>
         </div>
         <div class="popup-actions">
