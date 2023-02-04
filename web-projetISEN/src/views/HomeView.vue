@@ -2,17 +2,21 @@
   <div class="home-content">
     <div class="app-btn-primary" v-if="!userContext.isConnected">
       <img src="/src/assets/icons/login.svg" />
-      <router-link to="/signin"> Sign in to get started </router-link>
+      <router-link to="/signin"></router-link>
     </div>
     <div v-else class="btn-start-connected">
       <div class="app-btn-primary">
         <img src="/src/assets/icons/edit.svg" />
-        <router-link to="/user">Edit your allergens</router-link>
+        <router-link to="/user">
+          {{ $t('message.editAllergens') }}
+        </router-link>
       </div>
       <div>or</div>
       <div class="app-btn-primary">
         <img src="/src/assets/icons/download.svg" />
-        <router-link to="/download">Download the app</router-link>
+        <router-link to="/download">
+          {{ $t('message.downloadApp') }}
+        </router-link>
       </div>
     </div>
   </div>

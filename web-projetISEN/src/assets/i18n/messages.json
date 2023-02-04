@@ -1,8 +1,16 @@
 {
   "en": {
-
+    "message": {
+      "editAllergens": "Edit your allergens",
+      "downloadApp": "Download the app",
+      "signInStart": "Sign in to get started"
+    }
   },
   "fr": {
-
+    "message": {
+      "editAllergens": "Renseigner vos allergenes",
+      "downloadApp": "Télécharger l'application",
+      "signInStart": "Connectez vous pour commencer"
+    }
   }
 }
