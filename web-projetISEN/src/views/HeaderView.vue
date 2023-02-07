@@ -1,6 +1,28 @@
 <template>
   <div>
+    <div
+      class="side-header"
+      :class="showSideHeader ? 'side-header-show' : 'side-header-hide'"
+    >
+      <div class="home-link">
+        <router-link to="/">
+          <img src="/src/assets/icons/logo/LogoLight.svg" />
+          {{ appName }}
+        </router-link>
+      </div>
+      <div class="nav-links" v-if="userContext.isConnected">
+        <div class="nav-link" v-for="link in links" :key="link">
+          <router-link :to="link[0]">{{ link[1] }}</router-link>
+        </div>
+      </div>
+      <div class="connect-links">
+        <UserAuth />
+      </div>
+    </div>
     <div class="header-content">
+      <div class="menu-btn" @click="showSideHeader = true">
+        <img src="/src/assets/icons/menu.svg" class="theme-icon" />
+      </div>
       <div class="header-content-left">
         <div class="home-link">
           <router-link to="/">
@@ -35,6 +57,8 @@ const links = [
 ]
 
 const appName = import.meta.env.VITE_APP_TITLE
+
+let showSideHeader = false
 </script>
 <style scoped>
 @media screen and (max-width: 500px) {
@@ -49,6 +73,36 @@ const appName = import.meta.env.VITE_APP_TITLE
   }
 }
 
+.side-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 15rem;
+  height: 100vh;
+  background-color: var(--color-background-soft);
+  border-right: solid var(--color-border) 1px;
+}
+
+.side-header-show {
+  left: 0;
+  transition: 150ms;
+}
+
+.side-header-hide {
+  left: -100%;
+  transition: 150ms;
+}
+
+.menu-btn {
+  height: 100%;
+  width: 1rem;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  margin-right: 1rem;
+  margin-left: 1rem;
+}
+
 .header-content-left,
 .header-content-right {
   display: flex;
@@ -60,6 +114,11 @@ const appName = import.meta.env.VITE_APP_TITLE
 .header-content-right {
   display: flex;
   justify-content: flex-end;
+  margin-right: 0.3rem;
+}
+
+.header-content-left {
+  margin-left: 0.3rem;
 }
 
 .header-content {
