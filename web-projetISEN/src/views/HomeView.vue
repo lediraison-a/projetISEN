@@ -11,7 +11,9 @@
           {{ $t('message.editAllergens') }}
         </router-link>
       </div>
-      <div>or</div>
+      <div>
+        {{ $t('message.or') }}
+      </div>
       <div class="app-btn-primary">
         <img src="/src/assets/icons/download.svg" />
         <router-link to="/download">

@@ -3,7 +3,8 @@
     "message": {
       "editAllergens": "Edit your allergens",
       "downloadApp": "Download the app",
-      "signInStart": "Sign in to get started"
+      "signInStart": "Sign in to get started",
+      "or": "or"
     },
     "header": {
       "user": "User",
@@ -15,7 +16,8 @@
     "message": {
       "editAllergens": "Renseigner vos allergenes",
       "downloadApp": "Télécharger l'application",
-      "signInStart": "Connectez vous pour commencer"
+      "signInStart": "Connectez vous pour commencer",
+      "or": "ou"
     },
     "header": {
       "user": "Utilisateur",

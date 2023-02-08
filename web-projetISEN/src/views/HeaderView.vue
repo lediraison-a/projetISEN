@@ -33,7 +33,7 @@ const userContext = useUserContext()
 // not working :((
 // https://stackoverflow.com/questions/73078162/vue-use-i18n-within-the-setup-script
 const { t } = useI18n()
-let userLabel = t('message.editAllergens')
+let userLabel = t('header.user')
 console.log(userLabel)
 
 const links = [
