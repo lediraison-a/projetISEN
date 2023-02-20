@@ -23,6 +23,7 @@ String? firebaseToken = "";
 final FirebaseAuth auth = FirebaseAuth.instance;
 
 // Création d'une primaryswatch à partir d'un hex de couleur
+// pour la couleur verte de la charte graphique
 MaterialColor buildMaterialColor(Color color) {
   List strengths = <double>[.05];
   Map<int, Color> swatch = {};
@@ -64,7 +65,6 @@ class MyApp extends StatelessWidget {
 
 class ForgottenPasswordScreen extends StatefulWidget {
   const ForgottenPasswordScreen({super.key});
-  // final String title;
 
   @override
   State<ForgottenPasswordScreen> createState() =>
@@ -335,7 +335,7 @@ class ScanScreen extends StatefulWidget {
 class _ScanScreenState extends State<ScanScreen> {
   String _scanBarcode = "";
 
-  // Allergen test
+  // Test d'allergènes
   Future<void> testAllergies(
       String? firebaseToken, String barcodeScanRes) async {
     List userAllergens = [];
@@ -347,7 +347,7 @@ class _ScanScreenState extends State<ScanScreen> {
       'Authorization': 'Bearer $firebaseToken'
     };
 
-    // get user allergens
+    // taper l'API pour avoir les allergènes de l'utilisateur
     var request =
         http.Request('GET', Uri.parse('${apiBaseUrl}api/v1/user/allergens'));
     request.headers.addAll(headers);
@@ -355,7 +355,7 @@ class _ScanScreenState extends State<ScanScreen> {
     if (response.statusCode == 200) {
       // response.stream.bytesToString() = allergènes de l'utilisateur
       userAllergens = json.decode(await response.stream.bytesToString());
-      // convert to lowercase
+      // convertir en minuscules
       userAllergens =
           userAllergens.map((allergen) => allergen.toLowerCase()).toList();
       print("User allergens: $userAllergens");
@@ -363,7 +363,7 @@ class _ScanScreenState extends State<ScanScreen> {
       print(response.reasonPhrase);
     }
 
-    // get product allergens
+    // demander les allergènes du produit $barcodeScanRes à l'API
     var productRequestHeaders = {
       'accept': 'application/json',
       'Authorization': 'Bearer $firebaseToken'
@@ -380,7 +380,6 @@ class _ScanScreenState extends State<ScanScreen> {
       // String productName = valuesReturned[0];
       // String productBarcode = valuesReturned[1];
       productAllergens = valuesReturned[2];
-      // convert to lowercase
       productAllergens =
           productAllergens.map((allergen) => allergen.toLowerCase()).toList();
       print("Product allergens: $productAllergens");
@@ -388,7 +387,7 @@ class _ScanScreenState extends State<ScanScreen> {
       print(productResponse.reasonPhrase);
     }
 
-    // Comparison logic
+    // Comparer
     userAllergens.forEach((element) {
       if (productAllergens.contains(element)) {
         isSafeToEat = false;
@@ -397,7 +396,7 @@ class _ScanScreenState extends State<ScanScreen> {
 
     if (isSafeToEat) {
       Fluttertoast.showToast(
-          msg: "C'est safe!",
+          msg: "Pas d'allergènes détéctés !",
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
           timeInSecForIosWeb: 1,
@@ -406,7 +405,7 @@ class _ScanScreenState extends State<ScanScreen> {
           fontSize: 16.0);
     } else {
       Fluttertoast.showToast(
-          msg: "Allergènes présents!",
+          msg: "Attention, allergènes présents!",
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
           timeInSecForIosWeb: 1,
