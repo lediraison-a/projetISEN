@@ -413,6 +413,15 @@ class _ScanScreenState extends State<ScanScreen> {
           textColor: Colors.white,
           fontSize: 16.0);
     }
+
+    // ignore: use_build_context_synchronously
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => AllergenDetailsScreen(
+                  userAllergens: userAllergens,
+                  productAllergens: productAllergens,
+                )));
   }
 
   // Unique scan
@@ -492,5 +501,78 @@ class _ScanScreenState extends State<ScanScreen> {
                 ],
               )
             ])));
+  }
+}
+
+// ignore: must_be_immutable
+class AllergenDetailsScreen extends StatelessWidget {
+  List userAllergens;
+  List productAllergens;
+
+  AllergenDetailsScreen(
+      {super.key, required this.userAllergens, required this.productAllergens});
+
+  @override
+  Widget build(BuildContext context) {
+    print("userAllergens: $userAllergens");
+    print("productAllergens: $productAllergens");
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Détails du scan'),
+      ),
+      body: Center(
+          child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Row(
+            children: [
+              Expanded(
+                child:
+                    Column(children: createUserAllergensColumn(userAllergens)),
+              ),
+              Expanded(
+                child: Column(
+                    children: createProductAllergensColumn(productAllergens)),
+              )
+            ],
+          ),
+        ],
+      )),
+    );
+  }
+
+  // Générer les widgets à afficher sur la page détaillant les allergènes
+  createUserAllergensColumn(userAllergens) {
+    var userAllergensColumn = <Widget>[];
+
+    userAllergensColumn.add(
+      const Text(
+        "Vos allergènes",
+        textAlign: TextAlign.center,
+        style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+      ),
+    );
+    userAllergens.forEach((allergen) {
+      var textWidget = Text(allergen);
+      return userAllergensColumn.add(textWidget);
+    });
+    return userAllergensColumn;
+  }
+
+  createProductAllergensColumn(productAllergens) {
+    var productAllergensColumn = <Widget>[];
+    productAllergensColumn.add(
+      const Text(
+        "Allergènes du produit",
+        textAlign: TextAlign.center,
+        style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+      ),
+    );
+    productAllergens.forEach((allergen) {
+      var textWidget = Text(allergen);
+      return productAllergensColumn.add(textWidget);
+    });
+    return productAllergensColumn;
   }
 }
