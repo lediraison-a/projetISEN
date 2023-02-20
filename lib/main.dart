@@ -3,14 +3,10 @@ import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
-// TODO:
-//    - re-check fonction mot de passe oublié
-//    - design
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,10 +15,32 @@ Future<void> main() async {
 }
 
 String barcodeNutella = "3017620422003";
+// url qui hébèrge l'api pour le moment, vu que la vm est indisponible
 String apiBaseUrl = "http://projetisenapi.zazadago.fr/";
 
 String? firebaseToken = "";
 final FirebaseAuth auth = FirebaseAuth.instance;
+
+// Création d'une primaryswatch à partir d'un hex
+MaterialColor buildMaterialColor(Color color) {
+  List strengths = <double>[.05];
+  Map<int, Color> swatch = {};
+  final int r = color.red, g = color.green, b = color.blue;
+
+  for (int i = 1; i < 10; i++) {
+    strengths.add(0.1 * i);
+  }
+  strengths.forEach((strength) {
+    final double ds = 0.5 - strength;
+    swatch[(strength * 1000).round()] = Color.fromRGBO(
+      r + ((ds < 0 ? r : (255 - r)) * ds).round(),
+      g + ((ds < 0 ? g : (255 - g)) * ds).round(),
+      b + ((ds < 0 ? b : (255 - b)) * ds).round(),
+      1,
+    );
+  });
+  return MaterialColor(color.value, swatch);
+}
 
 class MyApp extends StatelessWidget {
   static User? firebaseUser;
@@ -35,7 +53,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'MyHomePage',
       theme: ThemeData(
-        primarySwatch: Colors.pink,
+        primarySwatch: buildMaterialColor(Color(0xff00bd7e)),
+        fontFamily: 'Inter',
       ),
       home: const MyHomePage(title: 'Dish'),
     );
@@ -114,8 +133,7 @@ class _ForgottenPasswordScreenState extends State<ForgottenPasswordScreen> {
                                         child: const Text('Confirmer'),
                                         onPressed: () {
                                           auth.sendPasswordResetEmail(
-                                              email: mailTextController.text
-                                              );
+                                              email: mailTextController.text);
                                           Navigator.of(context).pop();
                                         },
                                       ),
