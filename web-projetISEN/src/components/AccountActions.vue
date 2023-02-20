@@ -18,14 +18,14 @@
       <div class="popup-content">
         <div class="popup-info">
           <img src="/src/assets/icons/warning.svg" class="icon theme-icon" />
-          <div class="popup-msg">{{ confirmData.message }}</div>
+          <div class="popup-msg">{{ $t(confirmData.message) }}</div>
         </div>
         <div class="popup-actions">
           <div class="app-btn" @click="onCancelConfirm">
-            {{ confirmData.cancelLabel }}
+            {{ $t(confirmData.cancelLabel) }}
           </div>
           <div class="app-btn-warning" @click="onAcceptConfirm">
-            {{ confirmData.confirmLabel }}
+            {{ $t(confirmData.confirmLabel) }}
           </div>
         </div>
       </div>
@@ -43,24 +43,23 @@ const hasToConfirm = ref(false)
 let confirmFunc = null
 
 const confirmData = reactive({
-  message: 'message',
-  cancelLabel: 'Cancel',
-  confirmLabel: 'Yes',
+  message: '',
+  cancelLabel: 'message.cancel',
+  confirmLabel: 'message.yes',
 })
 
 function onRequestNewPassword() {
   hasToConfirm.value = true
   confirmFunc = userContext.sendEmailReset
-  confirmData.message =
-    'Request a password change ? You will receive a email with a link to change your password.'
-  confirmData.confirmLabel = 'Yes send me the email'
+  confirmData.message = 'accountActions.passwordResetConfirmMsg'
+  confirmData.confirmLabel = 'accountActions.passwordResetConfirmLabel'
 }
 
 function onDeleteAccount() {
   hasToConfirm.value = true
   confirmFunc = userContext.deleteCurrentUser
-  confirmData.message = 'Delete account ? Warning : no undo.'
-  confirmData.confirmLabel = 'Yes delete my account'
+  confirmData.message = 'accountActions.deleteConfirmMsg'
+  confirmData.confirmLabel = 'accountActions.deleteConfirmLabel'
 }
 
 function onCancelConfirm() {
