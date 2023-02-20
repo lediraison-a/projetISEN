@@ -23,7 +23,7 @@ public class AllergenService {
         allergens = StreamSupport
                 .stream(rootNode.spliterator(), false)
                 .map(jsonNode -> jsonNode.get("name").get("en").asText())
-                .filter(s -> !s.equals("Aucun"))
+                .filter(s -> !(s.equals("Aucun") || s.equals("None")))
                 .toList();
     }
 

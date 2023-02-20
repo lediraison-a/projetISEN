@@ -15,7 +15,7 @@
         v-if="userAllergens.allergens.length === 0"
         class="label-noallergens"
       >
-        no allergens
+        {{ $t('message.noAllergen') }}
       </div>
       <div
         class="add-allergen-item"
@@ -30,7 +30,7 @@
     </div>
     <div class="popup-add-allergen" v-if="componentData.popupVisible">
       <div class="popup-content">
-        <div>Add an allergen</div>
+        <div>{{ $t('message.addAnAllergen') }}</div>
         <div class="allergen-input">
           <div class="allergen-input-area">
             <input
@@ -73,7 +73,7 @@
           </div>
           <div class="app-btn" @click="cancelAddPopup">
             <img src="/src/assets/icons/cancel.svg" class="theme-icon" />
-            Cancel
+            {{ $t('message.cancel') }}
           </div>
         </div>
       </div>

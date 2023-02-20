@@ -19,9 +19,6 @@ public class ProductApiImpl extends AbstractApi implements ProductApi {
     @Override
     public ResponseEntity<List<String>> productBarcodeAllergensGet(String barcode) {
         var product = productService.getProductInfo(barcode);
-//        if (product == null) {
-//            return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
-//        }
         return ResponseEntity.ok(product.getAllergensTags());
     }
 
@@ -29,9 +26,6 @@ public class ProductApiImpl extends AbstractApi implements ProductApi {
     public ResponseEntity<Product> productBarcodeGet(String barcode) {
         var product = productService.getProductInfo(barcode);
         var productOutput = new Product();
-//        if (product == null) {
-//            return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
-//        }
         productOutput.setName(product.getName());
         productOutput.setBarcode(product.getBarcode());
         productOutput.setAllergens(product.getAllergensTags());

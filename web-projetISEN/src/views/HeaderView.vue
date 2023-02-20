@@ -10,11 +10,16 @@
         </div>
         <div class="nav-links" v-if="userContext.isConnected">
           <div class="nav-link" v-for="link in links" :key="link">
-            <router-link :to="link[0]">{{ link[1] }}</router-link>
+            <router-link :to="link[0]">{{ $t(link[1]) }}</router-link>
           </div>
         </div>
       </div>
       <div class="header-content-right">
+        <div>
+          <div class="app-btn" @click="switchLang">
+            {{ locale === 'en' ? '🇬🇧' : '🇫🇷' }}
+          </div>
+        </div>
         <div class="connect-links">
           <UserAuth />
         </div>
@@ -25,13 +30,22 @@
 <script setup>
 import UserAuth from '../components/UserAuth.vue'
 import { useUserContext } from '@/stores/userContextStore'
-
+import { useI18n } from 'vue-i18n'
+const { locale } = useI18n({ useScope: 'global' })
 const userContext = useUserContext()
 
+function switchLang() {
+  if (locale.value === 'en') {
+    locale.value = 'fr'
+  } else if (locale.value === 'fr') {
+    locale.value = 'en'
+  }
+}
+
 const links = [
-  ['/user', 'User'],
-  ['/download', 'Download'],
-  ['/qna', 'Q&A'],
+  ['/user', 'header.user'],
+  ['/download', 'header.download'],
+  ['/qna', 'header.qna'],
 ]
 
 const appName = import.meta.env.VITE_APP_TITLE

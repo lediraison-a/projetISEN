@@ -4,7 +4,9 @@
       ISEN - 2023
     </div>
     <div>
-      <a href="https://github.com/lediraison-a/projetISEN">Source Code</a>
+      <a href="https://github.com/lediraison-a/projetISEN">{{
+        $t('message.sourceCode')
+      }}</a>
     </div>
   </div>
 </template>

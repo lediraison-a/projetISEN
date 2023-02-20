@@ -1,0 +1,74 @@
+{
+  "en": {
+    "message": {
+      "editAllergens": "Edit your allergens",
+      "downloadApp": "Download the app",
+      "signInStart": "Sign in to get started",
+      "or": "or",
+      "noAllergen": "no allergens",
+      "addAnAllergen": "Add an allergen",
+      "cancel": "cancel",
+      "allergens": "Allergens",
+      "accountSettings": "Account settings",
+      "deleteAccount" : "Delete account",
+      "passwordChange": "Request a password change",
+      "email": "email",
+      "name": "name",
+      "cancelChanges": "Cancel changes",
+      "saveChanges": "Save changes",
+      "signIn": "Sign in",
+      "logOut": "Log out",
+      "downloadApk": " Download the .apk file ",
+      "headerUser": "User",
+      "yes": "Yes",
+      "sourceCode": "Source code"
+    },
+    "header": {
+      "user": "User",
+      "download": "Download",
+      "qna": "Q&A"
+    },
+    "accountActions": {
+      "deleteConfirmLabel": "Yes delete my account",
+      "deleteConfirmMsg": "Delete account ? Warning : no undo.",
+      "passwordResetConfirmLabel": "Yes send me the email",
+      "passwordResetConfirmMsg": "Request a password change ? You will receive a email with a link to change your password."
+    }
+  },
+  "fr": {
+    "message": {
+      "editAllergens": "Renseigner vos allergenes",
+      "downloadApp": "Télécharger l'application",
+      "signInStart": "Connectez vous pour commencer",
+      "or": "ou",
+      "noAllergen": "pas d'allergenes",
+      "addAnAllergen": "Ajouter un allergen",
+      "cancel": "Annuler",
+      "allergens": "Allergens",
+      "accountSettings": "Parametres du compte",
+      "deleteAccount" : "Supprimer le compte",
+      "passwordChange": "Demander un changement de mot de passe",
+      "email": "mail",
+      "name": "nom",
+      "cancelChanges": "Annuler les changements",
+      "saveChanges": "Sauvegarder les changements",
+      "signIn": "Se connecter",
+      "logOut": "Se déconnecter",
+      "downloadApk": " Télécharger le fichier .apk ",
+      "headerUser": "Utilisateur",
+      "yes": "Oui",
+      "sourceCode": "Code source"
+    },
+    "header": {
+      "user": "Utilisateur",
+      "download": "Téléchargement",
+      "qna": "FAQ"
+    },
+    "accountActions": {
+      "deleteConfirmLabel": "Oui supprimer mon compte",
+      "deleteConfirmMsg": "Supprimer le compte ?",
+      "passwordResetConfirmLabel": "Oui envoyez moi le mail",
+      "passwordResetConfirmMsg": "Demander un nouveau mot de passe ? Vous receverez un mail contenent un lien pour réinitialiser votre mot de passe."
+    }
+  }
+}

@@ -2,7 +2,7 @@
   <div class="download-content">
     <div class="app-btn-primary" @click="download">
       <img src="/src/assets/icons/download.svg" />
-      <div> Download the .apk file </div>
+      <div>{{ $t('message.downloadApk') }}</div>
     </div>
   </div>
 </template>
