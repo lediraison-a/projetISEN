@@ -15,6 +15,11 @@
         </div>
       </div>
       <div class="header-content-right">
+        <div>
+          <div class="app-btn" @click="switchLang">
+            {{ locale === 'en' ? '🇬🇧' : '🇫🇷' }}
+          </div>
+        </div>
         <div class="connect-links">
           <UserAuth />
         </div>
@@ -26,13 +31,20 @@
 import UserAuth from '../components/UserAuth.vue'
 import { useUserContext } from '@/stores/userContextStore'
 import { useI18n } from 'vue-i18n'
-
+const { t, locale } = useI18n({ useScope: 'global' })
 const userContext = useUserContext()
+
+function switchLang() {
+  if (locale.value === 'en') {
+    locale.value = 'fr'
+  } else if (locale.value === 'fr') {
+    locale.value = 'en'
+  }
+}
 
 // TODO
 // not working :((
 // https://stackoverflow.com/questions/73078162/vue-use-i18n-within-the-setup-script
-const { t } = useI18n()
 let userLabel = t('header.user')
 console.log(userLabel)
 

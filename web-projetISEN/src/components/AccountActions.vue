@@ -1,17 +1,17 @@
 <template>
   <div class="account-actions">
     <div class="infos">
-      <p>email : {{ userContext.email }}</p>
-      <p>name : {{ userContext.name }}</p>
+      <p>{{ $t('message.email') }} : {{ userContext.email }}</p>
+      <p>{{ $t('message.name') }} : {{ userContext.name }}</p>
     </div>
     <div class="actions">
       <div class="app-btn" @click="onRequestNewPassword">
         <img src="/src/assets/icons/key.svg" class="theme-icon" />
-        Request a password change
+        {{ $t('message.passwordChange') }}
       </div>
       <div class="btn-warning app-btn" @click="onDeleteAccount">
         <img src="/src/assets/icons/person_remove.svg" class="theme-icon" />
-        Delete account
+        {{ $t('message.deleteAccount') }}
       </div>
     </div>
     <div class="popup" v-if="hasToConfirm">

@@ -2,11 +2,11 @@
   <div class="actions">
     <div class="app-btn" @click="userAllergens.fetchUserAllergens">
       <img src="/src/assets/icons/cancel.svg" class="theme-icon" />
-      Cancel changes
+      {{ $t('message.cancelChanges') }}
     </div>
     <div class="app-btn-primary" @click="userAllergens.updateUserAllergens">
       <img src="/src/assets/icons/save.svg" />
-      Save changes
+      {{ $t('message.saveChanges') }}
     </div>
   </div>
 </template>

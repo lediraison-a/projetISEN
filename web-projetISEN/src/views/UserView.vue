@@ -1,10 +1,10 @@
 <template>
   <div class="user-view">
-    <h2>Allergens</h2>
+    <h2>{{ $t('message.allergens') }}</h2>
     <AllergensList />
     <AllergensActions />
     <div class="account-area">
-      <h2>Account settings</h2>
+      <h2>{{ $t('message.accountSettings') }}</h2>
       <AccountActions />
     </div>
   </div>
