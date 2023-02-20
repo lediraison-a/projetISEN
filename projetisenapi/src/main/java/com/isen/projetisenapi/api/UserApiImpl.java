@@ -1,7 +1,6 @@
 package com.isen.projetisenapi.api;
 
 import com.isen.projetisenapi.service.UserService;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 
@@ -30,9 +29,6 @@ public class UserApiImpl extends AbstractApi implements UserApi {
     @Override
     public ResponseEntity<List<String>> userProductBarcodeAllergensGet(String barcode) {
         var productAllergens = userService.getProductUserAllergens(getPrincipal().getName(), barcode);
-//        if (productAllergens == null) {
-//            return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
-//        }
         return ResponseEntity.ok(productAllergens);
     }
 }
