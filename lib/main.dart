@@ -16,12 +16,13 @@ Future<void> main() async {
 
 String barcodeNutella = "3017620422003";
 // url qui hébèrge l'api pour le moment, vu que la vm est indisponible
+// hébergée chez moi
 String apiBaseUrl = "http://projetisenapi.zazadago.fr/";
 
 String? firebaseToken = "";
 final FirebaseAuth auth = FirebaseAuth.instance;
 
-// Création d'une primaryswatch à partir d'un hex
+// Création d'une primaryswatch à partir d'un hex de couleur
 MaterialColor buildMaterialColor(Color color) {
   List strengths = <double>[.05];
   Map<int, Color> swatch = {};
@@ -70,6 +71,7 @@ class ForgottenPasswordScreen extends StatefulWidget {
       _ForgottenPasswordScreenState();
 }
 
+// Activité Mot de passe oublié
 class _ForgottenPasswordScreenState extends State<ForgottenPasswordScreen> {
   final mailTextController = TextEditingController();
 
@@ -158,6 +160,7 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
+// Activité principale au lancement de l'app
 class _MyHomePageState extends State<MyHomePage> {
   static Future<User?> signInUsingEmailPassword({
     required String email,
@@ -291,6 +294,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
+// Activité erreur de connexion
 class UnsuccessfullLoginScreen extends StatelessWidget {
   const UnsuccessfullLoginScreen({super.key});
 
@@ -319,6 +323,7 @@ class UnsuccessfullLoginScreen extends StatelessWidget {
   }
 }
 
+// Activité de scan
 class ScanScreen extends StatefulWidget {
   const ScanScreen({super.key});
   //final String title;
