@@ -4,14 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dropdown_alert/model/data_alert.dart';
-//import 'package:fluttertoast/fluttertoast.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:firebase_core/firebase_core.dart';
-//import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:rflutter_alert/rflutter_alert.dart';
-//import 'package:flutter_dropdown_alert/alert_controller.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -400,68 +398,75 @@ class _ScanScreenState extends State<ScanScreen> {
     });
 
     // Boîte de dialogue après chaque scan
+    // Afficher le dialogue si le scan est continu, afficher le toast sinon
     if (isSafeToEat) {
-      /*Fluttertoast.showToast(
-          msg: "Pas d'allergènes détéctés !",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.red,
-          textColor: Colors.white,
-          fontSize: 16.0);*/
-      Alert(
-        context: context,
-        title: "Safe",
-        desc: "Pas d'allergènes détéctés!",
-        type: AlertType.success,
-        buttons: [
-          DialogButton(
-            onPressed: () => {
-              Navigator.pop(context),
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => AllergenDetailsScreen(
-                            userAllergens: userAllergens,
-                            productAllergens: productAllergens,
-                          )))
-            },
-            width: 120,
-            child: const Text("Détails"),
-          )
-        ],
-      ).show();
+      if (isContinuous) {
+        Alert(
+          context: context,
+          title: "Safe",
+          desc: "Pas d'allergènes détéctés!",
+          type: AlertType.success,
+          buttons: [
+            DialogButton(
+              onPressed: () => {
+                Navigator.pop(context),
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => AllergenDetailsScreen(
+                              userAllergens: userAllergens,
+                              productAllergens: productAllergens,
+                            )))
+              },
+              width: 120,
+              child: const Text("Détails"),
+            )
+          ],
+        ).show();
+      } else {
+        Fluttertoast.showToast(
+            msg: "Pas d'allergènes détéctés !",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0);
+      }
     } else {
-      /*Fluttertoast.showToast(
-          msg: "Attention, allergènes présents!",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.red,
-          textColor: Colors.white,
-          fontSize: 16.0);*/
-      Alert(
-        context: context,
-        title: "Attention",
-        desc: "Allergènes détéctés!",
-        type: AlertType.error,
-        buttons: [
-          DialogButton(
-            onPressed: () => {
-              Navigator.pop(context),
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => AllergenDetailsScreen(
-                            userAllergens: userAllergens,
-                            productAllergens: productAllergens,
-                          )))
-            },
-            width: 120,
-            child: const Text("Détails"),
-          )
-        ],
-      ).show();
+      if (isContinuous) {
+        Alert(
+          context: context,
+          title: "Attention",
+          desc: "Allergènes détéctés!",
+          type: AlertType.error,
+          buttons: [
+            DialogButton(
+              onPressed: () => {
+                Navigator.pop(context),
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => AllergenDetailsScreen(
+                              userAllergens: userAllergens,
+                              productAllergens: productAllergens,
+                            )))
+              },
+              width: 120,
+              child: const Text("Détails"),
+            )
+          ],
+        ).show();
+      } else {
+        Fluttertoast.showToast(
+            msg: "Attention, allergènes présents!",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0);
+      }
     }
   }
 
