@@ -10,6 +10,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:quickalert/quickalert.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -435,7 +436,7 @@ class _ScanScreenState extends State<ScanScreen> {
       }
     } else {
       if (isContinuous) {
-        Alert(
+        /*Alert(
           context: context,
           title: "Attention",
           desc: "Allergènes détéctés!",
@@ -456,7 +457,13 @@ class _ScanScreenState extends State<ScanScreen> {
               child: const Text("Détails"),
             )
           ],
-        ).show();
+        ).show();*/
+        QuickAlert.show(
+          context: context,
+          type: QuickAlertType.warning,
+          confirmBtnText: "Détails",
+          confirmBtnColor: buildMaterialColor(Color(0xff00bd7e)),
+        ); // That's it to display an alert, use other properties to customize.
       } else {
         Fluttertoast.showToast(
             msg: "Attention, allergènes présents!",
