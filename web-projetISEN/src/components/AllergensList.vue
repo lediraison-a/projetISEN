@@ -6,9 +6,12 @@
         :key="i"
         class="allergen-item"
       >
-        <div class="allergen-label">{{ allergen }}</div>
+        <div class="allergen-label">{{ getAllergenName(allergen) }}</div>
         <div class="delete-btn" @click="userAllergens.deleteAllergen(i)">
-          <img class="delete-icon icon theme-icon" src="/src/assets/icons/delete.svg" />
+          <img
+            class="delete-icon icon theme-icon"
+            src="/src/assets/icons/delete.svg"
+          />
         </div>
       </div>
       <div
@@ -22,7 +25,9 @@
         @click="openAddPopup"
         v-if="!componentData.popupVisible"
       >
-        <div class="allergen-label allergen-label-add">add an allergen</div>
+        <div class="allergen-label allergen-label-add">
+          {{ $t('message.addAnAllergen') }}
+        </div>
         <div class="add-btn">
           <img class="icon" src="/src/assets/icons/add_box.svg" />
         </div>
@@ -67,7 +72,7 @@
                     : ''
                 "
               >
-                {{ suggestion }}
+                {{ getAllergenName(suggestion) }}
               </div>
             </div>
           </div>
@@ -84,6 +89,8 @@
 import { useUserAllergens } from '@/stores/userAllergensStore'
 import { computed, reactive, ref } from 'vue'
 import { useAllergens } from '@/stores/allergensStore'
+import { useI18n } from 'vue-i18n'
+const { locale } = useI18n({ useScope: 'global' })
 
 const userAllergens = useUserAllergens()
 const allergensStore = useAllergens()
@@ -96,6 +103,10 @@ const componentData = reactive({
   inputFocus: false,
   suggestionSelected: 0,
 })
+
+function getAllergenName(allergen) {
+  return allergensStore.getAllergenName(allergen, locale.value)
+}
 
 const allergenInputSanitized = computed(() =>
   componentData.allergenInput.trim().toLowerCase()
@@ -110,8 +121,9 @@ const allergensFilteredUser = computed(() =>
   )
 )
 const suggestions = computed(() => {
-  let suggestions = allergensFilteredUser.value.filter((v) =>
-    v.toLowerCase().startsWith(allergenInputSanitized.value)
+  let suggestions = allergensFilteredUser.value
+    .filter((v) =>
+    getAllergenName(v).toLowerCase().startsWith(allergenInputSanitized.value)
   )
   if (
     suggestions.length === 1 &&
@@ -123,12 +135,10 @@ const suggestions = computed(() => {
 })
 
 function selectSuggestionIndex(index) {
-  componentData.allergenInput = suggestions.value[index]
-  if (!suggestions.value.includes(componentData.allergenInput)) {
-    return
-  }
+  const allergenOk = suggestions.value[index]
+  componentData.allergenInput = getAllergenName(allergenOk)
   componentData.suggestionSelected = 0
-  userAllergens.addAllergen(componentData.allergenInput)
+  userAllergens.addAllergen(allergenOk)
   componentData.allergenInput = ''
   setTimeout(() => {
     input.value.focus()

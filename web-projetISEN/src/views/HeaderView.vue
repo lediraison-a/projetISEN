@@ -30,9 +30,9 @@
 <script setup>
 import UserAuth from '../components/UserAuth.vue'
 import { useUserContext } from '@/stores/userContextStore'
-import { useI18n } from 'vue-i18n'
 import { onMounted } from 'vue'
 import { useLangPref } from '@/stores/LangPrefStore'
+import { useI18n } from 'vue-i18n'
 const { locale } = useI18n({ useScope: 'global' })
 const userContext = useUserContext()
 
@@ -40,8 +40,6 @@ const langPrefStore = useLangPref()
 
 onMounted(() => {
   const langPref = langPrefStore.getLangPref()
-  console.log(langPref)
-
   if (langPref) {
     locale.value = langPref
   }

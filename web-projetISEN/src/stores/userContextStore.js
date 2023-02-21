@@ -28,7 +28,7 @@ export const useUserContext = defineStore('userContext', () => {
         uid.value = ''
         name.value = ''
         router.push('/')
-        appAlert.setAlertInfoTimed('Successfully logged out', 3500)
+        appAlert.setAlertInfoTimed('alert.okLoggedOut', 3500)
       })
   }
 
@@ -51,7 +51,7 @@ export const useUserContext = defineStore('userContext', () => {
   function sendEmailReset() {
     sendPasswordResetEmail(getAuth(), email.value)
       .then(() => {
-        appAlert.setAlertInfoTimed('Reset email sent', 3500)
+        appAlert.setAlertInfoTimed('alert.okMailSent', 3500)
       })
       .catch((error) => {
         const errorCode = error.code
@@ -68,11 +68,11 @@ export const useUserContext = defineStore('userContext', () => {
         uid.value = ''
         name.value = ''
         router.push('/')
-        appAlert.setAlertInfoTimed('User deleted', 3500)
+        appAlert.setAlertInfoTimed('alert.okDeletingUser', 3500)
       })
       .catch((error) => {
         console.log(error.message)
-        appAlert.setAlertErrorTimed('Error deleting user', 3500)
+        appAlert.setAlertErrorTimed('alert.errorDeletingUser', 3500)
       })
   }
 
