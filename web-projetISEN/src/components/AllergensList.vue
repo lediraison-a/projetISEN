@@ -48,7 +48,7 @@
               type="text"
               class="app-input allergen-text-input"
               v-model="componentData.allergenInput"
-              placeholder="an allergen"
+              placeholder="..."
               @keydown.down="moveSelectedSuggestion(1)"
               @keydown.up="moveSelectedSuggestion(-1)"
               @keydown.enter="

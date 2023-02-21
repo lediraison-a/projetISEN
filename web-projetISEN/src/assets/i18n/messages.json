@@ -39,7 +39,10 @@
       "errorDeletingUser": "Error deleting user",
       "okDeletingUser": "User deleted",
       "okMailSent": "Reset email sent",
-      "okLoggedOut": "Successfully logged out"
+      "okLoggedOut": "Successfully logged out",
+      "okUserAllergensUpdate": "User allergens updated",
+      "errorUserAllergensUpdate": "Error updating user allergens",
+      "errorFetchUserAllergens": "Error fetching user allergens"
     }
   },
   "fr": {
@@ -82,7 +85,10 @@
       "errorDeletingUser": "Érreur supression du compte",
       "okDeletingUser": "Compte suprimé",
       "okMailSent": "Mail de réinitialisation de mot de passe envoyé",
-      "okLoggedOut": "Déconnexion ok"
+      "okLoggedOut": "Déconnexion ok",
+      "okUserAllergensUpdate": "Allergens de l'utilisateur mis à jour",
+      "errorUserAllergensUpdate": "Erreur lors de la mise à jour des allergens de l'utilisateur",
+      "errorFetchUserAllergens": "Erreur lors de la récupération des allergens de l'utilisateur"
     }
   }
 }
