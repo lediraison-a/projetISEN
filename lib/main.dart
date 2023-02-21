@@ -1,12 +1,17 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter/services.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter_dropdown_alert/model/data_alert.dart';
+//import 'package:fluttertoast/fluttertoast.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:google_fonts/google_fonts.dart';
+//import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:rflutter_alert/rflutter_alert.dart';
+//import 'package:flutter_dropdown_alert/alert_controller.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -337,7 +342,7 @@ class _ScanScreenState extends State<ScanScreen> {
 
   // Test d'allergènes
   Future<void> testAllergies(
-      String? firebaseToken, String barcodeScanRes) async {
+      String? firebaseToken, String barcodeScanRes, bool isContinuous) async {
     List userAllergens = [];
     List productAllergens = [];
     bool isSafeToEat = true;
@@ -394,34 +399,70 @@ class _ScanScreenState extends State<ScanScreen> {
       }
     });
 
+    // Boîte de dialogue après chaque scan
     if (isSafeToEat) {
-      Fluttertoast.showToast(
+      /*Fluttertoast.showToast(
           msg: "Pas d'allergènes détéctés !",
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
           timeInSecForIosWeb: 1,
           backgroundColor: Colors.red,
           textColor: Colors.white,
-          fontSize: 16.0);
+          fontSize: 16.0);*/
+      Alert(
+        context: context,
+        title: "Safe",
+        desc: "Pas d'allergènes détéctés!",
+        type: AlertType.success,
+        buttons: [
+          DialogButton(
+            onPressed: () => {
+              Navigator.pop(context),
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => AllergenDetailsScreen(
+                            userAllergens: userAllergens,
+                            productAllergens: productAllergens,
+                          )))
+            },
+            width: 120,
+            child: const Text("Détails"),
+          )
+        ],
+      ).show();
     } else {
-      Fluttertoast.showToast(
+      /*Fluttertoast.showToast(
           msg: "Attention, allergènes présents!",
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
           timeInSecForIosWeb: 1,
           backgroundColor: Colors.red,
           textColor: Colors.white,
-          fontSize: 16.0);
+          fontSize: 16.0);*/
+      Alert(
+        context: context,
+        title: "Attention",
+        desc: "Allergènes détéctés!",
+        type: AlertType.error,
+        buttons: [
+          DialogButton(
+            onPressed: () => {
+              Navigator.pop(context),
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => AllergenDetailsScreen(
+                            userAllergens: userAllergens,
+                            productAllergens: productAllergens,
+                          )))
+            },
+            width: 120,
+            child: const Text("Détails"),
+          )
+        ],
+      ).show();
     }
-
-    // ignore: use_build_context_synchronously
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => AllergenDetailsScreen(
-                  userAllergens: userAllergens,
-                  productAllergens: productAllergens,
-                )));
   }
 
   // Unique scan
@@ -431,7 +472,7 @@ class _ScanScreenState extends State<ScanScreen> {
     try {
       barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
           '#ff6666', 'Annuler', true, ScanMode.BARCODE);
-      queryAllergens(barcodeScanRes);
+      queryAllergens(barcodeScanRes, true);
     } on PlatformException {
       barcodeScanRes = 'Failed to get platform version.';
     }
@@ -446,19 +487,19 @@ class _ScanScreenState extends State<ScanScreen> {
     FlutterBarcodeScanner.getBarcodeStreamReceiver(
             '#ff6666', 'Annuler', true, ScanMode.BARCODE)!
         .listen((barcode) {
-      queryAllergens(barcode);
+      queryAllergens(barcode, false);
     });
   }
 
   // Query API
-  String queryAllergens(String barcodeScanRes) {
+  void queryAllergens(String barcodeScanRes, bool isContinuous) {
     User? firebaseUser = MyApp.firebaseUser;
     firebaseUser?.getIdTokenResult(true).then((value) {
       firebaseToken = value.token;
       print("firebaseToken $firebaseToken");
-      testAllergies(firebaseToken, barcodeScanRes);
+      testAllergies(firebaseToken, barcodeScanRes, isContinuous);
     });
-    return "a";
+    //return "a";
   }
 
   @override
