@@ -21,7 +21,12 @@
       "downloadApk": " Download the .apk file ",
       "headerUser": "User",
       "yes": "Yes",
-      "sourceCode": "Source code"
+      "sourceCode": "Source code",
+      "welcomeConnected": "Welcome to Dish, an app to track allergens in everyday products.",
+      "welcomeNotConnected": "Welcome to Dish, an app to track allergens in everyday products.",
+      "guide": "questions and answers",
+      "homeGuide1": "Check the ",
+      "homeGuide2": " to know more."
     },
     "header": {
       "user": "User",
@@ -67,7 +72,12 @@
       "downloadApk": " Télécharger le fichier .apk ",
       "headerUser": "Utilisateur",
       "yes": "Oui",
-      "sourceCode": "Code source"
+      "sourceCode": "Code source",
+      "welcomeConnected": "Bienvenu sur Dish, l'application qui vous permet d'identifier des allergenes dans les produits de la vie courante.",
+      "welcomeNotConnected": "Bienvenu sur Dish, l'application qui vous permet d'identifier des allergenes dans les produits de la vie courante.",
+      "guide": "foire aux questions",
+      "homeGuide1": "Visitez la ",
+      "homeGuide2": " pour en savoir plus."
     },
     "header": {
       "user": "Utilisateur",

@@ -327,8 +327,7 @@ function checkValidInput() {
 }
 
 .add-allergen-item > .allergen-label {
-  width: 0;
-  display: none;
+  width: 100%;
 }
 
 .label-noallergens {
