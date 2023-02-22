@@ -18,9 +18,6 @@ const authUi =
 
 onMounted(() => {
   if (userContext.isConnected) {
-    if (userContext.user.uid == '6OyRNCHxNfhhOdTiFMn5A9K889M2'){
-      router.push('/admin')
-    }
     router.push('/user')
     return
   }
@@ -29,12 +26,6 @@ onMounted(() => {
       signInSuccessWithAuthResult: function (authResult, redirectUrl) {
         console.log(redirectUrl)
         userContext.userSetInfo(authResult.user)
-        console.log(authResult.user.uid);
-        if (authResult.user.uid == '6OyRNCHxNfhhOdTiFMn5A9K889M2') {
-          router.push('/admin')
-        } else {
-          router.push('/user')
-        }
         return false
       },
     },

@@ -43,6 +43,8 @@ dependencies {
 
 	// firebase
 	implementation 'com.google.cloud:google-cloud-firestore:3.7.0'
+	implementation 'com.google.firebase:firebase-admin:9.1.1'
+
 }
 
 tasks.named('test') {
