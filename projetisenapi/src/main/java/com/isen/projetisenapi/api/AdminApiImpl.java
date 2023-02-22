@@ -4,6 +4,7 @@ import com.isen.projetisenapi.api.models.User;
 import com.isen.projetisenapi.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 
 import java.util.List;

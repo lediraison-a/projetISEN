@@ -3,20 +3,24 @@ package com.isen.projetisenapi.service;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.isen.projetisenapi.models.UserInfo;
 import com.isen.projetisenapi.repository.firebaseAdmin.FirebaseAdminRepositoryImpl;
+import com.isen.projetisenapi.repository.firestore.FirestoreDao;
 import com.isen.projetisenapi.utils.exception.ApiError;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 @Service
 public class AdminService {
-    private final Logger LOG = LoggerFactory.getLogger(AllergenService.class);
+    private final Logger LOG = LoggerFactory.getLogger(AdminService.class);
     private final FirebaseAdminRepositoryImpl firebaseAdminRepository;
+    private final FirestoreDao firestoreDao;
 
-    public AdminService(FirebaseAdminRepositoryImpl firebaseAdminRepository) {
+    public AdminService(FirebaseAdminRepositoryImpl firebaseAdminRepository, FirestoreDao firestoreDao) {
         this.firebaseAdminRepository = firebaseAdminRepository;
+        this.firestoreDao = firestoreDao;
     }
 
     public List<UserInfo> listUsers() {
@@ -25,6 +29,7 @@ public class AdminService {
         try {
             listUsers = firebaseAdminRepository.listUsers();
         } catch (FirebaseAuthException e) {
+            LOG.error(e.getMessage());
             throw new ApiError(e.getMessage());
         }
         return listUsers;
@@ -35,6 +40,7 @@ public class AdminService {
         try {
             firebaseAdminRepository.disableUser(uid);
         } catch (FirebaseAuthException e) {
+            LOG.error(e.getMessage());
             throw new ApiError(e.getMessage());
         }
     }
@@ -44,6 +50,36 @@ public class AdminService {
         try {
             firebaseAdminRepository.activateUsers(uid);
         } catch (FirebaseAuthException e) {
+            LOG.error(e.getMessage());
+            throw new ApiError(e.getMessage());
+        }
+    }
+
+    public boolean isAdmin(String userId) {
+        return getAdmins().contains(userId);
+    }
+
+    public List<String> getAdmins() {
+        try {
+            return firestoreDao.getAdmins();
+        } catch (ExecutionException e) {
+            throw new RuntimeException(e);
+        } catch (Exception e) {
+            LOG.error(e.getMessage());
+            throw new ApiError(e.getMessage());
+        }
+    }
+
+    public void setAdmins(List<String> admins, String userId) {
+        LOG.info("Listing admins");
+        LOG.info("user {} set the admins list", userId);
+        try {
+            if(!admins.contains(userId)) {
+                admins.add(userId);
+            }
+            firestoreDao.setAdmins(admins);
+        } catch (Exception e) {
+            LOG.error(e.getMessage());
             throw new ApiError(e.getMessage());
         }
     }
