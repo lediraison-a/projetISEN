@@ -8,8 +8,13 @@
 <script setup>
 import { onMounted } from 'vue'
 import UsersList from '@/components/UsersList.vue'
+import { useAdmin } from '@/stores/adminStore'
 
-onMounted(async () => {})
+const adminStore = useAdmin()
+
+onMounted(async () => {
+  await adminStore.fetchUserList()
+})
 </script>
 
 <style scoped>

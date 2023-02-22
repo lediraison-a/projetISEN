@@ -7,14 +7,18 @@
 </template>
 
 <script setup>
+import { useAdmin } from '@/stores/adminStore'
 
-import { adminUsers } from '@/stores/adminUsersStore'
+const adminStore = useAdmin()
 
-const usersList = adminUsers()
-console.log(usersList)
+async function deactivateUser(uid) {
+  await adminStore.deactivateUser(uid)
+}
 
+async function reactivateUser(uid) {
+  await adminStore.reactivateUser(uid)
+}
 </script>
-  
 <style scoped>
 </style>
   

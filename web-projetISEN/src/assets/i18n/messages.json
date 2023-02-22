@@ -22,7 +22,7 @@
       "headerUser": "User",
       "yes": "Yes",
       "sourceCode": "Source code",
-      "loggedAsAdmin": "Logged as admin user"
+      "loggedAsAdmin": "Logged as admin user",
       "sourceCode": "Source code",
       "welcomeConnected": "Welcome to Dish, an app to track allergens in everyday products.",
       "welcomeNotConnected": "Welcome to Dish, an app to track allergens in everyday products.",
@@ -49,7 +49,10 @@
       "okLoggedOut": "Successfully logged out",
       "okUserAllergensUpdate": "User allergens updated",
       "errorUserAllergensUpdate": "Error updating user allergens",
-      "errorFetchUserAllergens": "Error fetching user allergens"
+      "errorFetchUserAllergens": "Error fetching user allergens",
+      "errorFetchUserList": "Error fetching user list",
+      "errorDeactivateUser": "Error deactivating user",
+      "errorReactivateUser": "Error Reactivating user"
     }
   },
   "fr": {
@@ -79,7 +82,7 @@
       "welcomeNotConnected": "Bienvenu sur Dish, l'application qui vous permet d'identifier des allergenes dans les produits de la vie courante.",
       "guide": "foire aux questions",
       "homeGuide1": "Visitez la ",
-      "homeGuide2": " pour en savoir plus."
+      "homeGuide2": " pour en savoir plus.",
       "sourceCode": "Code source",
       "loggedAsAdmin": "Connecté en tant qu'administrateur"
 
@@ -103,7 +106,10 @@
       "okLoggedOut": "Déconnexion ok",
       "okUserAllergensUpdate": "Allergens de l'utilisateur mis à jour",
       "errorUserAllergensUpdate": "Erreur lors de la mise à jour des allergens de l'utilisateur",
-      "errorFetchUserAllergens": "Erreur lors de la récupération des allergens de l'utilisateur"
+      "errorFetchUserAllergens": "Erreur lors de la récupération des allergens de l'utilisateur",
+      "errorFetchUserList": "Erreur lors de la récupération de la liste des utilisateurs",
+      "errorDeactivateUser": "Erreur lors de la déséctivation de l'utilisateur",
+      "errorReactivateUser": "Erreur lors de la réactivation de l'utilisateur"
     }
   }
 }
