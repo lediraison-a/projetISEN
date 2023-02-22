@@ -186,7 +186,10 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/user"
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/user"
+                                    }
                                 }
                             }
                         },
