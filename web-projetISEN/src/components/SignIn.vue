@@ -26,6 +26,7 @@ onMounted(() => {
       signInSuccessWithAuthResult: function (authResult, redirectUrl) {
         console.log(redirectUrl)
         userContext.userSetInfo(authResult.user)
+        router.push('/user')
         return false
       },
     },
