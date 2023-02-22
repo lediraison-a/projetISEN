@@ -3,13 +3,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_dropdown_alert/model/data_alert.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:quickalert/quickalert.dart';
 
 Future<void> main() async {
@@ -402,28 +400,24 @@ class _ScanScreenState extends State<ScanScreen> {
     // Afficher le dialogue si le scan est continu, afficher le toast sinon
     if (isSafeToEat) {
       if (isUnique) {
-        Alert(
+        QuickAlert.show(
+          title: "Sûr!",
+          text: "Pas d'allergènes détéctés!",
           context: context,
-          title: "Safe",
-          desc: "Pas d'allergènes détéctés!",
-          type: AlertType.success,
-          buttons: [
-            DialogButton(
-              onPressed: () => {
-                Navigator.pop(context),
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => AllergenDetailsScreen(
-                              userAllergens: userAllergens,
-                              productAllergens: productAllergens,
-                            )))
-              },
-              width: 120,
-              child: const Text("Détails"),
-            )
-          ],
-        ).show();
+          type: QuickAlertType.success,
+          confirmBtnText: "Détails",
+          confirmBtnColor: buildMaterialColor(Color(0xff00bd7e)),
+          onConfirmBtnTap: () => {
+            Navigator.pop(context),
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => AllergenDetailsScreen(
+                          userAllergens: userAllergens,
+                          productAllergens: productAllergens,
+                        )))
+          },
+        );
       } else {
         Fluttertoast.showToast(
             msg: "Pas d'allergènes détéctés !",
@@ -436,33 +430,23 @@ class _ScanScreenState extends State<ScanScreen> {
       }
     } else {
       if (isUnique) {
-        /*Alert(
-          context: context,
-          title: "Attention",
-          desc: "Allergènes détéctés!",
-          type: AlertType.error,
-          buttons: [
-            DialogButton(
-              onPressed: () => {
-                Navigator.pop(context),
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => AllergenDetailsScreen(
-                              userAllergens: userAllergens,
-                              productAllergens: productAllergens,
-                            )))
-              },
-              width: 120,
-              child: const Text("Détails"),
-            )
-          ],
-        ).show();*/
         QuickAlert.show(
+          text: "Allergènes détéctés!",
+          title: "Attention!",
           context: context,
           type: QuickAlertType.warning,
           confirmBtnText: "Détails",
           confirmBtnColor: buildMaterialColor(Color(0xff00bd7e)),
+          onConfirmBtnTap: () => {
+            Navigator.pop(context),
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => AllergenDetailsScreen(
+                          userAllergens: userAllergens,
+                          productAllergens: productAllergens,
+                        )))
+          },
         ); // That's it to display an alert, use other properties to customize.
       } else {
         Fluttertoast.showToast(
