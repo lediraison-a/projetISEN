@@ -178,6 +178,70 @@
                     }
                 }
             }
+        },
+        "/admin/users": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/user"
+                                }
+                            }
+                        },
+                        "description": "Retrieve a list of all users"
+                    }
+                }
+            }
+        },
+        "/admin/reactivate/{uid}": {
+            "post": {
+                "parameters": [
+                    {
+                        "name": "uid",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Reactivate an user that has been deactivated"
+                    }
+                }
+            },
+            "parameters": [
+                {
+                    "name": "uid",
+                    "schema": {
+                        "type": "string"
+                    },
+                    "in": "path",
+                    "required": true
+                }
+            ]
+        },
+        "/admin/deactivate/{uid}": {
+            "post": {
+                "responses": {
+                    "200": {
+                        "description": "Deactivate a user"
+                    }
+                }
+            },
+            "parameters": [
+                {
+                    "name": "uid",
+                    "schema": {
+                        "type": "string"
+                    },
+                    "in": "path",
+                    "required": true
+                }
+            ]
         }
     },
     "components": {
@@ -205,6 +269,35 @@
                         "items": {
                             "type": "string"
                         }
+                    }
+                }
+            },
+            "user": {
+                "description": "data for a user",
+                "required": [
+                    "disabled",
+                    "mail",
+                    "name",
+                    "uid"
+                ],
+                "type": "object",
+                "properties": {
+                    "mail": {
+                        "description": "",
+                        "type": "string",
+                        "readOnly": true
+                    },
+                    "disabled": {
+                        "description": "",
+                        "type": "boolean"
+                    },
+                    "name": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "uid": {
+                        "description": "",
+                        "type": "string"
                     }
                 }
             }
