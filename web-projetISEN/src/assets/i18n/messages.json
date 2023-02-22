@@ -23,6 +23,12 @@
       "yes": "Yes",
       "sourceCode": "Source code",
       "loggedAsAdmin": "Logged as admin user"
+      "sourceCode": "Source code",
+      "welcomeConnected": "Welcome to Dish, an app to track allergens in everyday products.",
+      "welcomeNotConnected": "Welcome to Dish, an app to track allergens in everyday products.",
+      "guide": "questions and answers",
+      "homeGuide1": "Check the ",
+      "homeGuide2": " to know more."
     },
     "header": {
       "user": "User",
@@ -34,6 +40,16 @@
       "deleteConfirmMsg": "Delete account ? Warning : no undo.",
       "passwordResetConfirmLabel": "Yes send me the email",
       "passwordResetConfirmMsg": "Request a password change ? You will receive a email with a link to change your password."
+    },
+    "alert": {
+      "errorFetchingAllergens": "Error fetching allergens",
+      "errorDeletingUser": "Error deleting user",
+      "okDeletingUser": "User deleted",
+      "okMailSent": "Reset email sent",
+      "okLoggedOut": "Successfully logged out",
+      "okUserAllergensUpdate": "User allergens updated",
+      "errorUserAllergensUpdate": "Error updating user allergens",
+      "errorFetchUserAllergens": "Error fetching user allergens"
     }
   },
   "fr": {
@@ -59,6 +75,12 @@
       "headerUser": "Utilisateur",
       "yes": "Oui",
       "sourceCode": "Code source",
+      "welcomeConnected": "Bienvenu sur Dish, l'application qui vous permet d'identifier des allergenes dans les produits de la vie courante.",
+      "welcomeNotConnected": "Bienvenu sur Dish, l'application qui vous permet d'identifier des allergenes dans les produits de la vie courante.",
+      "guide": "foire aux questions",
+      "homeGuide1": "Visitez la ",
+      "homeGuide2": " pour en savoir plus."
+      "sourceCode": "Code source",
       "loggedAsAdmin": "Connecté en tant qu'administrateur"
 
     },
@@ -72,6 +94,16 @@
       "deleteConfirmMsg": "Supprimer le compte ?",
       "passwordResetConfirmLabel": "Oui envoyez moi le mail",
       "passwordResetConfirmMsg": "Demander un nouveau mot de passe ? Vous receverez un mail contenent un lien pour réinitialiser votre mot de passe."
+    },
+    "alert": {
+      "errorFetchingAllergens": "Érreur récupération des allergens",
+      "errorDeletingUser": "Érreur supression du compte",
+      "okDeletingUser": "Compte suprimé",
+      "okMailSent": "Mail de réinitialisation de mot de passe envoyé",
+      "okLoggedOut": "Déconnexion ok",
+      "okUserAllergensUpdate": "Allergens de l'utilisateur mis à jour",
+      "errorUserAllergensUpdate": "Erreur lors de la mise à jour des allergens de l'utilisateur",
+      "errorFetchUserAllergens": "Erreur lors de la récupération des allergens de l'utilisateur"
     }
   }
 }

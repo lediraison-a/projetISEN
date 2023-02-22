@@ -1,5 +1,5 @@
 <template>
-  <div class="app-content">
+  <div class="app-content bgpattern">
     <HeaderView class="app-header" />
     <div class="app-view">
       <RouterView></RouterView>
@@ -33,6 +33,7 @@ import FooterView from '@/views/FooterView.vue'
 }
 
 .app-view {
+  background-color: var(--color-background);
   position: relative;
   width: 100vw;
   max-width: 85rem;

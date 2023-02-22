@@ -27,7 +27,7 @@ export const useUserAllergens = defineStore('userAllergens', () => {
       .then((result) => (allergens.value = JSON.parse(result)))
       .catch((error) => {
         console.log('error', error.message)
-        appAlert.setAlertErrorTimed('Error fetching user allergens', 3500)
+        appAlert.setAlertErrorTimed('alert.errorFetchUserAllergens', 3500)
       })
   }
 
@@ -50,11 +50,11 @@ export const useUserAllergens = defineStore('userAllergens', () => {
       .then((response) => response.text())
       .then((result) => {
         console.log(result)
-        appAlert.setAlertInfoTimed('User allergens updated', 3500)
+        appAlert.setAlertInfoTimed('alert.okUserAllergensUpdate', 3500)
       })
       .catch((error) => {
         console.log('error', error.message)
-        appAlert.setAlertErrorTimed('Error updating user allergens', 3500)
+        appAlert.setAlertErrorTimed('alert.errorUserAllergensUpdate', 3500)
       })
   }
 
