@@ -2,9 +2,7 @@ package com.isen.projetisenapi.api;
 
 import com.isen.projetisenapi.api.models.User;
 import com.isen.projetisenapi.service.AdminService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 
 import java.util.List;
@@ -16,6 +14,17 @@ public class AdminApiImpl extends AbstractApi implements AdminApi {
 
     public AdminApiImpl(AdminService adminService) {
         this.adminService = adminService;
+    }
+
+    @Override
+    public ResponseEntity<List<String>> adminAdminsGet() {
+        return ResponseEntity.ok(adminService.getAdmins());
+    }
+
+    @Override
+    public ResponseEntity<Void> adminAdminsPut(List<String> requestBody) {
+        adminService.setAdmins(requestBody, getPrincipal().getName());
+        return ResponseEntity.ok().build();
     }
 
     @Override
