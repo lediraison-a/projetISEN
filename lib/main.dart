@@ -341,7 +341,7 @@ class _ScanScreenState extends State<ScanScreen> {
 
   // Test d'allergènes
   Future<void> testAllergies(
-      String? firebaseToken, String barcodeScanRes, bool isContinuous) async {
+      String? firebaseToken, String barcodeScanRes, bool isUnique) async {
     List userAllergens = [];
     List productAllergens = [];
     bool isSafeToEat = true;
@@ -401,7 +401,7 @@ class _ScanScreenState extends State<ScanScreen> {
     // Boîte de dialogue après chaque scan
     // Afficher le dialogue si le scan est continu, afficher le toast sinon
     if (isSafeToEat) {
-      if (isContinuous) {
+      if (isUnique) {
         Alert(
           context: context,
           title: "Safe",
@@ -435,7 +435,7 @@ class _ScanScreenState extends State<ScanScreen> {
             fontSize: 16.0);
       }
     } else {
-      if (isContinuous) {
+      if (isUnique) {
         /*Alert(
           context: context,
           title: "Attention",
@@ -504,12 +504,12 @@ class _ScanScreenState extends State<ScanScreen> {
   }
 
   // Query API
-  void queryAllergens(String barcodeScanRes, bool isContinuous) {
+  void queryAllergens(String barcodeScanRes, bool isUnique) {
     User? firebaseUser = MyApp.firebaseUser;
     firebaseUser?.getIdTokenResult(true).then((value) {
       firebaseToken = value.token;
       print("firebaseToken $firebaseToken");
-      testAllergies(firebaseToken, barcodeScanRes, isContinuous);
+      testAllergies(firebaseToken, barcodeScanRes, isUnique);
     });
     //return "a";
   }
