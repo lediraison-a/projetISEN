@@ -17,6 +17,10 @@ Future<void> main() async {
 }
 
 String barcodeNutella = "3017620422003";
+
+// IP de la VM ovh
+// String apiBaseUrl = "54.36.181.29"
+
 // url qui hébèrge l'api pour le moment, vu que la vm est indisponible
 // hébergée chez moi
 String apiBaseUrl = "http://projetisenapi.zazadago.fr/";
@@ -262,7 +266,6 @@ class _MyHomePageState extends State<MyHomePage> {
                                 "firebaseUser ${usernameTextController.text} connected");
 
                             MyApp.firebaseUser = firebaseUser;
-                            // ignore: use_build_context_synchronously
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -374,6 +377,8 @@ class _ScanScreenState extends State<ScanScreen> {
         'GET', Uri.parse('${apiBaseUrl}api/v1/product/$barcodeScanRes'));
     productRequest.headers.addAll(productRequestHeaders);
     http.StreamedResponse productResponse = await productRequest.send();
+
+    // Si l'API renvoie un statusCode 200, la requête est bien passée
     if (productResponse.statusCode == 200) {
       String productResponseString =
           await productResponse.stream.bytesToString();
@@ -385,79 +390,89 @@ class _ScanScreenState extends State<ScanScreen> {
       productAllergens =
           productAllergens.map((allergen) => allergen.toLowerCase()).toList();
       print("Product allergens: $productAllergens");
-    } else {
-      print(productResponse.reasonPhrase);
+
+      // Comparer
+      userAllergens.forEach((element) {
+        if (productAllergens.contains(element)) {
+          isSafeToEat = false;
+        }
+      });
+
+      // Boîte de dialogue après chaque scan
+      // Afficher le dialogue si le scan est continu, afficher le toast sinon
+      if (isSafeToEat) {
+        if (isUnique) {
+          QuickAlert.show(
+            title: "Sûr!",
+            text: "Pas d'allergènes détéctés!",
+            context: context,
+            type: QuickAlertType.success,
+            confirmBtnText: "Détails",
+            confirmBtnColor: buildMaterialColor(Color(0xff00bd7e)),
+            onConfirmBtnTap: () => {
+              Navigator.pop(context),
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => AllergenDetailsScreen(
+                            userAllergens: userAllergens,
+                            productAllergens: productAllergens,
+                          )))
+            },
+          );
+        } else {
+          Fluttertoast.showToast(
+              msg: "Pas d'allergènes détéctés !",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.CENTER,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.red,
+              textColor: Colors.white,
+              fontSize: 16.0);
+        }
+      } else {
+        if (isUnique) {
+          QuickAlert.show(
+            text: "Allergènes détéctés!",
+            title: "Attention!",
+            context: context,
+            type: QuickAlertType.warning,
+            confirmBtnText: "Détails",
+            confirmBtnColor: buildMaterialColor(Color(0xff00bd7e)),
+            onConfirmBtnTap: () => {
+              Navigator.pop(context),
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => AllergenDetailsScreen(
+                            userAllergens: userAllergens,
+                            productAllergens: productAllergens,
+                          )))
+            },
+          );
+        } else {
+          Fluttertoast.showToast(
+              msg: "Attention, allergènes présents!",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.CENTER,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.red,
+              textColor: Colors.white,
+              fontSize: 16.0);
+        }
+      }
     }
-
-    // Comparer
-    userAllergens.forEach((element) {
-      if (productAllergens.contains(element)) {
-        isSafeToEat = false;
-      }
-    });
-
-    // Boîte de dialogue après chaque scan
-    // Afficher le dialogue si le scan est continu, afficher le toast sinon
-    if (isSafeToEat) {
-      if (isUnique) {
-        QuickAlert.show(
-          title: "Sûr!",
-          text: "Pas d'allergènes détéctés!",
-          context: context,
-          type: QuickAlertType.success,
-          confirmBtnText: "Détails",
-          confirmBtnColor: buildMaterialColor(Color(0xff00bd7e)),
-          onConfirmBtnTap: () => {
-            Navigator.pop(context),
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => AllergenDetailsScreen(
-                          userAllergens: userAllergens,
-                          productAllergens: productAllergens,
-                        )))
-          },
-        );
-      } else {
-        Fluttertoast.showToast(
-            msg: "Pas d'allergènes détéctés !",
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 1,
-            backgroundColor: Colors.red,
-            textColor: Colors.white,
-            fontSize: 16.0);
-      }
-    } else {
-      if (isUnique) {
-        QuickAlert.show(
-          text: "Allergènes détéctés!",
-          title: "Attention!",
-          context: context,
-          type: QuickAlertType.warning,
-          confirmBtnText: "Détails",
-          confirmBtnColor: buildMaterialColor(Color(0xff00bd7e)),
-          onConfirmBtnTap: () => {
-            Navigator.pop(context),
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => AllergenDetailsScreen(
-                          userAllergens: userAllergens,
-                          productAllergens: productAllergens,
-                        )))
-          },
-        ); // That's it to display an alert, use other properties to customize.
-      } else {
-        Fluttertoast.showToast(
-            msg: "Attention, allergènes présents!",
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 1,
-            backgroundColor: Colors.red,
-            textColor: Colors.white,
-            fontSize: 16.0);
-      }
+    // mail admin: matg29@protonmail.com
+    // Sinon il y a erreur. Générer un popup d'erreur
+    else {
+      QuickAlert.show(
+        text: "Nous avons rencontré une erreur, veuillez réessayer.",
+        title: "Oups ...",
+        context: context,
+        type: QuickAlertType.error,
+        confirmBtnText: "Retour",
+        confirmBtnColor: buildMaterialColor(Color(0xff00bd7e)),
+      );
     }
   }
 
