@@ -21,7 +21,8 @@
       "downloadApk": " Download the .apk file ",
       "headerUser": "User",
       "yes": "Yes",
-      "sourceCode": "Source code"
+      "sourceCode": "Source code",
+      "loggedAsAdmin": "Logged as admin user"
     },
     "header": {
       "user": "User",
@@ -57,7 +58,9 @@
       "downloadApk": " Télécharger le fichier .apk ",
       "headerUser": "Utilisateur",
       "yes": "Oui",
-      "sourceCode": "Code source"
+      "sourceCode": "Code source",
+      "loggedAsAdmin": "Connecté en tant qu'administrateur"
+
     },
     "header": {
       "user": "Utilisateur",
