@@ -21,7 +21,6 @@
       "downloadApk": " Download the .apk file ",
       "headerUser": "User",
       "yes": "Yes",
-      "sourceCode": "Source code",
       "loggedAsAdmin": "Logged as admin user",
       "sourceCode": "Source code",
       "welcomeConnected": "Welcome to Dish, an app to track allergens in everyday products.",
@@ -52,7 +51,8 @@
       "errorFetchUserAllergens": "Error fetching user allergens",
       "errorFetchUserList": "Error fetching user list",
       "errorDeactivateUser": "Error deactivating user",
-      "errorReactivateUser": "Error Reactivating user"
+      "errorReactivateUser": "Error Reactivating user",
+      "errorUpdatingUsers": "Error updating users"
     }
   },
   "fr": {
@@ -109,7 +109,8 @@
       "errorFetchUserAllergens": "Erreur lors de la récupération des allergens de l'utilisateur",
       "errorFetchUserList": "Erreur lors de la récupération de la liste des utilisateurs",
       "errorDeactivateUser": "Erreur lors de la déséctivation de l'utilisateur",
-      "errorReactivateUser": "Erreur lors de la réactivation de l'utilisateur"
+      "errorReactivateUser": "Erreur lors de la réactivation de l'utilisateur",
+      "errorUpdatingUsers": "Erreur lors de la mise a jour des utilisateurs"
     }
   }
 }

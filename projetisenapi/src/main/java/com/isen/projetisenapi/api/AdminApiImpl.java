@@ -58,14 +58,18 @@ public class AdminApiImpl extends AbstractApi implements AdminApi {
     @Override
     public ResponseEntity<Void> adminUsersPut(List<User> user) {
         List<String> deactivated = new ArrayList<>();
+        List<String> reactivated = new ArrayList<>();
         List<String> admins = new ArrayList<>();
         user.forEach(user1 -> {
             if(user1.getIsadmin())
-                admins.add(user1.getName());
+                admins.add(user1.getUid());
             if(user1.getDisabled())
-                deactivated.add(user1.getName());
+                deactivated.add(user1.getUid());
+            else
+                reactivated.add(user1.getUid());
+
         });
-        adminService.updateUsers(admins, deactivated, getPrincipal().getName());
+        adminService.updateUsers(admins, deactivated, reactivated, getPrincipal().getName());
         return ResponseEntity.ok().build();
     }
 }

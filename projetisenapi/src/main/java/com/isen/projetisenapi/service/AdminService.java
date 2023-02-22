@@ -7,6 +7,8 @@ import com.isen.projetisenapi.repository.firestore.FirestoreDao;
 import com.isen.projetisenapi.utils.exception.ApiError;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,9 +37,10 @@ public class AdminService {
         return listUsers;
     }
 
-    public void updateUsers(List<String> admins, List<String> deactivated, String userId) {
+    public void updateUsers(List<String> admins, List<String> deactivated, List<String> reactivated, String userId) {
         setAdmins(admins, userId);
         deactivated.forEach(this::disableUser);
+        reactivated.forEach(this::activateUser);
     }
 
     public void disableUser(String uid) {
@@ -64,6 +67,7 @@ public class AdminService {
         return getAdmins().contains(userId);
     }
 
+    @Cacheable(value = "admins")
     public List<String> getAdmins() {
         try {
             return firestoreDao.getAdmins();
@@ -75,8 +79,8 @@ public class AdminService {
         }
     }
 
+    @CacheEvict(value = "admins", allEntries = true)
     public void setAdmins(List<String> admins, String userId) {
-        LOG.info("Listing admins");
         LOG.info("user {} set the admins list", userId);
         try {
             if(!admins.contains(userId)) {
