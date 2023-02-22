@@ -74,7 +74,7 @@ public class FirestoreDaoImpl implements FirestoreDao {
         LOG.info("setAdmins");
         var query = db.collection(COLLECTION_ADMINS).document(DOCUMENT_ADMINS);
         Map<String, Object> data = new HashMap<>();
-        data.put(ALLERGENS_FIELD_NAME, admins);
+        data.put(ADMINS_FIELD_NAME, admins);
         query.set(data).get();
     }
 }
