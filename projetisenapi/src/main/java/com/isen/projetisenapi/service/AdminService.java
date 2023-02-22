@@ -35,6 +35,11 @@ public class AdminService {
         return listUsers;
     }
 
+    public void updateUsers(List<String> admins, List<String> deactivated, String userId) {
+        setAdmins(admins, userId);
+        deactivated.forEach(this::disableUser);
+    }
+
     public void disableUser(String uid) {
         LOG.info("Disabling user {}", uid);
         try {

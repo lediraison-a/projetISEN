@@ -196,6 +196,26 @@
                         "description": "Retrieve a list of all users"
                     }
                 }
+            },
+            "put": {
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/user"
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "users updated"
+                    }
+                }
             }
         },
         "/admin/reactivate/{uid}": {
@@ -320,7 +340,8 @@
                     "disabled",
                     "mail",
                     "name",
-                    "uid"
+                    "uid",
+                    "isadmin"
                 ],
                 "type": "object",
                 "properties": {
@@ -340,6 +361,10 @@
                     "uid": {
                         "description": "",
                         "type": "string"
+                    },
+                    "isadmin": {
+                        "description": "",
+                        "type": "boolean"
                     }
                 }
             }
