@@ -40,7 +40,7 @@ public class AdminService {
     }
 
     public void activateUser(String uid) {
-        LOG.info("Activete user {}", uid);
+        LOG.info("Activate user {}", uid);
         try {
             firebaseAdminRepository.activateUsers(uid);
         } catch (FirebaseAuthException e) {

@@ -20,7 +20,14 @@ public class FirebaseAdminRepositoryImpl implements FirebaseAdminRepository {
         var page = FirebaseAuth.getInstance().listUsers(null);
         List<UserInfo> users = new ArrayList<>();
         page.iterateAll().forEach(e ->
-                users.add(new UserInfo(e.getDisplayName(), e.getUid(), e.getEmail(), e.isDisabled())));
+                users.add(
+                    new UserInfo(
+                        e.getDisplayName(),
+                        e.getUid(),
+                        e.getEmail(),
+                        e.isDisabled())
+                )
+        );
         return users;
     }
 
