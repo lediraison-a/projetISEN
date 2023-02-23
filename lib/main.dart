@@ -454,14 +454,25 @@ class _ScanScreenState extends State<ScanScreen> {
     // mail admin: matg29@protonmail.com
     // Sinon il y a erreur. Générer un popup d'erreur
     else {
-      QuickAlert.show(
-        text: "Nous avons rencontré une erreur, veuillez réessayer.",
-        title: "Oups ...",
-        context: context,
-        type: QuickAlertType.error,
-        confirmBtnText: "Retour",
-        confirmBtnColor: buildMaterialColor(Color(0xff00bd7e)),
-      );
+      if (isUnique) {
+        QuickAlert.show(
+          text: "Nous avons rencontré une erreur, veuillez réessayer.",
+          title: "Oups ...",
+          context: context,
+          type: QuickAlertType.error,
+          confirmBtnText: "Retour",
+          confirmBtnColor: buildMaterialColor(Color(0xff00bd7e)),
+        );
+      } else {
+        Fluttertoast.showToast(
+            msg: "Nous avons rencontré une erreur, veuillez réessayer.",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0);
+      }
     }
   }
 
