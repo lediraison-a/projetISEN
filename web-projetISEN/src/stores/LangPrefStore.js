@@ -11,7 +11,6 @@ export const useLangPref = defineStore('langPref', () => {
   }
 
   function saveLangPref(langPref) {
-    console.log(langPref)
     localStorage.setItem(langPrefKey, langPref)
   }
 

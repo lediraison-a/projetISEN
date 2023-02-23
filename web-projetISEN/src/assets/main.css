@@ -6,12 +6,6 @@
   font-weight: normal;
 }
 
-@media (prefers-color-scheme: dark) {
-  .theme-icon {
-    filter: invert(1);
-  }
-}
-
 a,
 .green {
   text-decoration: none;
