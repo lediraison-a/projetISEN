@@ -39,12 +39,15 @@ public class AdminService {
 
     public void updateUsers(List<String> admins, List<String> deactivated, List<String> reactivated, String userId) {
         setAdmins(admins, userId);
-        deactivated.forEach(this::disableUser);
+        deactivated.forEach(s -> disableUser(s, userId));
         reactivated.forEach(this::activateUser);
     }
 
-    public void disableUser(String uid) {
+    public void disableUser(String uid, String userId) {
         LOG.info("Disabling user {}", uid);
+        if (uid.equals(userId)) {
+            return;
+        }
         try {
             firebaseAdminRepository.disableUser(uid);
         } catch (FirebaseAuthException e) {

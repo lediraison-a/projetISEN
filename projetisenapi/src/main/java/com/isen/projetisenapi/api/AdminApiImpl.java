@@ -30,7 +30,7 @@ public class AdminApiImpl extends AbstractApi implements AdminApi {
 
     @Override
     public ResponseEntity<Void> adminDeactivateUidPost(String uid) {
-        adminService.disableUser(uid);
+        adminService.disableUser(uid, getPrincipal().getName());
         return ResponseEntity.ok().build();
     }
 
