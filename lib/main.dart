@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, must_be_immutable
 
 import 'package:flutter/material.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
@@ -9,7 +9,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:quickalert/quickalert.dart';
-import 'package:tuple/tuple.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -77,7 +76,7 @@ class ForgottenPasswordScreen extends StatefulWidget {
 class _ForgottenPasswordScreenState extends State<ForgottenPasswordScreen> {
   final mailTextController = TextEditingController();
 
-  void sendResetPasswordMail(String mail) {}
+  //void sendResetPasswordMail(String mail) {}
 
   @override
   Widget build(BuildContext context) {
@@ -182,10 +181,34 @@ class _MyHomePageState extends State<MyHomePage> {
     } on FirebaseAuthException catch (e) {
       exception = e;
       if (e.code == 'user-not-found') {
+        QuickAlert.show(
+          title: "Oups ...",
+          text: "Cette adresse mail n'est associée à aucun utilisateur.",
+          context: context,
+          type: QuickAlertType.error,
+          confirmBtnText: "Retour",
+          confirmBtnColor: buildMaterialColor(Color(0xff00bd7e)),
+        );
         print('FirebaseAuthException: No user found for that email.');
       } else if (e.code == 'wrong-password') {
+        QuickAlert.show(
+          title: "Oups ...",
+          text: "Mot de passe invalide.",
+          context: context,
+          type: QuickAlertType.error,
+          confirmBtnText: "Retour",
+          confirmBtnColor: buildMaterialColor(Color(0xff00bd7e)),
+        );
         print('FirebaseAuthException: Wrong password provided.');
       } else if (e.code == 'user-disabled') {
+        QuickAlert.show(
+          title: "Oups ...",
+          text: "Ce compte utilisateur a été désactivé par un administrateur.",
+          context: context,
+          type: QuickAlertType.error,
+          confirmBtnText: "Retour",
+          confirmBtnColor: buildMaterialColor(Color(0xff00bd7e)),
+        );
         print(
             "FirebaseAuthException: The user account has been disabled by an administrator.");
       }
@@ -256,12 +279,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
                           if (firebaseUser == null) {
                             print("firebaseUser null");
-                            // ignore: use_build_context_synchronously
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const UnsuccessfullLoginScreen()));
                           } else {
                             print(
                                 "firebaseUser ${usernameTextController.text} connected");
@@ -296,35 +313,6 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
       )),
-    );
-  }
-}
-
-// Activité erreur de connexion
-class UnsuccessfullLoginScreen extends StatelessWidget {
-  const UnsuccessfullLoginScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Erreur d\'authentification'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const Text("Identifiants invalides."),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: const Text("Réessayer"),
-            )
-          ],
-        ),
-      ),
     );
   }
 }
@@ -557,7 +545,6 @@ class _ScanScreenState extends State<ScanScreen> {
   }
 }
 
-// ignore: must_be_immutable
 class AllergenDetailsScreen extends StatelessWidget {
   List userAllergens;
   List productAllergens;
