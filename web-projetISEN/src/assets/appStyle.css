@@ -143,3 +143,13 @@
     color: var(--vt-c-text-light-1);
     background: var(--primary)
 }
+
+/* Q&A Style */
+
+.qanda-img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border: solid hsla(160, 100%, 37%, 1) 2px;
+
+}

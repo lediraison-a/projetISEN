@@ -5,10 +5,10 @@
       "downloadApp": "Download the app",
       "signInStart": "Sign in to get started",
       "or": "or",
-      "noAllergen": "no allergens",
+      "noAllergen": "No allergens",
       "addAnAllergen": "Add an allergen",
       "cancel": "cancel",
-      "allergens": "Allergens",
+      "allergens": "My allergens",
       "accountSettings": "Account settings",
       "deleteAccount" : "Delete account",
       "passwordChange": "Request a password change",
@@ -47,14 +47,14 @@
   },
   "fr": {
     "message": {
-      "editAllergens": "Renseigner vos allergenes",
+      "editAllergens": "Renseigner vos allergènes",
       "downloadApp": "Télécharger l'application",
       "signInStart": "Connectez vous pour commencer",
       "or": "ou",
-      "noAllergen": "pas d'allergenes",
+      "noAllergen": "Pas d'allergenes",
       "addAnAllergen": "Ajouter un allergen",
       "cancel": "Annuler",
-      "allergens": "Allergens",
+      "allergens": "Mes allergènes",
       "accountSettings": "Parametres du compte",
       "deleteAccount" : "Supprimer le compte",
       "passwordChange": "Demander un changement de mot de passe",
@@ -64,7 +64,7 @@
       "saveChanges": "Sauvegarder les changements",
       "signIn": "Se connecter",
       "logOut": "Se déconnecter",
-      "downloadApk": " Télécharger le fichier .apk ",
+      "downloadApk": " Télécharger le fichier l'application mobile sous format .apk ",
       "headerUser": "Utilisateur",
       "yes": "Oui",
       "sourceCode": "Code source"
@@ -86,9 +86,9 @@
       "okDeletingUser": "Compte suprimé",
       "okMailSent": "Mail de réinitialisation de mot de passe envoyé",
       "okLoggedOut": "Déconnexion ok",
-      "okUserAllergensUpdate": "Allergens de l'utilisateur mis à jour",
-      "errorUserAllergensUpdate": "Erreur lors de la mise à jour des allergens de l'utilisateur",
-      "errorFetchUserAllergens": "Erreur lors de la récupération des allergens de l'utilisateur"
+      "okUserAllergensUpdate": "Allergènes de l'utilisateur mis à jour",
+      "errorUserAllergensUpdate": "Erreur lors de la mise à jour des allergènes de l'utilisateur",
+      "errorFetchUserAllergens": "Erreur lors de la récupération des allergènes de l'utilisateur"
     }
   }
 }
