@@ -1,15 +1,25 @@
 <template>
   <div class="users-container">
+    <h3>Liste des utilisateurs</h3>
     <div class="allergens-list">
       
+      <div v-for="user in adminStore.userList" :key="user.uid"> 
+        <label :for="'user-' + user.uid"> Disabled :</label>       
+        <input type="checkbox" :id="'user-' + user.Uid" :value="user.uid" v-model="user.disabled" @change="onCheckboxChange(user)"> 
+        <label :for="'user-' + user.uid">{{ user.mail }}</label>       
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
+
+
 import { useAdmin } from '@/stores/adminStore'
 
 const adminStore = useAdmin()
+
+console.log(adminStore)
 
 async function deactivateUser(uid) {
   await adminStore.deactivateUser(uid)
@@ -18,6 +28,18 @@ async function deactivateUser(uid) {
 async function reactivateUser(uid) {
   await adminStore.reactivateUser(uid)
 }
+
+function onCheckboxChange(user) {
+  if (user.disabled) {
+    console.log("tu es bien en train de désactiver un mec")
+    deactivateUser(user.uid)
+  } else {
+    console.log("tu es bien en train d'activer un mec")
+    reactivateUser(user.uid)
+
+  }
+}
+
 </script>
 <style scoped>
 </style>
