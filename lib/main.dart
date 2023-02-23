@@ -9,6 +9,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:quickalert/quickalert.dart';
+import 'package:tuple/tuple.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,13 +18,6 @@ Future<void> main() async {
 }
 
 String barcodeNutella = "3017620422003";
-
-// IP de la VM ovh
-// String apiBaseUrl = "54.36.181.29"
-
-// url qui hébèrge l'api pour le moment, vu que la vm est indisponible
-// hébergée chez moi
-//String apiBaseUrl = "http://projetisenapi.zazadago.fr/";
 
 String apiBaseUrl = "http://vps-6d160f31.vps.ovh.net:8082/dishapi/";
 
@@ -177,6 +171,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }) async {
     // auth = FirebaseAuth.instance;
     User? user;
+    FirebaseAuthException? exception;
 
     try {
       UserCredential userCredential = await auth.signInWithEmailAndPassword(
@@ -185,10 +180,14 @@ class _MyHomePageState extends State<MyHomePage> {
       );
       user = userCredential.user;
     } on FirebaseAuthException catch (e) {
+      exception = e;
       if (e.code == 'user-not-found') {
-        print('No user found for that email.');
+        print('FirebaseAuthException: No user found for that email.');
       } else if (e.code == 'wrong-password') {
-        print('Wrong password provided.');
+        print('FirebaseAuthException: Wrong password provided.');
+      } else if (e.code == 'user-disabled') {
+        print(
+            "FirebaseAuthException: The user account has been disabled by an administrator.");
       }
     }
     return user;
