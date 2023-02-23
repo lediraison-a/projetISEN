@@ -168,9 +168,7 @@ class _MyHomePageState extends State<MyHomePage> {
     required String password,
     required BuildContext context,
   }) async {
-    // auth = FirebaseAuth.instance;
     User? user;
-    FirebaseAuthException? exception;
 
     try {
       UserCredential userCredential = await auth.signInWithEmailAndPassword(
@@ -179,7 +177,6 @@ class _MyHomePageState extends State<MyHomePage> {
       );
       user = userCredential.user;
     } on FirebaseAuthException catch (e) {
-      exception = e;
       if (e.code == 'user-not-found') {
         QuickAlert.show(
           title: "Oups ...",
