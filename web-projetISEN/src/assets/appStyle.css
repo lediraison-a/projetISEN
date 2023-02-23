@@ -153,3 +153,9 @@
     border: solid hsla(160, 100%, 37%, 1) 2px;
 
 }
+
+
+.bgpattern {
+    background-color: var(--bgcolor);
+    background-image: var(--bgimage);
+}

@@ -4,9 +4,9 @@ import { computed } from 'vue'
 
 export const useAllergens = defineStore('allergens', () => {
   const allergens = computed(() => {
-    return Object.getOwnPropertyNames(allergenData).map((s) =>
-      s.substring(3)
-    )
+    return Object.getOwnPropertyNames(allergenData)
+      .map((s) => s.substring(3))
+      .filter((s) => s !== 'none')
   })
 
   function getAllergenName(allergen, locale) {
