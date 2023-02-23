@@ -30,9 +30,20 @@
 <script setup>
 import UserAuth from '../components/UserAuth.vue'
 import { useUserContext } from '@/stores/userContextStore'
+import { onMounted } from 'vue'
+import { useLangPref } from '@/stores/LangPrefStore'
 import { useI18n } from 'vue-i18n'
 const { locale } = useI18n({ useScope: 'global' })
 const userContext = useUserContext()
+
+const langPrefStore = useLangPref()
+
+onMounted(() => {
+  const langPref = langPrefStore.getLangPref()
+  if (langPref) {
+    locale.value = langPref
+  }
+})
 
 function switchLang() {
   if (locale.value === 'en') {
@@ -40,6 +51,7 @@ function switchLang() {
   } else if (locale.value === 'fr') {
     locale.value = 'en'
   }
+  langPrefStore.saveLangPref(locale.value)
 }
 
 const links = [

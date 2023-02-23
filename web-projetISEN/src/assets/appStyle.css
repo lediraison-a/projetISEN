@@ -143,3 +143,8 @@
     color: var(--vt-c-text-light-1);
     background: var(--primary)
 }
+
+.bgpattern {
+    background-color: var(--bgcolor);
+    background-image: var(--bgimage);
+}
