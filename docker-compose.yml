@@ -13,5 +13,5 @@ services:
     build: web-projetISEN
     container_name: dish-web
     ports:
-      - "80:80"
+      - "8080:80"
 
