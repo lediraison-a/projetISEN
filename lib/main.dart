@@ -23,7 +23,9 @@ String barcodeNutella = "3017620422003";
 
 // url qui hébèrge l'api pour le moment, vu que la vm est indisponible
 // hébergée chez moi
-String apiBaseUrl = "http://projetisenapi.zazadago.fr/";
+//String apiBaseUrl = "http://projetisenapi.zazadago.fr/";
+
+String apiBaseUrl = "http://vps-6d160f31.vps.ovh.net:8082/dishapi/";
 
 String? firebaseToken = "";
 final FirebaseAuth auth = FirebaseAuth.instance;
