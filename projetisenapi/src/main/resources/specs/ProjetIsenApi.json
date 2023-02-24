@@ -178,6 +178,132 @@
                     }
                 }
             }
+        },
+        "/admin/users": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/user"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Retrieve a list of all users"
+                    }
+                }
+            },
+            "put": {
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/user"
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "users updated"
+                    }
+                }
+            }
+        },
+        "/admin/reactivate/{uid}": {
+            "post": {
+                "parameters": [
+                    {
+                        "name": "uid",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Reactivate an user that has been deactivated"
+                    }
+                }
+            },
+            "parameters": [
+                {
+                    "name": "uid",
+                    "schema": {
+                        "type": "string"
+                    },
+                    "in": "path",
+                    "required": true
+                }
+            ]
+        },
+        "/admin/deactivate/{uid}": {
+            "post": {
+                "responses": {
+                    "200": {
+                        "description": "Deactivate a user"
+                    }
+                }
+            },
+            "parameters": [
+                {
+                    "name": "uid",
+                    "schema": {
+                        "type": "string"
+                    },
+                    "in": "path",
+                    "required": true
+                }
+            ]
+        },
+        "/admin/admins": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "list of admin users"
+                    }
+                }
+            },
+            "put": {
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "ok admin user list updated"
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -205,6 +331,40 @@
                         "items": {
                             "type": "string"
                         }
+                    }
+                }
+            },
+            "user": {
+                "description": "data for a user",
+                "required": [
+                    "disabled",
+                    "mail",
+                    "name",
+                    "uid",
+                    "isadmin"
+                ],
+                "type": "object",
+                "properties": {
+                    "mail": {
+                        "description": "",
+                        "type": "string",
+                        "readOnly": true
+                    },
+                    "disabled": {
+                        "description": "",
+                        "type": "boolean"
+                    },
+                    "name": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "uid": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "isadmin": {
+                        "description": "",
+                        "type": "boolean"
                     }
                 }
             }

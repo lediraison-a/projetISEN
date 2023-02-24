@@ -14,6 +14,7 @@ import java.util.List;
 @Configuration
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+    private static final String ADMIN_BASEPATH = "/api/v1/admin/**";
     private static final String[] AUTH_WHITE_LIST = {
             "/swagger-ui/**",
             "/v3/api-docs/**",
@@ -25,6 +26,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .cors()
                 .and()
                 .authorizeRequests()
+                .antMatchers(ADMIN_BASEPATH)
+                .access("@adminService.isAdmin(authentication.name)")
                 .antMatchers(AUTH_WHITE_LIST).permitAll()
                 .anyRequest()
                 .authenticated();

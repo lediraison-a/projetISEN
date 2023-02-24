@@ -22,7 +22,10 @@ import java.util.concurrent.ExecutionException;
 public class FirestoreDaoImpl implements FirestoreDao {
     private static final Logger LOG = LoggerFactory.getLogger(FirestoreDaoImpl.class);
     private static final String COLLECTION = "allergens";
+    private static final String DOCUMENT_ADMINS = "admin";
+    private static final String COLLECTION_ADMINS = "admin";
     private static final String ALLERGENS_FIELD_NAME = "allergens";
+    private static final String ADMINS_FIELD_NAME = "admins";
 
     private final Firestore db;
 
@@ -54,6 +57,24 @@ public class FirestoreDaoImpl implements FirestoreDao {
         var query = db.collection(COLLECTION).document(userId);
         Map<String, Object> data = new HashMap<>();
         data.put(ALLERGENS_FIELD_NAME, allergens);
+        query.set(data).get();
+    }
+
+    @Override
+    public List<String> getAdmins() throws ExecutionException, InterruptedException {
+        LOG.info("get admins");
+        var query = db.collection(COLLECTION_ADMINS).document(DOCUMENT_ADMINS);
+        var querySnapshot = query.get();
+        var document = querySnapshot.get();
+        return (List<String>) document.get(ADMINS_FIELD_NAME);
+    }
+
+    @Override
+    public void setAdmins(List<String> admins) throws ExecutionException, InterruptedException {
+        LOG.info("setAdmins");
+        var query = db.collection(COLLECTION_ADMINS).document(DOCUMENT_ADMINS);
+        Map<String, Object> data = new HashMap<>();
+        data.put(ADMINS_FIELD_NAME, admins);
         query.set(data).get();
     }
 }

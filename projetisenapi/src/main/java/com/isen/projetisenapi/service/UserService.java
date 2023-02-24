@@ -49,7 +49,7 @@ public class UserService {
 
     public List<String> getProductUserAllergens(String userId, String barcode) {
         LOG.info("getProductUserAllergens {} {}", userId, barcode);
-        List<String> productUserAllergens = null;
+        List<String> productUserAllergens;
         try {
             var userAllergens = firestoreDao.getUserAllergens(userId)
                     .stream()

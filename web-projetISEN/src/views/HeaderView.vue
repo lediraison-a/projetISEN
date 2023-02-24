@@ -14,6 +14,9 @@
             <router-link :to="link[0]">{{ $t(link[1]) }}</router-link>
           </div>
         </div>
+        <router-link to="admin" v-if="adminStore.isSelfAdmin">
+          {{ $t('message.admin') }}
+        </router-link>
       </div>
       <div class="header-content-right">
         <div class="site-prefs">
@@ -38,10 +41,20 @@ import { onMounted } from 'vue'
 import { useLangPref } from '@/stores/LangPrefStore'
 import { useI18n } from 'vue-i18n'
 import { useTheme } from "@/stores/themeStore";
+import { useAdmin } from "@/stores/adminStore";
 const { locale } = useI18n({ useScope: 'global' })
-const userContext = useUserContext()
 
+const userContext = useUserContext()
 const langPrefStore = useLangPref()
+const adminStore = useAdmin()
+
+const links = [
+  ['/user', 'header.user'],
+  ['/download', 'header.download'],
+  ['/qna', 'header.qna'],
+]
+
+const appName = import.meta.env.VITE_APP_TITLE
 
 const theme = useTheme()
 
@@ -62,18 +75,6 @@ function switchLang() {
   langPrefStore.saveLangPref(locale.value)
 }
 
-const getPreferredScheme = () =>
-  window?.matchMedia?.('(prefers-color-scheme:dark)')?.matches
-    ? 'dark'
-    : 'light'
-
-const links = [
-  ['/user', 'header.user'],
-  ['/download', 'header.download'],
-  ['/qna', 'header.qna'],
-]
-
-const appName = import.meta.env.VITE_APP_TITLE
 </script>
 <style scoped>
 @media screen and (max-width: 500px) {
