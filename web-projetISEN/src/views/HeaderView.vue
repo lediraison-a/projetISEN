@@ -14,7 +14,11 @@
             <router-link :to="link[0]">{{ $t(link[1]) }}</router-link>
           </div>
         </div>
-        <router-link to="admin" v-if="adminStore.isSelfAdmin">
+        <router-link
+          to="admin"
+          v-if="adminStore.isSelfAdmin"
+          class="admin-link"
+        >
           {{ $t('message.admin') }}
         </router-link>
       </div>
@@ -87,6 +91,11 @@ function switchLang() {
   .nav-links {
     display: flex;
   }
+}
+
+.admin-link {
+  font-size: larger;
+  margin-left: 2rem;
 }
 
 .site-prefs {

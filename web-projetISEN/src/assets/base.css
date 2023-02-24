@@ -77,3 +77,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
   margin: 0;
 }
+
+hr {
+  border-top: 1px solid var(--color-border);
+  border-bottom: none;
+  height: 0px;
+}
