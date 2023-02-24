@@ -20,6 +20,7 @@ onMounted(async () => {
 <style scoped>
 .admin-view {
   padding: 1rem;
+  max-width: 85rem;
 }
 
 .account-area {
@@ -27,4 +28,6 @@ onMounted(async () => {
   padding-top: 1rem;
   border-top: solid var(--color-border) 1px;
 }
+
+
 </style>

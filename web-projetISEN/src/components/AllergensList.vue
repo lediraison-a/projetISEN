@@ -5,11 +5,12 @@
         v-for="(allergen, i) in userAllergens.allergens"
         :key="i"
         class="allergen-item"
+        @click="userAllergens.deleteAllergen(i)"
       >
         <div class="allergen-label">{{ getAllergenName(allergen) }}</div>
-        <div class="delete-btn" @click="userAllergens.deleteAllergen(i)">
+        <div class="delete-btn">
           <img
-            class="delete-icon icon theme-icon"
+            class="delete-icon icon"
             src="/src/assets/icons/delete.svg"
           />
         </div>
@@ -189,8 +190,8 @@ function checkValidInput() {
   border-right: solid var(--color-border) 2px;
   border-bottom: solid var(--color-border) 2px;
   border-radius: 0 0 0.375em 0.375em;
-  box-shadow: -2px 0 0 0 var(--primary), 2px 0 0 0 var(--primary),
-    0 2px 0 0 var(--primary);
+  box-shadow: -1px 0 0 0 var(--color-border), 1px 0 0 0 var(--color-border),
+    0 1px 0 0 var(--color-border);
 }
 
 .suggestions-hidden {
@@ -287,7 +288,12 @@ function checkValidInput() {
 
 .allergen-item {
   background-color: var(--color-background);
-  border: solid var(--primary) 2px;
+  border: solid var(--color-border) 2px;
+}
+
+.allergen-item:hover {
+  background-color: var(--primary);
+  filter: brightness(115%);
 }
 
 .delete-icon {
@@ -311,10 +317,12 @@ function checkValidInput() {
   padding: 0 0.4rem;
 }
 
-.delete-btn:hover,
 .add-allergen-item:hover {
   background-color: var(--primary);
-  filter: brightness(115%);
+}
+
+.add-allergen-item:hover > .allergen-label {
+  color: var(--vt-c-text-light-1);
 }
 
 .allergen-item:hover .delete-icon {

@@ -102,6 +102,12 @@ td, th {
   padding: 0.3rem;
 }
 
+
+input[type=checkbox] {
+  accent-color: var(--primary);
+}
+
+
 /*input[type='checkbox'] {*/
 /*  position: relative;*/
 /*  appearance: none;*/

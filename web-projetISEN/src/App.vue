@@ -5,8 +5,8 @@
       <RouterView></RouterView>
     </div>
     <FooterView class="app-footer" />
+    <AppAlert />
   </div>
-  <AppAlert />
 </template>
 <script setup>
 import HeaderView from './views/HeaderView.vue'
