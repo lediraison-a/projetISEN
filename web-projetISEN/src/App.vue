@@ -1,5 +1,5 @@
 <template>
-  <div class="app-content bgpattern">
+  <div class="app-content bgpattern" :class="'app-' + theme.theme">
     <HeaderView class="app-header" />
     <div class="app-view">
       <RouterView></RouterView>
@@ -12,6 +12,9 @@
 import HeaderView from './views/HeaderView.vue'
 import AppAlert from '@/components/AppAlert.vue'
 import FooterView from '@/views/FooterView.vue'
+import { useTheme } from '@/stores/themeStore'
+
+const theme = useTheme()
 </script>
 <style scoped>
 @import '@/assets/appStyle.css';
@@ -46,6 +49,5 @@ import FooterView from '@/views/FooterView.vue'
 }
 
 .app-footer {
-
 }
 </style>

@@ -2,6 +2,8 @@ version: "3.9"
 services:
   api:
     build: projetisenapi
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=/srv/projetisenapi/projetisen-dd64c-firebase-adminsdk-d0aq1-b3f1a453eb.json
     container_name: dish-api
     volumes:
       - /srv/dish:/srv/dish
@@ -11,5 +13,5 @@ services:
     build: web-projetISEN
     container_name: dish-web
     ports:
-      - "8080:80"
+      - "80:80"
 

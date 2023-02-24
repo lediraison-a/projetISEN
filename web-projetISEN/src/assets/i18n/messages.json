@@ -5,10 +5,10 @@
       "downloadApp": "Download the app",
       "signInStart": "Sign in to get started",
       "or": "or",
-      "noAllergen": "no allergens",
+      "noAllergen": "No allergens",
       "addAnAllergen": "Add an allergen",
       "cancel": "cancel",
-      "allergens": "Allergens",
+      "allergens": "My allergens",
       "accountSettings": "Account settings",
       "deleteAccount" : "Delete account",
       "passwordChange": "Request a password change",
@@ -28,7 +28,11 @@
       "guide": "questions and answers",
       "homeGuide1": "Check the ",
       "homeGuide2": " to know more.",
-      "admin": "Admin"
+      "admin": "Admin",
+      "homeGuide2": " to know more.",
+      "smartphoneApp": "Smartphone app",
+      "explainDownload1": "To detect allergens in producs, Dish provides an application.",
+      "explainDownload2": "The app is available for android smartphones."
     },
     "header": {
       "user": "User",
@@ -58,14 +62,14 @@
   },
   "fr": {
     "message": {
-      "editAllergens": "Renseigner vos allergenes",
+      "editAllergens": "Renseigner vos allergènes",
       "downloadApp": "Télécharger l'application",
       "signInStart": "Connectez vous pour commencer",
       "or": "ou",
-      "noAllergen": "pas d'allergenes",
+      "noAllergen": "Pas d'allergenes",
       "addAnAllergen": "Ajouter un allergen",
       "cancel": "Annuler",
-      "allergens": "Allergens",
+      "allergens": "Mes allergènes",
       "accountSettings": "Parametres du compte",
       "deleteAccount" : "Supprimer le compte",
       "passwordChange": "Demander un changement de mot de passe",
@@ -75,7 +79,7 @@
       "saveChanges": "Sauvegarder les changements",
       "signIn": "Se connecter",
       "logOut": "Se déconnecter",
-      "downloadApk": " Télécharger le fichier .apk ",
+      "downloadApk": " Télécharger le fichier l'application mobile sous format .apk ",
       "headerUser": "Utilisateur",
       "yes": "Oui",
       "sourceCode": "Code source",
@@ -83,6 +87,10 @@
       "welcomeNotConnected": "Bienvenu sur Dish, l'application qui vous permet d'identifier des allergenes dans les produits de la vie courante.",
       "guide": "foire aux questions",
       "homeGuide1": "Visitez la ",
+      "homeGuide2": " pour en savoir plus.",
+      "smartphoneApp": "L'application smartphone",
+      "explainDownload1": "Pour detecter les allergenes présent dans les produits, Dish propose un application smartphone. L'application est disponible sous la forme d'un fichier .apk à installer sur votre appareil.",
+      "explainDownload2": "The app is available for android smartphoL'application est diponible pour les téléphones android. Cliquez sur le bouton suivant pour télécharger l'application.es."
       "homeGuide2": " pour en savoir plus.",
       "sourceCode": "Code source",
       "loggedAsAdmin": "Connecté en tant qu'administrateur",
@@ -112,6 +120,9 @@
       "errorDeactivateUser": "Erreur lors de la déséctivation de l'utilisateur",
       "errorReactivateUser": "Erreur lors de la réactivation de l'utilisateur",
       "errorUpdatingUsers": "Erreur lors de la mise a jour des utilisateurs"
+      "okUserAllergensUpdate": "Allergènes de l'utilisateur mis à jour",
+      "errorUserAllergensUpdate": "Erreur lors de la mise à jour des allergènes de l'utilisateur",
+      "errorFetchUserAllergens": "Erreur lors de la récupération des allergènes de l'utilisateur"
     }
   }
 }

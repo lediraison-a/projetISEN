@@ -1,8 +1,15 @@
 <template>
   <div class="download-content">
-    <div class="app-btn-primary" @click="download">
-      <img src="/src/assets/icons/download.svg" />
-      <div>{{ $t('message.downloadApk') }}</div>
+    <h2>{{ $t('message.smartphoneApp') }}</h2>
+    <div class="text">
+      <p>{{ $t('message.explainDownload1') }}</p>
+      <p>{{ $t('message.explainDownload2') }}</p>
+    </div>
+    <div class="actions">
+      <div class="app-btn-primary" @click="download">
+        <img src="/src/assets/icons/download.svg" />
+        <div>{{ $t('message.downloadApk') }}</div>
+      </div>
     </div>
   </div>
 </template>
@@ -17,9 +24,16 @@ const download = () => {
 
 <style scoped>
 .download-content {
-  height: calc(100vh - 3.5rem);
+  padding: 1rem;
+}
+
+.text {
+  padding: 0 1rem;
+}
+
+.actions {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 100%;
+  padding: 1rem 3rem;
 }
 </style>
