@@ -1,9 +1,9 @@
 <template>
   <div class="download-content">
-    <h2>L'application smartphone</h2>
+    <h2>{{ $t('message.smartphoneApp') }}</h2>
     <div class="text">
-      <p>Pour detecter les allergenes présent dans les produits, Dish propose un application smartphone. L'application est disponible sous la forme d'un fichier .apk à installer sur votre appareil.</p>
-      <p>L'application est diponible pour les téléphones android. Cliquez sur le bouton suivant pour télécharger l'application.</p>
+      <p>{{ $t('message.explainDownload1') }}</p>
+      <p>{{ $t('message.explainDownload2') }}</p>
     </div>
     <div class="actions">
       <div class="app-btn-primary" @click="download">
@@ -25,10 +25,6 @@ const download = () => {
 <style scoped>
 .download-content {
   padding: 1rem;
-  /*height: calc(100vh - 3.5rem);*/
-  /*display: flex;*/
-  /*justify-content: center;*/
-  /*align-items: center;*/
 }
 
 .text {

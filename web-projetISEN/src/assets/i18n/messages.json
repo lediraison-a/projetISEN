@@ -26,7 +26,10 @@
       "welcomeNotConnected": "Welcome to Dish, an app to track allergens in everyday products.",
       "guide": "questions and answers",
       "homeGuide1": "Check the ",
-      "homeGuide2": " to know more."
+      "homeGuide2": " to know more.",
+      "smartphoneApp": "Smartphone app",
+      "explainDownload1": "To detect allergens in producs, Dish provides an application.",
+      "explainDownload2": "The app is available for android smartphones."
     },
     "header": {
       "user": "User",
@@ -77,7 +80,10 @@
       "welcomeNotConnected": "Bienvenu sur Dish, l'application qui vous permet d'identifier des allergenes dans les produits de la vie courante.",
       "guide": "foire aux questions",
       "homeGuide1": "Visitez la ",
-      "homeGuide2": " pour en savoir plus."
+      "homeGuide2": " pour en savoir plus.",
+      "smartphoneApp": "L'application smartphone",
+      "explainDownload1": "Pour detecter les allergenes présent dans les produits, Dish propose un application smartphone. L'application est disponible sous la forme d'un fichier .apk à installer sur votre appareil.",
+      "explainDownload2": "The app is available for android smartphoL'application est diponible pour les téléphones android. Cliquez sur le bouton suivant pour télécharger l'application.es."
     },
     "header": {
       "user": "Utilisateur",
