@@ -7,9 +7,11 @@
       <div v-else class="welcome-text">
         {{ $t('message.welcomeNotConnected') }}
       </div>
-      <div class="app-btn-primary" v-if="!userContext.isConnected">
-        <img src="/src/assets/icons/login.svg" />
-        <router-link to="/signin"></router-link>
+      <div class="hero-actions" v-if="!userContext.isConnected">
+        <div class="app-btn-primary">
+          <img src="/src/assets/icons/login.svg" />
+          <router-link to="signin">{{ $t('message.signInStart') }}</router-link>
+        </div>
       </div>
       <div v-else class="btn-start-connected">
         <div class="app-btn-primary">
@@ -50,6 +52,12 @@ const userContext = useUserContext()
   display: flex;
   flex-direction: column;
   gap: 4rem;
+}
+
+.hero-actions {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .welcome-text {

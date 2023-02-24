@@ -4,7 +4,8 @@
       <div class="header-content-left">
         <div class="home-link">
           <router-link to="/">
-            <img src="/src/assets/icons/logo/LogoLight.svg" />
+            <img src="/src/assets/icons/logo/Logo-dark.svg" v-if="theme.theme === 'dark'">
+            <img src="/src/assets/icons/logo/Logo-light.svg" v-else>
             {{ appName }}
           </router-link>
         </div>
@@ -13,9 +14,15 @@
             <router-link :to="link[0]">{{ $t(link[1]) }}</router-link>
           </div>
         </div>
+        <router-link to="admin" v-if="adminStore.isSelfAdmin">
+          {{ $t('message.admin') }}
+        </router-link>
       </div>
       <div class="header-content-right">
-        <div>
+        <div class="site-prefs">
+          <div class="app-btn" @click="theme.switchTheme">
+            {{ theme.theme === 'dark' ? '🌙' : '🌞' }}
+          </div>
           <div class="app-btn" @click="switchLang">
             {{ locale === 'en' ? '🇬🇧' : '🇫🇷' }}
           </div>
@@ -33,16 +40,30 @@ import { useUserContext } from '@/stores/userContextStore'
 import { onMounted } from 'vue'
 import { useLangPref } from '@/stores/LangPrefStore'
 import { useI18n } from 'vue-i18n'
+import { useTheme } from "@/stores/themeStore";
+import { useAdmin } from "@/stores/adminStore";
 const { locale } = useI18n({ useScope: 'global' })
-const userContext = useUserContext()
 
+const userContext = useUserContext()
 const langPrefStore = useLangPref()
+const adminStore = useAdmin()
+
+const links = [
+  ['/user', 'header.user'],
+  ['/download', 'header.download'],
+  ['/qna', 'header.qna'],
+]
+
+const appName = import.meta.env.VITE_APP_TITLE
+
+const theme = useTheme()
 
 onMounted(() => {
   const langPref = langPrefStore.getLangPref()
   if (langPref) {
     locale.value = langPref
   }
+  theme.fetchTheme()
 })
 
 function switchLang() {
@@ -54,13 +75,6 @@ function switchLang() {
   langPrefStore.saveLangPref(locale.value)
 }
 
-const links = [
-  ['/user', 'header.user'],
-  ['/download', 'header.download'],
-  ['/qna', 'header.qna'],
-]
-
-const appName = import.meta.env.VITE_APP_TITLE
 </script>
 <style scoped>
 @media screen and (max-width: 500px) {
@@ -73,6 +87,18 @@ const appName = import.meta.env.VITE_APP_TITLE
   .nav-links {
     display: flex;
   }
+}
+
+.site-prefs {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
+.site-prefs > .app-btn {
+  font-size: larger;
+  padding: 0.5rem;
+  line-height: 1.2rem;
 }
 
 .header-content-left,
