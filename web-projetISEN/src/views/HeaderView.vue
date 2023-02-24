@@ -56,6 +56,7 @@ const links = [
   ['/user', 'header.user'],
   ['/download', 'header.download'],
   ['/qna', 'header.qna'],
+  ['/contact', 'header.contact']
 ]
 
 const appName = import.meta.env.VITE_APP_TITLE

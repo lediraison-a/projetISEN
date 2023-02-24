@@ -36,7 +36,8 @@
     "header": {
       "user": "User",
       "download": "Download",
-      "qna": "Q&A"
+      "qna": "Q&A",
+      "contact": "Contact"
     },
     "accountActions": {
       "deleteConfirmLabel": "Yes delete my account",
@@ -96,7 +97,8 @@
     "header": {
       "user": "Utilisateur",
       "download": "Téléchargement",
-      "qna": "FAQ"
+      "qna": "FAQ",
+      "contact": "Contact"
     },
     "accountActions": {
       "deleteConfirmLabel": "Oui supprimer mon compte",

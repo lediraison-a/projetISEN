@@ -17,7 +17,7 @@ Remember to save the changes made by clicking on the _Save Changes_ button.
 ## My account seems deactivated. What should I do ?
 If you encounter the following error while trying to log in, it is that your account has been deactivated by an administrator:
 
-![Screenshot of a login error after an administrator deactivated the account](./img/EcranUtilisateurAllergenes.png "")
+![Screenshot of a login error after an administrator deactivated the account](./img/EcranCompteDesactive.png "")
 
 You can [contact us](/contact) to solve this problem, or create a new account with a different email address from the blocked account.
 
