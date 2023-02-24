@@ -294,6 +294,7 @@ function checkValidInput() {
 .allergen-item:hover {
   background-color: var(--primary);
   filter: brightness(115%);
+  color: black;
 }
 
 .delete-icon {
@@ -319,6 +320,7 @@ function checkValidInput() {
 
 .add-allergen-item:hover {
   background-color: var(--primary);
+  filter: brightness(115%);
 }
 
 .add-allergen-item:hover > .allergen-label {
