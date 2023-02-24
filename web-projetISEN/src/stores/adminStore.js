@@ -6,16 +6,25 @@ import router from '@/router'
 
 export const useAdmin = defineStore('admin', () => {
   const userList = ref([])
+  const isSelfAdmin = ref(false)
 
   const appAlert = useAppAlert()
 
+  function clearAdminInfo() {
+    userList.value = []
+    isSelfAdmin.value = false
+  }
+
   function checkAdmin(resp) {
+    isSelfAdmin.value = false
     if (resp.status === 403) {
       router.push('/')
+    } else if (resp.status === 200) {
+      isSelfAdmin.value = true
     }
   }
 
-  async function isSelfAdmin() {
+  async function fetchIsSelfAdmin() {
     const userContext = useUserContext()
     const token = await userContext.getToken()
 
@@ -29,15 +38,17 @@ export const useAdmin = defineStore('admin', () => {
       redirect: 'follow',
     }
 
-    return fetch(
+    fetch(
       import.meta.env.VITE_API_URL + 'admin/selfadmin',
       requestOptions
     )
-      .then((response) => response.text())
-      .then(() => true)
+      .then((response) => {
+        checkAdmin(response)
+        return response.text()
+      })
       .catch((error) => {
         console.log('error', error)
-        return false
+        isSelfAdmin.value = false
       })
   }
 
@@ -155,9 +166,11 @@ export const useAdmin = defineStore('admin', () => {
   return {
     userList,
     isSelfAdmin,
+    fetchIsSelfAdmin,
     fetchUserList,
     deactivateUser,
     reactivateUser,
     updateUsers,
+    clearAdminInfo,
   }
 })

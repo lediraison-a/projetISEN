@@ -4,6 +4,7 @@ import firebase from 'firebase/compat/app'
 import { getAuth, sendPasswordResetEmail, deleteUser } from 'firebase/auth'
 import router from '@/router'
 import { useAppAlert } from '@/stores/appAlertStore'
+import { useAdmin } from '@/stores/adminStore'
 
 export const useUserContext = defineStore('userContext', () => {
   const email = ref('')
@@ -20,6 +21,7 @@ export const useUserContext = defineStore('userContext', () => {
   }
 
   async function userLogout() {
+    const adminStore = useAdmin()
     firebase
       .auth()
       .signOut()
@@ -27,6 +29,7 @@ export const useUserContext = defineStore('userContext', () => {
         email.value = ''
         uid.value = ''
         name.value = ''
+        adminStore.clearAdminInfo()
         router.push('/')
         appAlert.setAlertInfoTimed('alert.okLoggedOut', 3500)
       })

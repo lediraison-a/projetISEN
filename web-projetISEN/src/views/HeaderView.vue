@@ -4,8 +4,11 @@
       <div class="header-content-left">
         <div class="home-link">
           <router-link to="/">
-            <img src="/src/assets/icons/logo/Logo-dark.svg" v-if="theme.theme === 'dark'">
-            <img src="/src/assets/icons/logo/Logo-light.svg" v-else>
+            <img
+              src="/src/assets/icons/logo/Logo-dark.svg"
+              v-if="theme.theme === 'dark'"
+            />
+            <img src="/src/assets/icons/logo/Logo-light.svg" v-else />
             {{ appName }}
           </router-link>
         </div>
@@ -16,7 +19,7 @@
         </div>
         <router-link
           to="admin"
-          v-if="adminStore.isSelfAdmin"
+          v-if="userContext.isConnected && adminStore.isSelfAdmin"
           class="admin-link"
         >
           {{ $t('message.admin') }}
@@ -44,8 +47,8 @@ import { useUserContext } from '@/stores/userContextStore'
 import { onMounted } from 'vue'
 import { useLangPref } from '@/stores/LangPrefStore'
 import { useI18n } from 'vue-i18n'
-import { useTheme } from "@/stores/themeStore";
-import { useAdmin } from "@/stores/adminStore";
+import { useTheme } from '@/stores/themeStore'
+import { useAdmin } from '@/stores/adminStore'
 const { locale } = useI18n({ useScope: 'global' })
 
 const userContext = useUserContext()
@@ -62,7 +65,7 @@ const appName = import.meta.env.VITE_APP_TITLE
 
 const theme = useTheme()
 
-onMounted(() => {
+onMounted(async () => {
   const langPref = langPrefStore.getLangPref()
   if (langPref) {
     locale.value = langPref
@@ -78,7 +81,6 @@ function switchLang() {
   }
   langPrefStore.saveLangPref(locale.value)
 }
-
 </script>
 <style scoped>
 @media screen and (max-width: 500px) {
