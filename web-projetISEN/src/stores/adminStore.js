@@ -15,6 +15,32 @@ export const useAdmin = defineStore('admin', () => {
     }
   }
 
+  async function isSelfAdmin() {
+    const userContext = useUserContext()
+    const token = await userContext.getToken()
+
+    const myHeaders = new Headers()
+    myHeaders.append('accept', 'application/json')
+    myHeaders.append('Authorization', 'Bearer ' + token)
+
+    const requestOptions = {
+      method: 'GET',
+      headers: myHeaders,
+      redirect: 'follow',
+    }
+
+    return fetch(
+      import.meta.env.VITE_API_URL + 'admin/selfadmin',
+      requestOptions
+    )
+      .then((response) => response.text())
+      .then(() => true)
+      .catch((error) => {
+        console.log('error', error)
+        return false
+      })
+  }
+
   async function fetchUserList() {
     const userContext = useUserContext()
     const token = await userContext.getToken()
@@ -128,6 +154,7 @@ export const useAdmin = defineStore('admin', () => {
 
   return {
     userList,
+    isSelfAdmin,
     fetchUserList,
     deactivateUser,
     reactivateUser,

@@ -7,8 +7,8 @@
           <th>Name</th>
           <th>Mail</th>
           <th>Uid</th>
-          <th>is admin</th>
           <th>is deactivated</th>
+          <th>is admin</th>
         </tr>
         <tr v-for="user in adminStore.userList" :key="user.uid">
           <td>{{ user.name }}</td>
@@ -18,30 +18,10 @@
             <input type="checkbox" v-model="user.disabled" />
           </td>
           <td class="center-cell">
-            <input type="checkbox" v-model="user.isAdmin" />
+            <input type="checkbox" v-model="user.isadmin" />
           </td>
         </tr>
       </table>
-
-      <div v-for="user in adminStore.userList" :key="user.uid">
-        <label>{{ user.name }}</label>
-        <label>{{ user.mail }}</label>
-        <label>{{ user.uid }}</label>
-        <label :for="'user-' + user.uid"> Disabled :</label>
-        <input
-          type="checkbox"
-          :id="'user-' + user.Uid"
-          :value="user.uid"
-          v-model="user.disabled"
-        />
-        <label :for="'user-' + user.uid"> Admin :</label>
-        <input
-          type="checkbox"
-          :id="'user-' + user.Uid"
-          :value="user.uid"
-          v-model="user.isadmin"
-        />
-      </div>
     </div>
     <div class="list-actions">
       <div class="action-btns">
@@ -98,6 +78,7 @@ async function cancelChanges() {
 }
 
 .list-actions {
+  padding-top: 1rem;
   display: flex;
   justify-content: flex-end;
 }
@@ -121,37 +102,37 @@ td, th {
   padding: 0.3rem;
 }
 
-input[type='checkbox'] {
-  position: relative;
-  appearance: none;
-  width: 2.6rem;
-  height: 1.3rem;
-  background: #ccc;
-  border-radius: 1.3rem;
-  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
-  cursor: pointer;
-  transition: 0.1s;
-}
+/*input[type='checkbox'] {*/
+/*  position: relative;*/
+/*  appearance: none;*/
+/*  width: 2.6rem;*/
+/*  height: 1.3rem;*/
+/*  background: #ccc;*/
+/*  border-radius: 1.3rem;*/
+/*  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);*/
+/*  cursor: pointer;*/
+/*  transition: 0.1s;*/
+/*}*/
 
-input:checked[type='checkbox'] {
-  background: var(--primary);
-}
+/*input:checked[type='checkbox'] {*/
+/*  background: var(--primary);*/
+/*}*/
 
-input[type='checkbox']::after {
-  position: absolute;
-  content: '';
-  width: 1.3rem;
-  height: 1.3rem;
-  top: 0;
-  left: 0;
-  background: #fff;
-  border-radius: 50%;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-  transform: scale(1.1);
-  transition: 0.1s;
-}
+/*input[type='checkbox']::after {*/
+/*  position: absolute;*/
+/*  content: '';*/
+/*  width: 1.3rem;*/
+/*  height: 1.3rem;*/
+/*  top: 0;*/
+/*  left: 0;*/
+/*  background: #fff;*/
+/*  border-radius: 50%;*/
+/*  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);*/
+/*  transform: scale(1.1);*/
+/*  transition: 0.1s;*/
+/*}*/
 
-input:checked[type='checkbox']::after {
-  left: 50%;
-}
+/*input:checked[type='checkbox']::after {*/
+/*  left: 50%;*/
+/*}*/
 </style>

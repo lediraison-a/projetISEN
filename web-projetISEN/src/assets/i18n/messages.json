@@ -27,7 +27,8 @@
       "welcomeNotConnected": "Welcome to Dish, an app to track allergens in everyday products.",
       "guide": "questions and answers",
       "homeGuide1": "Check the ",
-      "homeGuide2": " to know more."
+      "homeGuide2": " to know more.",
+      "admin": "Admin"
     },
     "header": {
       "user": "User",
@@ -84,8 +85,8 @@
       "homeGuide1": "Visitez la ",
       "homeGuide2": " pour en savoir plus.",
       "sourceCode": "Code source",
-      "loggedAsAdmin": "Connecté en tant qu'administrateur"
-
+      "loggedAsAdmin": "Connecté en tant qu'administrateur",
+      "admin": "Admin"
     },
     "header": {
       "user": "Utilisateur",
