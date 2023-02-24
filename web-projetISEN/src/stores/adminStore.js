@@ -53,6 +53,8 @@ export const useAdmin = defineStore('admin', () => {
   }
 
   async function fetchUserList() {
+    userList.value = []
+
     const userContext = useUserContext()
     const token = await userContext.getToken()
 

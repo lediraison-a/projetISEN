@@ -4,13 +4,15 @@
     <div>
       <table class="userlist-table">
         <tr>
+          <th>#</th>
           <th>{{ $t('table.name') }}</th>
           <th>{{ $t('table.mail') }}</th>
           <th>{{ $t('table.uid') }}</th>
           <th>{{ $t('table.isDeactivated') }}</th>
           <th>{{ $t('table.isAdmin') }}</th>
         </tr>
-        <tr v-for="user in adminStore.userList" :key="user.uid">
+        <tr v-for="(user, i) in adminStore.userList" :key="user.uid">
+          <td>{{ i+1 }}</td>
           <td>{{ user.name }}</td>
           <td>{{ user.mail }}</td>
           <td>{{ user.uid }}</td>

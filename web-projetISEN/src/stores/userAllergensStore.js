@@ -9,6 +9,8 @@ export const useUserAllergens = defineStore('userAllergens', () => {
   const appAlert = useAppAlert()
 
   async function fetchUserAllergens() {
+    allergens.value = []
+
     const userContext = useUserContext()
     const token = await userContext.getToken()
 
