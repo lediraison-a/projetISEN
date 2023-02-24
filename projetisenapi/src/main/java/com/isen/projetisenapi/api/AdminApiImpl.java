@@ -41,6 +41,11 @@ public class AdminApiImpl extends AbstractApi implements AdminApi {
     }
 
     @Override
+    public ResponseEntity<Void> adminSelfadminGet() {
+        return ResponseEntity.ok().build();
+    }
+
+    @Override
     public ResponseEntity<List<User>> adminUsersGet() {
         var userInfos = adminService.listUsers();
         var admins = adminService.getAdmins();

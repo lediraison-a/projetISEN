@@ -304,6 +304,15 @@
                     }
                 }
             }
+        },
+        "/admin/selfadmin": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "ok user is admin"
+                    }
+                }
+            }
         }
     },
     "components": {

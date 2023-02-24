@@ -90,7 +90,7 @@
       "homeGuide2": " pour en savoir plus.",
       "smartphoneApp": "L'application smartphone",
       "explainDownload1": "Pour detecter les allergenes présent dans les produits, Dish propose un application smartphone. L'application est disponible sous la forme d'un fichier .apk à installer sur votre appareil.",
-      "explainDownload2": "The app is available for android smartphoL'application est diponible pour les téléphones android. Cliquez sur le bouton suivant pour télécharger l'application.es."
+      "explainDownload2": "The app is available for android smartphoL'application est diponible pour les téléphones android. Cliquez sur le bouton suivant pour télécharger l'application.",
       "homeGuide2": " pour en savoir plus.",
       "sourceCode": "Code source",
       "loggedAsAdmin": "Connecté en tant qu'administrateur",
@@ -119,7 +119,7 @@
       "errorFetchUserList": "Erreur lors de la récupération de la liste des utilisateurs",
       "errorDeactivateUser": "Erreur lors de la déséctivation de l'utilisateur",
       "errorReactivateUser": "Erreur lors de la réactivation de l'utilisateur",
-      "errorUpdatingUsers": "Erreur lors de la mise a jour des utilisateurs"
+      "errorUpdatingUsers": "Erreur lors de la mise a jour des utilisateurs",
       "okUserAllergensUpdate": "Allergènes de l'utilisateur mis à jour",
       "errorUserAllergensUpdate": "Erreur lors de la mise à jour des allergènes de l'utilisateur",
       "errorFetchUserAllergens": "Erreur lors de la récupération des allergènes de l'utilisateur"
