@@ -85,6 +85,7 @@ export const useAdmin = defineStore('admin', () => {
     const myHeaders = new Headers()
     myHeaders.append('accept', 'application/json')
     myHeaders.append('Authorization', 'Bearer ' + token)
+    myHeaders.append('Content-Type', 'application/json')
 
     const requestOptions = {
       method: 'PUT',
@@ -98,7 +99,10 @@ export const useAdmin = defineStore('admin', () => {
         checkAdmin(response)
         return response.text()
       })
-      .then((result) => console.log(result))
+      .then((result) => {
+        console.log(result)
+        appAlert.setAlertInfoTimed('alert.okUsersUpdate', 3500)
+      })
       .catch((error) => {
         console.log('error', error)
         appAlert.setAlertErrorTimed('alert.errorUpdatingUsers', 3500)

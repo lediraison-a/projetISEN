@@ -36,8 +36,9 @@ export const useUserAllergens = defineStore('userAllergens', () => {
     const token = await userContext.getToken()
 
     const myHeaders = new Headers()
-    myHeaders.append('Content-Type', 'application/json')
+    myHeaders.append('accept', 'application/json')
     myHeaders.append('Authorization', 'Bearer ' + token)
+    myHeaders.append('Content-Type', 'application/json')
 
     const requestOptions = {
       method: 'PUT',

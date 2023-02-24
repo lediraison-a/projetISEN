@@ -56,7 +56,17 @@
       "errorFetchUserList": "Error fetching user list",
       "errorDeactivateUser": "Error deactivating user",
       "errorReactivateUser": "Error Reactivating user",
-      "errorUpdatingUsers": "Error updating users"
+      "errorUpdatingUsers": "Error updating users",
+      "okUsersUpdate": "Users updated"
+    },
+    "table": {
+      "name": "name",
+      "mail": "email",
+      "uid": "uid",
+      "isDeactivated": "is deactivated",
+      "isAdmin": "is admin",
+      "no": "no",
+      "yes": "yes"
     }
   },
   "fr": {
@@ -116,7 +126,17 @@
       "errorUpdatingUsers": "Erreur lors de la mise a jour des utilisateurs",
       "okUserAllergensUpdate": "Allergènes de l'utilisateur mis à jour",
       "errorUserAllergensUpdate": "Erreur lors de la mise à jour des allergènes de l'utilisateur",
-      "errorFetchUserAllergens": "Erreur lors de la récupération des allergènes de l'utilisateur"
+      "errorFetchUserAllergens": "Erreur lors de la récupération des allergènes de l'utilisateur",
+      "okUsersUpdate": "Utilisateurs mis à jour"
+    },
+    "table": {
+      "name": "nom",
+      "mail": "mail",
+      "uid": "uid",
+      "isDeactivated": "est désactivé",
+      "isAdmin": "est admin",
+      "no": "non",
+      "yes": "oui"
     }
   }
 }
