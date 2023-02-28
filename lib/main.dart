@@ -541,7 +541,7 @@ class _ScanScreenState extends State<ScanScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-              Text("Bonjour ${MyApp.firebaseUser?.email} !"),
+              Text("Bonjour ${MyApp.firebaseUser?.displayName} !"),
               // Text("Contenu du code-barres: $_scanBarcode"),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
