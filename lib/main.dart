@@ -9,6 +9,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:quickalert/quickalert.dart';
+import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -224,100 +225,112 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-          child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          Card(
-              child: SizedBox(
-            height: 250,
-            width: 250,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                SizedBox(
-                  width: 225,
-                  child: TextField(
-                    controller: usernameTextController,
-                    obscureText: false,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Nom d\'utilisateur',
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 15.0,
-                ),
-                SizedBox(
-                  width: 225,
-                  child: TextField(
-                    controller: passwordTextController,
-                    obscureText: true,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Mot de passe',
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Row(
+        appBar: AppBar(
+          // Here we take the value from the MyHomePage object that was created by
+          // the App.build method, and use it to set our appbar title.
+          title: Text(widget.title),
+        ),
+        body: Container(
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              repeat: ImageRepeat.repeat,
+              image: Svg(
+                'assets/svg/i-like-food.svg',
+                color: Colors.green,
+              ),
+            ),
+          ),
+          child: Center(
+              child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Card(
+                  child: SizedBox(
+                height: 250,
+                width: 250,
+                child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Column(children: [
-                      ElevatedButton(
-                        onPressed: () async {
-                          print("Login button pressed");
-                          User? firebaseUser = await signInUsingEmailPassword(
-                              email: usernameTextController.text,
-                              password: passwordTextController.text,
-                              context: context);
-
-                          if (firebaseUser == null) {
-                            print("firebaseUser null");
-                          } else {
-                            print(
-                                "firebaseUser ${usernameTextController.text} connected");
-
-                            MyApp.firebaseUser = firebaseUser;
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const ScanScreen()));
-                          }
-                        },
-                        child: const Text('Login'),
+                  children: <Widget>[
+                    SizedBox(
+                      width: 225,
+                      child: TextField(
+                        controller: usernameTextController,
+                        obscureText: false,
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'Nom d\'utilisateur',
+                        ),
                       ),
-                    ]),
-                    const SizedBox(width: 10),
-                    Column(children: [
-                      ElevatedButton(
-                        onPressed: () => {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      const ForgottenPasswordScreen()))
-                        },
-                        child: const Text('Mot de passe oublié'),
+                    ),
+                    const SizedBox(
+                      height: 15.0,
+                    ),
+                    SizedBox(
+                      width: 225,
+                      child: TextField(
+                        controller: passwordTextController,
+                        obscureText: true,
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'Mot de passe',
+                        ),
                       ),
-                    ])
+                    ),
+                    const SizedBox(height: 8),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Column(children: [
+                          ElevatedButton(
+                            onPressed: () async {
+                              print("Login button pressed");
+                              User? firebaseUser =
+                                  await signInUsingEmailPassword(
+                                      email: usernameTextController.text,
+                                      password: passwordTextController.text,
+                                      context: context);
+
+                              if (firebaseUser == null) {
+                                print("firebaseUser null");
+                              } else {
+                                print(
+                                    "firebaseUser ${usernameTextController.text} connected");
+
+                                MyApp.firebaseUser = firebaseUser;
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const ScanScreen()));
+                              }
+                            },
+                            child: const Text('Login'),
+                          ),
+                        ]),
+                        const SizedBox(width: 10),
+                        Column(children: [
+                          ElevatedButton(
+                            onPressed: () => {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const ForgottenPasswordScreen()))
+                            },
+                            child: const Text('Mot de passe oublié'),
+                          ),
+                        ])
+                      ],
+                    )
                   ],
-                )
-              ],
-            ),
+                ),
+              )),
+            ],
           )),
-        ],
-      )),
-    );
+        ));
   }
 }
 

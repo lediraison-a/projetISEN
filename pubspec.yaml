@@ -46,6 +46,7 @@ dependencies:
   rflutter_alert: ^2.0.4
   quickalert: ^1.0.1
   tuple: ^2.0.1
+  flutter_svg_provider: ^1.0.3
 
 dev_dependencies:
   flutter_test:
@@ -99,6 +100,9 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+  assets:
+    - "assets/svg/i-like-food.svg"
 
 flutter_icons:
   android: "launcher_icon"
