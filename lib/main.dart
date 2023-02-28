@@ -234,30 +234,37 @@ class _MyHomePageState extends State<MyHomePage> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          SizedBox(
+          Card(
+              child: SizedBox(
             height: 250,
             width: 250,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                TextField(
-                  controller: usernameTextController,
-                  obscureText: false,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Nom d\'utilisateur',
+                SizedBox(
+                  width: 225,
+                  child: TextField(
+                    controller: usernameTextController,
+                    obscureText: false,
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Nom d\'utilisateur',
+                    ),
                   ),
                 ),
                 const SizedBox(
                   height: 15.0,
                 ),
-                TextField(
-                  controller: passwordTextController,
-                  obscureText: true,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Mot de passe',
+                SizedBox(
+                  width: 225,
+                  child: TextField(
+                    controller: passwordTextController,
+                    obscureText: true,
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Mot de passe',
+                    ),
                   ),
                 ),
                 const SizedBox(height: 8),
@@ -307,7 +314,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 )
               ],
             ),
-          ),
+          )),
         ],
       )),
     );
