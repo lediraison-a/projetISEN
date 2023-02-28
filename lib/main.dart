@@ -566,9 +566,9 @@ class _ScanScreenState extends State<ScanScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Column(
+                  Row(
                     children: [
-                      Row(children: [
+                      Column(children: [
                         ElevatedButton(
                           style: ButtonStyle(
                               shape: MaterialStateProperty.all<
@@ -582,7 +582,8 @@ class _ScanScreenState extends State<ScanScreen> {
                           child: const Text('Scan unique'),
                         )
                       ]),
-                      Row(children: [
+                      const SizedBox(width: 10,),
+                      Column(children: [
                         ElevatedButton(
                           style: ButtonStyle(
                               shape: MaterialStateProperty.all<
