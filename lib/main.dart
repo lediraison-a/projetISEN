@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously, must_be_immutable
+// ignore_for_file: use_build_context_synchronously, must_be_immutable, avoid_function_literals_in_foreach_calls, avoid_print, unused_field
 
 import 'package:flutter/material.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
@@ -57,7 +57,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'MyHomePage',
       theme: ThemeData(
-        primarySwatch: buildMaterialColor(Color(0xff00bd7e)),
+        primarySwatch: buildMaterialColor(const Color(0xff00bd7e)),
         fontFamily: 'Inter',
       ),
       home: const MyHomePage(title: 'Dish'),
@@ -110,6 +110,11 @@ class _ForgottenPasswordScreenState extends State<ForgottenPasswordScreen> {
                       height: 10.0,
                     ),
                     ElevatedButton(
+                        style: ButtonStyle(
+                            shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15)))),
                         onPressed: () => {
                               showDialog<void>(
                                 context: context,
@@ -185,7 +190,7 @@ class _MyHomePageState extends State<MyHomePage> {
           context: context,
           type: QuickAlertType.error,
           confirmBtnText: "Retour",
-          confirmBtnColor: buildMaterialColor(Color(0xff00bd7e)),
+          confirmBtnColor: buildMaterialColor(const Color(0xff00bd7e)),
         );
         print('FirebaseAuthException: No user found for that email.');
       } else if (e.code == 'wrong-password') {
@@ -195,7 +200,7 @@ class _MyHomePageState extends State<MyHomePage> {
           context: context,
           type: QuickAlertType.error,
           confirmBtnText: "Retour",
-          confirmBtnColor: buildMaterialColor(Color(0xff00bd7e)),
+          confirmBtnColor: buildMaterialColor(const Color(0xff00bd7e)),
         );
         print('FirebaseAuthException: Wrong password provided.');
       } else if (e.code == 'user-disabled') {
@@ -205,7 +210,7 @@ class _MyHomePageState extends State<MyHomePage> {
           context: context,
           type: QuickAlertType.error,
           confirmBtnText: "Retour",
-          confirmBtnColor: buildMaterialColor(Color(0xff00bd7e)),
+          confirmBtnColor: buildMaterialColor(const Color(0xff00bd7e)),
         );
         print(
             "FirebaseAuthException: The user account has been disabled by an administrator.");
@@ -246,88 +251,102 @@ class _MyHomePageState extends State<MyHomePage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Card(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15)),
                   child: SizedBox(
-                height: 250,
-                width: 250,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    SizedBox(
-                      width: 225,
-                      child: TextField(
-                        controller: usernameTextController,
-                        obscureText: false,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'Nom d\'utilisateur',
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 15.0,
-                    ),
-                    SizedBox(
-                      width: 225,
-                      child: TextField(
-                        controller: passwordTextController,
-                        obscureText: true,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'Mot de passe',
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    Row(
+                    height: 250,
+                    width: 300,
+                    child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Column(children: [
-                          ElevatedButton(
-                            onPressed: () async {
-                              print("Login button pressed");
-                              User? firebaseUser =
-                                  await signInUsingEmailPassword(
-                                      email: usernameTextController.text,
-                                      password: passwordTextController.text,
-                                      context: context);
-
-                              if (firebaseUser == null) {
-                                print("firebaseUser null");
-                              } else {
-                                print(
-                                    "firebaseUser ${usernameTextController.text} connected");
-
-                                MyApp.firebaseUser = firebaseUser;
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const ScanScreen()));
-                              }
-                            },
-                            child: const Text('Login'),
+                      children: <Widget>[
+                        SizedBox(
+                          width: 280,
+                          child: TextField(
+                            controller: usernameTextController,
+                            obscureText: false,
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: 'Nom d\'utilisateur',
+                            ),
                           ),
-                        ]),
-                        const SizedBox(width: 10),
-                        Column(children: [
-                          ElevatedButton(
-                            onPressed: () => {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const ForgottenPasswordScreen()))
-                            },
-                            child: const Text('Mot de passe oublié'),
+                        ),
+                        const SizedBox(
+                          height: 15.0,
+                        ),
+                        SizedBox(
+                          width: 280,
+                          child: TextField(
+                            controller: passwordTextController,
+                            obscureText: true,
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: 'Mot de passe',
+                            ),
                           ),
-                        ])
+                        ),
+                        const SizedBox(height: 8),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Column(children: [
+                              ElevatedButton(
+                                style: ButtonStyle(
+                                    shape: MaterialStateProperty.all<
+                                            RoundedRectangleBorder>(
+                                        RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(15)))),
+                                onPressed: () async {
+                                  print("Login button pressed");
+                                  User? firebaseUser =
+                                      await signInUsingEmailPassword(
+                                          email: usernameTextController.text,
+                                          password: passwordTextController.text,
+                                          context: context);
+
+                                  if (firebaseUser == null) {
+                                    print("firebaseUser null");
+                                  } else {
+                                    print(
+                                        "firebaseUser ${usernameTextController.text} connected");
+
+                                    MyApp.firebaseUser = firebaseUser;
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const ScanScreen()));
+                                  }
+                                },
+                                child: const Text('Se connecter'),
+                              ),
+                            ]),
+                            const SizedBox(width: 10),
+                            Column(children: [
+                              ElevatedButton(
+                                style: ButtonStyle(
+                                    shape: MaterialStateProperty.all<
+                                            RoundedRectangleBorder>(
+                                        RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(15)))),
+                                onPressed: () => {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const ForgottenPasswordScreen()))
+                                },
+                                child: const Text('Mot de passe oublié'),
+                              ),
+                            ])
+                          ],
+                        )
                       ],
-                    )
-                  ],
-                ),
-              )),
+                    ),
+                  )),
             ],
           )),
         ));
@@ -414,7 +433,7 @@ class _ScanScreenState extends State<ScanScreen> {
             context: context,
             type: QuickAlertType.success,
             confirmBtnText: "Détails",
-            confirmBtnColor: buildMaterialColor(Color(0xff00bd7e)),
+            confirmBtnColor: buildMaterialColor(const Color(0xff00bd7e)),
             onConfirmBtnTap: () => {
               Navigator.pop(context),
               Navigator.push(
@@ -430,10 +449,10 @@ class _ScanScreenState extends State<ScanScreen> {
           Fluttertoast.showToast(
               msg: "Pas d'allergènes détéctés !",
               toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.CENTER,
+              gravity: ToastGravity.BOTTOM,
               timeInSecForIosWeb: 1,
-              backgroundColor: Colors.red,
-              textColor: Colors.white,
+              backgroundColor: Colors.green,
+              textColor: Colors.black,
               fontSize: 16.0);
         }
       } else {
@@ -444,7 +463,7 @@ class _ScanScreenState extends State<ScanScreen> {
             context: context,
             type: QuickAlertType.warning,
             confirmBtnText: "Détails",
-            confirmBtnColor: buildMaterialColor(Color(0xff00bd7e)),
+            confirmBtnColor: buildMaterialColor(const Color(0xff00bd7e)),
             onConfirmBtnTap: () => {
               Navigator.pop(context),
               Navigator.push(
@@ -460,7 +479,7 @@ class _ScanScreenState extends State<ScanScreen> {
           Fluttertoast.showToast(
               msg: "Attention, allergènes présents!",
               toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.CENTER,
+              gravity: ToastGravity.BOTTOM,
               timeInSecForIosWeb: 1,
               backgroundColor: Colors.red,
               textColor: Colors.white,
@@ -478,15 +497,15 @@ class _ScanScreenState extends State<ScanScreen> {
           context: context,
           type: QuickAlertType.error,
           confirmBtnText: "Retour",
-          confirmBtnColor: buildMaterialColor(Color(0xff00bd7e)),
+          confirmBtnColor: buildMaterialColor(const Color(0xff00bd7e)),
         );
       } else {
         Fluttertoast.showToast(
             msg: "Nous avons rencontré une erreur, veuillez réessayer.",
             toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.CENTER,
+            gravity: ToastGravity.BOTTOM,
             timeInSecForIosWeb: 1,
-            backgroundColor: Colors.red,
+            backgroundColor: Colors.orange,
             textColor: Colors.white,
             fontSize: 16.0);
       }
@@ -534,7 +553,7 @@ class _ScanScreenState extends State<ScanScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Scanner un produit'),
+          title: const Text('Bienvenue sur Dish !'),
         ),
         body: Center(
             child: Column(
@@ -551,6 +570,12 @@ class _ScanScreenState extends State<ScanScreen> {
                     children: [
                       Row(children: [
                         ElevatedButton(
+                          style: ButtonStyle(
+                              shape: MaterialStateProperty.all<
+                                      RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(15)))),
                           onPressed: () async {
                             barcodeScan();
                           },
@@ -559,6 +584,12 @@ class _ScanScreenState extends State<ScanScreen> {
                       ]),
                       Row(children: [
                         ElevatedButton(
+                          style: ButtonStyle(
+                              shape: MaterialStateProperty.all<
+                                      RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(15)))),
                           onPressed: () async {
                             startBarcodeScanStream();
                           },
