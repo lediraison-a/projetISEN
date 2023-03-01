@@ -47,6 +47,7 @@ dependencies:
   quickalert: ^1.0.1
   tuple: ^2.0.1
   flutter_svg_provider: ^1.0.3
+  flutter_lorem: ^2.0.0
 
 dev_dependencies:
   flutter_test:

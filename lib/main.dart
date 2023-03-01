@@ -10,6 +10,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:quickalert/quickalert.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
+import 'package:flutter_lorem/flutter_lorem.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -161,6 +162,7 @@ class _ForgottenPasswordScreenState extends State<ForgottenPasswordScreen> {
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
+
   final String title;
 
   @override
@@ -356,6 +358,7 @@ class _MyHomePageState extends State<MyHomePage> {
 // Activité de scan
 class ScanScreen extends StatefulWidget {
   const ScanScreen({super.key});
+
   //final String title;
 
   @override
@@ -553,55 +556,180 @@ class _ScanScreenState extends State<ScanScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Bienvenue sur Dish !'),
+          title: const Text('Dish'),
         ),
         body: Center(
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-              Text("Bonjour ${MyApp.firebaseUser?.displayName} !"),
-              // Text("Contenu du code-barres: $_scanBarcode"),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Row(
-                    children: [
-                      Column(children: [
-                        ElevatedButton(
-                          style: ButtonStyle(
-                              shape: MaterialStateProperty.all<
-                                      RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius:
-                                          BorderRadius.circular(15)))),
-                          onPressed: () async {
-                            barcodeScan();
-                          },
-                          child: const Text('Scan unique'),
-                        )
-                      ]),
-                      const SizedBox(width: 10,),
-                      Column(children: [
-                        ElevatedButton(
-                          style: ButtonStyle(
-                              shape: MaterialStateProperty.all<
-                                      RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius:
-                                          BorderRadius.circular(15)))),
-                          onPressed: () async {
-                            startBarcodeScanStream();
-                          },
-                          child: const Text('Scan continu'),
+            child: Container(
+          decoration: const BoxDecoration(
+                image: DecorationImage(
+                  repeat: ImageRepeat.repeat,
+                  image: Svg(
+                    'assets/svg/i-like-food.svg',
+                    color: Colors.green,
+                  ),
+                ),
+              ),
+          //color: Colors.yellow,
+          child: Column(
+              //mainAxisAlignment: MainAxisAlignment.center,
+              //crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                //Text("Bonjour ${MyApp.firebaseUser?.displayName} !"),
+                // Text("Contenu du code-barres: $_scanBarcode"),
+                Card(
+                  //margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                  margin: const EdgeInsets.all(20),
+                  clipBehavior: Clip.antiAlias,
+                  elevation: 5,
+                  child: Container(
+                    margin: const EdgeInsets.all(6),
+                    child: Row(
+                      children: [
+                        Expanded(
+                            child: Column(
+                          children: [
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Container(
+                                //color: Colors.black54,
+                                child: const Text("Bienvenue sur Dish!",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 25,
+                                    )),
+                              ),
+                            ),
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Container(
+                                //color: Colors.black54,
+                                child:
+                                    const Text("On ne mange pas n'importe quoi !",
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 20,
+                                        )),
+                              ),
+                            ),
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Container(
+                                //color: Colors.black54,
+                                child: Text(lorem(paragraphs: 1, words: 70)),
+                              ),
+                            ),
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Container(
+                                //color: Colors.black54,
+                                child: const Text("Développement web",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20,
+                                    )),
+                              ),
+                            ),
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Container(
+                                //color: Colors.black54,
+                                child: Text(lorem(paragraphs: 1, words: 70)),
+                              ),
+                            ),
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Container(
+                                //color: Colors.black54,
+                                child: const Text("Développement Android",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20,
+                                    )),
+                              ),
+                            ),
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Container(
+                                //color: Colors.black54,
+                                child: Text(lorem(paragraphs: 1, words: 70)),
+                              ),
+                            ),
+                          ],
+                        ))
+                      ],
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                      //color: Colors.red,
+                      ),
+                ),
+                Center(
+                  child: Card(
+                    margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                    elevation: 5,
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                          Text(
+                            "connecté en tant que ${MyApp.firebaseUser?.displayName}",
+                            style: const TextStyle(
+                              fontSize: 12,
+                              fontStyle: FontStyle.italic,
+                            ),
+                          )
+                        ],),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Row(
+                              children: [
+                                Column(children: [
+                                  ElevatedButton(
+                                    style: ButtonStyle(
+                                        shape: MaterialStateProperty.all<
+                                                RoundedRectangleBorder>(
+                                            RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(15)))),
+                                    onPressed: () async {
+                                      barcodeScan();
+                                    },
+                                    child: const Text('Scan unique'),
+                                  )
+                                ]),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Column(children: [
+                                  ElevatedButton(
+                                    style: ButtonStyle(
+                                        shape: MaterialStateProperty.all<
+                                                RoundedRectangleBorder>(
+                                            RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(15)))),
+                                    onPressed: () async {
+                                      startBarcodeScanStream();
+                                    },
+                                    child: const Text('Scan continu'),
+                                  ),
+                                ])
+                              ],
+                            )
+                          ],
                         ),
-                      ])
-                    ],
-                  )
-                ],
-              )
-            ])));
+                      ],
+                    ),
+                  ),
+                )
+              ]),
+        )));
   }
 }
 
