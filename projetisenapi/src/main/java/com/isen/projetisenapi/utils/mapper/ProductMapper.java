@@ -18,14 +18,16 @@ public class ProductMapper {
         if (status == 0) {
             throw new Exception("product not found");
         }
-        var name = rootNode.get("product").get("product_name").asText();
+        var productNode = rootNode.get("product");
+        var nameNode = productNode.get("product_name");
+        var name = "";
+        if (nameNode != null) {
+            name = nameNode.asText();
+        }
         var barcode = rootNode.get("code").asText();
         var allergensTags = StreamSupport
                 .stream(rootNode.get("product").get("allergens_tags").spliterator(), false)
                 .map(jsonNode -> jsonNode.asText().substring(3)).toList();
-        var allergensImported = Arrays.asList(rootNode.get("product")
-                .get("allergens_imported").asText().split(", "));
-
-        return new ProductInfo(barcode, name, allergensTags, allergensImported);
+        return new ProductInfo(barcode, name, allergensTags);
     }
 }

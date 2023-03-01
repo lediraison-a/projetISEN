@@ -6,7 +6,6 @@ public class ProductInfo {
     private final String barcode;
     private final String name;
     private final List<String> allergensTags;
-    private final List<String> allergensImported;
 
     public String getBarcode() {
         return barcode;
@@ -20,14 +19,9 @@ public class ProductInfo {
         return allergensTags;
     }
 
-    public List<String> getAllergensImported() {
-        return allergensImported;
-    }
-
-    public ProductInfo(String barcode, String name, List<String> allergensTags, List<String> allergensImported) {
+    public ProductInfo(String barcode, String name, List<String> allergensTags) {
         this.barcode = barcode;
         this.name = name;
         this.allergensTags = allergensTags;
-        this.allergensImported = allergensImported;
     }
 }

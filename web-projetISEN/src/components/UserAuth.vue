@@ -22,8 +22,10 @@ import firebase from 'firebase/compat/app'
 import { useUserContext } from '@/stores/userContextStore'
 import { onMounted } from 'vue'
 import router from '@/router'
+import { useAdmin } from "@/stores/adminStore";
 
 const userContext = useUserContext()
+const adminStore = useAdmin()
 
 onMounted(() => {
   firebase.auth().onAuthStateChanged(function (user) {
@@ -32,7 +34,10 @@ onMounted(() => {
       firebase
         .auth()
         .currentUser.getIdTokenResult()
-        .then((value) => console.log(value.token))
+        .then((value) => {
+          console.log(value.token)
+          adminStore.fetchIsSelfAdmin()
+        })
     } else {
       router.push('/')
     }

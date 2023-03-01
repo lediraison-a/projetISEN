@@ -4,21 +4,29 @@
     <div>
       <table class="userlist-table">
         <tr>
-          <th>Name</th>
-          <th>Mail</th>
-          <th>Uid</th>
-          <th>is deactivated</th>
-          <th>is admin</th>
+          <th>#</th>
+          <th>{{ $t('table.name') }}</th>
+          <th>{{ $t('table.mail') }}</th>
+          <th>{{ $t('table.uid') }}</th>
+          <th>{{ $t('table.isDeactivated') }}</th>
+          <th>{{ $t('table.isAdmin') }}</th>
         </tr>
-        <tr v-for="user in adminStore.userList" :key="user.uid">
+        <tr v-for="(user, i) in adminStore.userList" :key="user.uid">
+          <td>{{ i+1 }}</td>
           <td>{{ user.name }}</td>
           <td>{{ user.mail }}</td>
           <td>{{ user.uid }}</td>
           <td class="center-cell">
-            <input type="checkbox" v-model="user.disabled" />
+            <div class="checkbox-cell">
+              <input type="checkbox" v-model="user.disabled" />
+              <div>{{ $t(user.disabled === true ? 'table.yes' : 'table.no') }}</div>
+            </div>
           </td>
           <td class="center-cell">
-            <input type="checkbox" v-model="user.isadmin" />
+            <div class="checkbox-cell">
+              <input type="checkbox" v-model="user.isadmin" />
+              <div>{{ $t(user.isadmin === true ? 'table.yes' : 'table.no') }}</div>
+            </div>
           </td>
         </tr>
       </table>
@@ -42,26 +50,6 @@ import { useAdmin } from '@/stores/adminStore'
 
 const adminStore = useAdmin()
 
-console.log(adminStore)
-
-async function deactivateUser(uid) {
-  await adminStore.deactivateUser(uid)
-}
-
-async function reactivateUser(uid) {
-  await adminStore.reactivateUser(uid)
-}
-
-function onCheckboxChange(user) {
-  if (user.disabled) {
-    console.log('tu es bien en train de désactiver un mec')
-    deactivateUser(user.uid)
-  } else {
-    console.log("tu es bien en train d'activer un mec")
-    reactivateUser(user.uid)
-  }
-}
-
 async function saveChanges() {
   await adminStore.updateUsers()
 }
@@ -81,6 +69,12 @@ async function cancelChanges() {
   padding-top: 1rem;
   display: flex;
   justify-content: flex-end;
+}
+
+.checkbox-cell {
+  display: flex;
+  flex-direction: row;
+  gap: 0.4rem;
 }
 
 tr:nth-child(even) {
