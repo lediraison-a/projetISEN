@@ -268,7 +268,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             obscureText: false,
                             decoration: const InputDecoration(
                               border: OutlineInputBorder(),
-                              labelText: 'Nom d\'utilisateur',
+                              labelText: 'Adresse mail',
                             ),
                           ),
                         ),
