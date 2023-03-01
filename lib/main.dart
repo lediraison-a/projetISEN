@@ -276,9 +276,13 @@ class _MyHomePageState extends State<MyHomePage> {
                           child: TextField(
                             controller: usernameTextController,
                             obscureText: false,
-                            decoration: const InputDecoration(
-                              border: OutlineInputBorder(),
+                            decoration: InputDecoration(
+                              border: const OutlineInputBorder(),
                               labelText: 'Adresse mail',
+                              suffixIcon: IconButton(
+                                  onPressed: usernameTextController.clear,
+                                  icon: const Icon(Icons.clear)
+                              )
                             ),
                           ),
                         ),
@@ -290,9 +294,13 @@ class _MyHomePageState extends State<MyHomePage> {
                           child: TextField(
                             controller: passwordTextController,
                             obscureText: true,
-                            decoration: const InputDecoration(
-                              border: OutlineInputBorder(),
+                            decoration: InputDecoration(
+                              border: const OutlineInputBorder(),
                               labelText: 'Mot de passe',
+                              suffixIcon: IconButton(
+                                  onPressed: passwordTextController.clear,
+                                  icon: const Icon(Icons.clear)
+                              )
                             ),
                           ),
                         ),
