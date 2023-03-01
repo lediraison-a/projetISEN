@@ -561,14 +561,14 @@ class _ScanScreenState extends State<ScanScreen> {
         body: Center(
             child: Container(
           decoration: const BoxDecoration(
-                image: DecorationImage(
-                  repeat: ImageRepeat.repeat,
-                  image: Svg(
-                    'assets/svg/i-like-food.svg',
-                    color: Colors.green,
-                  ),
-                ),
+            image: DecorationImage(
+              repeat: ImageRepeat.repeat,
+              image: Svg(
+                'assets/svg/i-like-food.svg',
+                color: Colors.green,
               ),
+            ),
+          ),
           //color: Colors.yellow,
           child: Column(
               //mainAxisAlignment: MainAxisAlignment.center,
@@ -580,7 +580,7 @@ class _ScanScreenState extends State<ScanScreen> {
                   //margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                   margin: const EdgeInsets.all(20),
                   clipBehavior: Clip.antiAlias,
-                  elevation: 5,
+                  //elevation: 5,
                   child: Container(
                     margin: const EdgeInsets.all(6),
                     child: Row(
@@ -603,19 +603,21 @@ class _ScanScreenState extends State<ScanScreen> {
                               alignment: Alignment.centerLeft,
                               child: Container(
                                 //color: Colors.black54,
-                                child:
-                                    const Text("On ne mange pas n'importe quoi !",
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 20,
-                                        )),
+                                child: const Text(
+                                    "On ne mange pas n'importe quoi !",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20,
+                                    )),
                               ),
                             ),
                             Align(
                               alignment: Alignment.centerLeft,
                               child: Container(
                                 //color: Colors.black54,
-                                child: Text(lorem(paragraphs: 1, words: 70)),
+                                child: const Text(
+                                    "Le but du projet a été de développer un service en réalité augmentée permettant d'identifier facilement si un produit alimentaire contient des allergènes.",
+                                    textAlign: TextAlign.justify),
                               ),
                             ),
                             Align(
@@ -633,7 +635,9 @@ class _ScanScreenState extends State<ScanScreen> {
                               alignment: Alignment.centerLeft,
                               child: Container(
                                 //color: Colors.black54,
-                                child: Text(lorem(paragraphs: 1, words: 70)),
+                                child: const Text(
+                                    "Nous avons développé et déployé une application web de gestion des abonnés au service. À partir de cette interface, il est possible de gérer les droits d'utilisation, de télécharger l'application mobile, de configurer ses allergènes, de lire la FAQ associée au service ou encore de contacter les développeurs du service. Chaque client doit avoir un compte sur le serveur pour pouvoir utiliser le service avec son smartphone.",
+                                    textAlign: TextAlign.justify),
                               ),
                             ),
                             Align(
@@ -651,7 +655,9 @@ class _ScanScreenState extends State<ScanScreen> {
                               alignment: Alignment.centerLeft,
                               child: Container(
                                 //color: Colors.black54,
-                                child: Text(lorem(paragraphs: 1, words: 70)),
+                                child: const Text(
+                                    "Nous avons également développé cette application Android pour que les utilisateurs puissent scanner le code-barre des aliments, puis être alertés si ces éléments contiennent des allergènes que l'utilisateur ne tolère pas et qu'il aura renseigné à l'avance sur le portail web du service.",
+                                    textAlign: TextAlign.justify),
                               ),
                             ),
                           ],
@@ -667,22 +673,24 @@ class _ScanScreenState extends State<ScanScreen> {
                 ),
                 Center(
                   child: Card(
-                    margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                    elevation: 5,
+                    margin: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 20),
+                    //elevation: 5,
                     child: Column(
                       children: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                          Text(
-                            "connecté en tant que ${MyApp.firebaseUser?.displayName}",
-                            style: const TextStyle(
-                              fontSize: 12,
-                              fontStyle: FontStyle.italic,
-                            ),
-                          )
-                        ],),
+                            Text(
+                              "connecté en tant que ${MyApp.firebaseUser?.displayName}",
+                              style: const TextStyle(
+                                fontSize: 12,
+                                fontStyle: FontStyle.italic,
+                              ),
+                            )
+                          ],
+                        ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -696,7 +704,8 @@ class _ScanScreenState extends State<ScanScreen> {
                                                 RoundedRectangleBorder>(
                                             RoundedRectangleBorder(
                                                 borderRadius:
-                                                    BorderRadius.circular(15)))),
+                                                    BorderRadius.circular(
+                                                        15)))),
                                     onPressed: () async {
                                       barcodeScan();
                                     },
@@ -713,7 +722,8 @@ class _ScanScreenState extends State<ScanScreen> {
                                                 RoundedRectangleBorder>(
                                             RoundedRectangleBorder(
                                                 borderRadius:
-                                                    BorderRadius.circular(15)))),
+                                                    BorderRadius.circular(
+                                                        15)))),
                                     onPressed: () async {
                                       startBarcodeScanStream();
                                     },
