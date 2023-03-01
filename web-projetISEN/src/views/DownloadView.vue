@@ -6,20 +6,34 @@
       <p>{{ $t('message.explainDownload2') }}</p>
     </div>
     <div class="actions">
-      <div class="app-btn-primary" @click="download">
-        <img src="/src/assets/icons/download.svg" />
-        <div>{{ $t('message.downloadApk') }}</div>
+      <div class="app-btn-primary">
+        <a href="dish.apk" class="dl-link">
+          <img class="dl-icon" src="/src/assets/icons/download.svg" />
+          <div class="dl-link-text">{{ $t('message.downloadApk') }}</div>
+        </a>
       </div>
+    </div>
+    <div>
+      <hr />
+      <p>{{ $t('message.downloadQrcode') }}</p>
+      <canvas id="canvas"></canvas>
     </div>
   </div>
 </template>
 
 <script setup>
-const apkFile = 'README.md'
-
-const download = () => {
-  window.open(apkFile)
-}
+import qrcode from 'qrcode'
+import { onMounted } from 'vue'
+onMounted(() => {
+  const canvas = document.getElementById('canvas')
+  qrcode.toCanvas(
+    canvas,
+    window.location.host + import.meta.env.VITE_APK_FILE,
+    function (error) {
+      if (error) console.error(error)
+    }
+  )
+})
 </script>
 
 <style scoped>
@@ -28,12 +42,32 @@ const download = () => {
 }
 
 .text {
-  padding: 0 1rem;
 }
 
 .actions {
   display: flex;
   width: 100%;
-  padding: 1rem 3rem;
+  padding: 1rem 1rem;
+}
+
+.dl-link {
+  display: flex;
+  flex-direction: row;
+}
+
+#canvas {
+  margin-top: 1rem;
+  margin-left: 1rem;
+  border: solid var(--color-border) 1px;
+  border-radius: 0.4rem;
+}
+
+.dl-link-text {
+  color: var(--vt-c-text-light-1);
+}
+
+.dl-icon {
+  width: 1.8rem;
+  height: 1.8rem;
 }
 </style>
