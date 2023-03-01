@@ -85,77 +85,87 @@ class _ForgottenPasswordScreenState extends State<ForgottenPasswordScreen> {
         appBar: AppBar(
           title: const Text("Réinitialiser le mot de passe"),
         ),
-        body: Center(
-            child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            SizedBox(
-                height: 250,
-                width: 250,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    // ignore: prefer_const_constructors
-                    TextField(
-                      controller: mailTextController,
-                      obscureText: false,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Adresse mail',
+        body: Container(
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              repeat: ImageRepeat.repeat,
+              image: Svg(
+                'assets/svg/i-like-food.svg',
+                color: Colors.green,
+              ),
+            ),
+          ),
+          child: Center(
+              child: Card(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15)),
+                child: SizedBox(
+                  height: 150,
+                  width: 250,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      // ignore: prefer_const_constructors
+                      Container(
+                        margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                        child: TextField(
+                          controller: mailTextController,
+                          obscureText: false,
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: 'Adresse mail',
+                          ),
+                        ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 10.0,
-                    ),
-                    ElevatedButton(
-                        style: ButtonStyle(
-                            shape: MaterialStateProperty.all<
-                                    RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15)))),
-                        onPressed: () => {
-                              showDialog<void>(
-                                context: context,
-                                barrierDismissible:
-                                    false, // user must tap button!
-                                builder: (BuildContext context) {
-                                  return AlertDialog(
-                                    title: const Text('Confirmation'),
-                                    content: SingleChildScrollView(
-                                      child: ListBody(
-                                        children: const <Widget>[
-                                          Text(
-                                              'Si l\'adresse mail renseignée est associée à un compte existant, un mail contenant les instructions pour réinitialiser son mot de passe lui sera envoyé.'),
-                                          Text('Souhaitez-vous continuer ?'),
-                                        ],
+                      ElevatedButton(
+                          style: ButtonStyle(
+                              shape: MaterialStateProperty.all<
+                                      RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15)))),
+                          onPressed: () => {
+                                showDialog<void>(
+                                  context: context,
+                                  barrierDismissible:
+                                      false, // user must tap button!
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: const Text('Confirmation'),
+                                      content: SingleChildScrollView(
+                                        child: ListBody(
+                                          children: const <Widget>[
+                                            Text(
+                                                'Si l\'adresse mail renseignée est associée à un compte existant, un mail contenant les instructions pour réinitialiser son mot de passe lui sera envoyé.'),
+                                            Text('Souhaitez-vous continuer ?'),
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                    actions: <Widget>[
-                                      TextButton(
-                                        child: const Text("Annuler"),
-                                        onPressed: () =>
-                                            Navigator.of(context).pop(),
-                                      ),
-                                      TextButton(
-                                        child: const Text('Confirmer'),
-                                        onPressed: () {
-                                          auth.sendPasswordResetEmail(
-                                              email: mailTextController.text);
-                                          Navigator.of(context).pop();
-                                        },
-                                      ),
-                                    ],
-                                  );
-                                },
-                              )
-                            },
-                        child: const Text("Envoyer"))
-                  ],
-                ))
-          ],
-        )));
+                                      actions: <Widget>[
+                                        TextButton(
+                                          child: const Text("Annuler"),
+                                          onPressed: () =>
+                                              Navigator.of(context).pop(),
+                                        ),
+                                        TextButton(
+                                          child: const Text('Confirmer'),
+                                          onPressed: () {
+                                            auth.sendPasswordResetEmail(
+                                                email: mailTextController.text);
+                                            Navigator.of(context).pop();
+                                          },
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                )
+                              },
+                          child: const Text("Envoyer"))
+                    ],
+                  ),
+                ),
+              )),
+        ));
   }
 }
 
