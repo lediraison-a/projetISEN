@@ -10,7 +10,6 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:quickalert/quickalert.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
-import 'package:flutter_lorem/flutter_lorem.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -547,10 +546,9 @@ class _ScanScreenState extends State<ScanScreen> {
     firebaseUser?.getIdTokenResult(true).then((value) {
       firebaseToken = value.token;
       print("firebaseToken $firebaseToken");
-      if(barcodeScanRes == "-1"){
+      if (barcodeScanRes == "-1") {
         print("Nothing scanned");
-      }
-      else {
+      } else {
         testAllergies(firebaseToken, barcodeScanRes, isUnique);
       }
     });
@@ -763,32 +761,34 @@ class AllergenDetailsScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Détails du scan'),
       ),
-      body: Center(
-          child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Row(
-            children: [
-              Expanded(
-                child:
-                    Column(children: createUserAllergensColumn(userAllergens)),
-              ),
-              Expanded(
-                child: Column(
-                    children: createProductAllergensColumn(productAllergens)),
-              )
-            ],
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            repeat: ImageRepeat.repeat,
+            image: Svg(
+              'assets/svg/i-like-food.svg',
+              color: Colors.green,
+            ),
           ),
-        ],
-      )),
+        ),
+        child: Card(
+            margin: const EdgeInsets.all(20),
+            child: Container(
+              margin: const EdgeInsets.all(10),
+              child: Column(
+                //mainAxisAlignment: MainAxisAlignment.center,
+                //crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  createDetailsWidgets(userAllergens, productAllergens)
+                ]
+              ),
+            )),
+      ),
     );
   }
 
-  // Générer les widgets à afficher sur la page détaillant les allergènes
-  createUserAllergensColumn(userAllergens) {
+  createDetailsWidgets(userAllergens, productAllergens) {
     var userAllergensColumn = <Widget>[];
-
     userAllergensColumn.add(
       const Text(
         "Vos allergènes",
@@ -796,14 +796,7 @@ class AllergenDetailsScreen extends StatelessWidget {
         style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
       ),
     );
-    userAllergens.forEach((allergen) {
-      var textWidget = Text(allergen);
-      return userAllergensColumn.add(textWidget);
-    });
-    return userAllergensColumn;
-  }
 
-  createProductAllergensColumn(productAllergens) {
     var productAllergensColumn = <Widget>[];
     productAllergensColumn.add(
       const Text(
@@ -812,10 +805,46 @@ class AllergenDetailsScreen extends StatelessWidget {
         style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
       ),
     );
-    productAllergens.forEach((allergen) {
+
+    userAllergens.forEach((allergen) {
+      if(productAllergens.contains(allergen)) {
+        var textWidget = Text(allergen, style: const TextStyle(color: Colors.red));
+        return userAllergensColumn.add(
+          textWidget
+        );
+      }
+      else {
+        var textWidget = Text(allergen);
+        return userAllergensColumn.add(textWidget);
+      }
+    });
+
+  productAllergens.forEach((allergen) {
+    if(userAllergens.contains(allergen)) {
+      var textWidget = Text(allergen, style: const TextStyle(color: Colors.red));
+      return productAllergensColumn.add(
+          textWidget
+      );
+    }
+    else {
       var textWidget = Text(allergen);
       return productAllergensColumn.add(textWidget);
-    });
-    return productAllergensColumn;
+    }
+  });
+
+  var row = Row(
+    mainAxisAlignment: MainAxisAlignment.center,
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Expanded(child: Column(
+        children: userAllergensColumn,
+      )),
+      Expanded(child: Column(
+        children: productAllergensColumn,
+      )),
+    ],
+  );
+  
+  return row;
   }
 }
