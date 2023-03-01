@@ -5,7 +5,7 @@ import UserView from '../views/UserView.vue'
 import QuestionsAnswers from '../views/QuestionsAnswers.vue'
 import SignIn from '../components/SignIn.vue'
 import Admin from '../views/AdminView.vue'
-import Contact from '../views/Contact.vue'
+import Contact from '../views/ContactView.vue'
 import NotFoundView from '../views/NotFoundView.vue'
 
 const router = createRouter({

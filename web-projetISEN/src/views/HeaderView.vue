@@ -12,9 +12,16 @@
             {{ appName }}
           </router-link>
         </div>
-        <div class="nav-links" v-if="userContext.isConnected">
-          <div class="nav-link" v-for="link in links" :key="link">
-            <router-link :to="link[0]">{{ $t(link[1]) }}</router-link>
+        <div class="nav-links">
+          <div class="links" v-if="userContext.isConnected">
+            <div class="nav-link" v-for="link in linksConnected" :key="link">
+              <router-link :to="link[0]">{{ $t(link[1]) }}</router-link>
+            </div>
+          </div>
+          <div class="links">
+            <div class="nav-link" v-for="link in links" :key="link">
+              <router-link :to="link[0]">{{ $t(link[1]) }}</router-link>
+            </div>
           </div>
         </div>
         <router-link
@@ -55,11 +62,14 @@ const userContext = useUserContext()
 const langPrefStore = useLangPref()
 const adminStore = useAdmin()
 
-const links = [
+const linksConnected = [
   ['/user', 'header.user'],
   ['/download', 'header.download'],
+]
+
+const links = [
   ['/qna', 'header.qna'],
-  ['/contact', 'header.contact']
+  ['/contact', 'header.contact'],
 ]
 
 const appName = import.meta.env.VITE_APP_TITLE
@@ -147,6 +157,8 @@ function switchLang() {
 
 .home-link {
   font-size: x-large;
+  white-space: nowrap;
+  user-select: none;
 }
 
 .nav-links {
@@ -161,6 +173,12 @@ function switchLang() {
 .nav-link {
   font-size: larger;
   padding: 0.5rem;
+  user-select: none;
+}
+
+.links {
+  display: flex;
+  flex-direction: row;
 }
 
 img {
