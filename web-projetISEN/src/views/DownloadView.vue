@@ -28,7 +28,7 @@ onMounted(() => {
   const canvas = document.getElementById('canvas')
   qrcode.toCanvas(
     canvas,
-    window.location.host + import.meta.env.VITE_APK_FILE,
+    window.location.host + '/' + import.meta.env.VITE_APK_FILE,
     function (error) {
       if (error) console.error(error)
     }
@@ -69,5 +69,9 @@ onMounted(() => {
 .dl-icon {
   width: 1.8rem;
   height: 1.8rem;
+}
+
+.dl-link-text {
+  font-size: larger;
 }
 </style>
