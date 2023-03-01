@@ -7,7 +7,7 @@
     </div>
     <div class="actions">
       <div class="app-btn-primary">
-        <a href="dish.apk" class="dl-link">
+        <a :href="apk" class="dl-link">
           <img class="dl-icon" src="/src/assets/icons/download.svg" />
           <div class="dl-link-text">{{ $t('message.downloadApk') }}</div>
         </a>
@@ -22,17 +22,14 @@
 </template>
 
 <script setup>
+import apk from '/dish.apk'
 import qrcode from 'qrcode'
 import { onMounted } from 'vue'
 onMounted(() => {
   const canvas = document.getElementById('canvas')
-  qrcode.toCanvas(
-    canvas,
-    window.location.host + '/' + import.meta.env.VITE_APK_FILE,
-    function (error) {
-      if (error) console.error(error)
-    }
-  )
+  qrcode.toCanvas(canvas, window.location.host + apk, function (error) {
+    if (error) console.error(error)
+  })
 })
 </script>
 
