@@ -547,7 +547,12 @@ class _ScanScreenState extends State<ScanScreen> {
     firebaseUser?.getIdTokenResult(true).then((value) {
       firebaseToken = value.token;
       print("firebaseToken $firebaseToken");
-      testAllergies(firebaseToken, barcodeScanRes, isUnique);
+      if(barcodeScanRes == "-1"){
+        print("Nothing scanned");
+      }
+      else {
+        testAllergies(firebaseToken, barcodeScanRes, isUnique);
+      }
     });
     //return "a";
   }
