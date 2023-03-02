@@ -1,8 +1,6 @@
 # Dish
 
-## Génération de l'apk
-
-Après avoir installé et configuré Flutter et Dart, se mettre dans le dossier gl-flutter et lancer `flutter build apk`.
+Application Android du service Dish sur la plateforme Flutter en Dart.
 
 ## Crédits
 
