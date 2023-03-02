@@ -19,7 +19,7 @@
       "signIn": "Sign in",
       "logOut": "Log out",
       "downloadApk": " Download the .apk file ",
-      "downloadQrcode": "Scan the qrcode with your smartphone to download the app.",
+      "downloadQrcode": "Scan the QR code with your smartphone to download the app.",
       "headerUser": "User",
       "yes": "Yes",
       "loggedAsAdmin": "Logged as admin user",
@@ -31,7 +31,7 @@
       "homeGuide2": " to know more.",
       "admin": "Admin",
       "smartphoneApp": "Smartphone app",
-      "explainDownload1": "To detect allergens in producs, Dish provides an application.",
+      "explainDownload1": "To detect allergens in products, Dish provides an application.",
       "explainDownload2": "The app is available for android smartphones."
     },
     "header": {
@@ -41,9 +41,9 @@
       "contact": "Contact"
     },
     "accountActions": {
-      "deleteConfirmLabel": "Yes delete my account",
+      "deleteConfirmLabel": "Yes, delete my account",
       "deleteConfirmMsg": "Delete account ? Warning : no undo.",
-      "passwordResetConfirmLabel": "Yes send me the email",
+      "passwordResetConfirmLabel": "Yes, send me the email",
       "passwordResetConfirmMsg": "Request a password change ? You will receive a email with a link to change your password."
     },
     "alert": {
@@ -80,7 +80,7 @@
     "message": {
       "editAllergens": "Renseigner vos allergènes",
       "downloadApp": "Télécharger l'application",
-      "signInStart": "Connectez vous pour commencer",
+      "signInStart": "Connectez-vous pour commencer",
       "or": "ou",
       "noAllergen": "Pas d'allergènes",
       "addAnAllergen": "Ajouter un allergène",
@@ -102,10 +102,10 @@
       "welcomeConnected": "Bienvenu sur Dish, l'application qui vous permet d'identifier des allergènes dans les produits de la vie courante.",
       "welcomeNotConnected": "Bienvenu sur Dish, l'application qui vous permet d'identifier des allergènes dans les produits de la vie courante.",
       "guide": "foire aux questions",
-      "homeGuide1": "Visitez la ",
+      "homeGuide1": "Visitez-la ",
       "smartphoneApp": "L'application smartphone",
       "explainDownload1": "Pour détecter les allergènes présent dans les produits, Dish propose un application smartphone. L'application est disponible sous la forme d'un fichier .apk à installer sur votre appareil.",
-      "explainDownload2": "L'application est disponible pour les téléphones android. Cliquez sur le bouton suivant pour télécharger l'application.es.",
+      "explainDownload2": "L'application est disponible pour les téléphones android. Cliquez sur le bouton suivant pour télécharger l'application.",
       "homeGuide2": " pour en savoir plus.",
       "sourceCode": "Code source",
       "loggedAsAdmin": "Connecté en tant qu'administrateur",
@@ -118,21 +118,21 @@
       "contact": "Contact"
     },
     "accountActions": {
-      "deleteConfirmLabel": "Oui supprimer mon compte",
+      "deleteConfirmLabel": "Oui, supprimer mon compte",
       "deleteConfirmMsg": "Supprimer le compte ?",
-      "passwordResetConfirmLabel": "Oui envoyez moi le mail",
-      "passwordResetConfirmMsg": "Demander un nouveau mot de passe ? Vous receverez un mail contenent un lien pour réinitialiser votre mot de passe."
+      "passwordResetConfirmLabel": "Oui, envoyez-moi le mail",
+      "passwordResetConfirmMsg": "Demander un nouveau mot de passe ? Vous recevrez un mail contenant un lien pour réinitialiser votre mot de passe."
     },
     "alert": {
-      "errorFetchingAllergens": "Erreur récupération des allergens",
-      "errorDeletingUser": "Erreur suppression du compte",
+      "errorFetchingAllergens": "Erreur récupération des allergènes",
+      "errorDeletingUser": "Erreur supression du compte",
       "okDeletingUser": "Compte supprimé",
       "okMailSent": "Mail de réinitialisation de mot de passe envoyé",
       "okLoggedOut": "Déconnexion ok",
       "errorFetchUserList": "Erreur lors de la récupération de la liste des utilisateurs",
       "errorDeactivateUser": "Erreur lors de la désactivation de l'utilisateur",
       "errorReactivateUser": "Erreur lors de la réactivation de l'utilisateur",
-      "errorUpdatingUsers": "Erreur lors de la mise a jour des utilisateurs",
+      "errorUpdatingUsers": "Erreur lors de la mise à jour des utilisateurs",
       "okUserAllergensUpdate": "Allergènes de l'utilisateur mis à jour",
       "errorUserAllergensUpdate": "Erreur lors de la mise à jour des allergènes de l'utilisateur",
       "errorFetchUserAllergens": "Erreur lors de la récupération des allergènes de l'utilisateur",
