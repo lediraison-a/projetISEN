@@ -1,9 +1,9 @@
 <template>
   <div class="notfound-content">
     <div class="hero">
-      <div class="error">Error 404</div>
-      <div class="error-text">The page you are looking for does not exist.</div>
-      <router-link to="/">Go back home</router-link>
+      <div class="error">{{ $t('notfound.error') }}</div>
+      <div class="error-text">{{ $t('notfound.errorText') }}</div>
+      <router-link to="/">{{ $t('notfound.back') }}</router-link>
     </div>
   </div>
 </template>

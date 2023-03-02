@@ -74,6 +74,11 @@
       "title": "Contact form",
       "subject": "Subject",
       "send": "Submit"
+    },
+    "notfound": {
+      "error": "Error 404",
+      "errorText": "The page you are looking for does not exist.",
+      "back": "Go back home"
     }
   },
   "fr": {
@@ -151,6 +156,11 @@
       "title": "Formulaire de contact",
       "subject": "Sujet",
       "send": "Contacter"
+    },
+    "notfound": {
+      "error": "Erreur 404",
+      "errorText": "La page que vous recherchez n'existe pas.",
+      "back": "Retour à l'accueil"
     }
   }
 }
