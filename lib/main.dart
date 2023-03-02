@@ -806,6 +806,8 @@ class AllergenDetailsScreen extends StatelessWidget {
   }
 
   createDetailsWidgets(userAllergens, productAllergens) {
+    userAllergens.sort();
+    productAllergens.sort();
     var userAllergensColumn = <Widget>[];
     userAllergensColumn.add(
       const Text(
@@ -826,12 +828,14 @@ class AllergenDetailsScreen extends StatelessWidget {
 
     userAllergens.forEach((allergen) {
       if(productAllergens.contains(allergen)) {
+        allergen = "${allergen[0].toUpperCase()}${allergen.substring(1)}";
         var textWidget = Text(allergen, style: const TextStyle(color: Colors.red));
         return userAllergensColumn.add(
           textWidget
         );
       }
       else {
+        allergen = "${allergen[0].toUpperCase()}${allergen.substring(1)}";
         var textWidget = Text(allergen);
         return userAllergensColumn.add(textWidget);
       }
@@ -839,12 +843,14 @@ class AllergenDetailsScreen extends StatelessWidget {
 
   productAllergens.forEach((allergen) {
     if(userAllergens.contains(allergen)) {
+      allergen = "${allergen[0].toUpperCase()}${allergen.substring(1)}";
       var textWidget = Text(allergen, style: const TextStyle(color: Colors.red));
       return productAllergensColumn.add(
           textWidget
       );
     }
     else {
+      allergen = "${allergen[0].toUpperCase()}${allergen.substring(1)}";
       var textWidget = Text(allergen);
       return productAllergensColumn.add(textWidget);
     }

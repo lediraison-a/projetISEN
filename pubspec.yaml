@@ -104,6 +104,7 @@ flutter:
 
   assets:
     - "assets/svg/i-like-food.svg"
+    - "assets/allergens.json"
 
 flutter_icons:
   android: "launcher_icon"
