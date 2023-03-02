@@ -69,6 +69,11 @@
       "isAdmin": "is admin",
       "no": "no",
       "yes": "yes"
+    },
+    "contact": {
+      "title": "Contact form",
+      "subject": "Subject",
+      "send": "Submit"
     }
   },
   "fr": {
@@ -141,6 +146,11 @@
       "isAdmin": "est admin",
       "no": "non",
       "yes": "oui"
+    },
+    "contact": {
+      "title": "Formulaire de contact",
+      "subject": "Sujet",
+      "send": "Envoyer"
     }
   }
 }
