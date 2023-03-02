@@ -10,12 +10,19 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:quickalert/quickalert.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
+import 'package:flutter/services.dart' show rootBundle;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(const MyApp());
 }
+
+Future<String> loadAsset() async {
+  return await rootBundle.loadString('assets/allergens.json');
+}
+
+String allergenData = "";
 
 String barcodeNutella = "3017620422003";
 
@@ -388,6 +395,10 @@ class _ScanScreenState extends State<ScanScreen> {
   // Test d'allergènes
   Future<void> testAllergies(
       String? firebaseToken, String barcodeScanRes, bool isUnique) async {
+
+    // Load allergen data for allergens translation
+    allergenData = await loadAsset();
+
     List userAllergens = [];
     List productAllergens = [];
     bool isSafeToEat = true;
@@ -805,9 +816,22 @@ class AllergenDetailsScreen extends StatelessWidget {
     );
   }
 
-  createDetailsWidgets(userAllergens, productAllergens) {
+  createDetailsWidgets(userAllergensEN, productAllergensEN) {
+    // Translate allergens to FR
+    var allergenJson = json.decode(allergenData);
+    List<String> userAllergens = [];
+    List<String> productAllergens = [];
+    userAllergensEN.forEach((allergen) {
+      userAllergens.add(allergenJson['en:$allergen']['name']['fr']);
+    });
+    productAllergensEN.forEach((allergen) {
+      productAllergens.add(allergenJson['en:$allergen']['name']['fr']);
+    });
+
+    // Sort allergens by alphabetical order
     userAllergens.sort();
     productAllergens.sort();
+
     var userAllergensColumn = <Widget>[];
     userAllergensColumn.add(
       const Text(
