@@ -9,6 +9,7 @@ import Contact from '../views/ContactView.vue'
 import NotFoundView from '../views/NotFoundView.vue'
 import { useUserContext } from '@/stores/userContextStore'
 import { useAdmin } from '@/stores/adminStore'
+import firebase from 'firebase/compat/app'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -55,9 +56,20 @@ const router = createRouter({
 const protectedPath = ['user', 'admin', 'download']
 const adminPath = ['admin']
 
-router.beforeEach((to, from) => {
+function getCurrentUser() {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
+      unsubscribe()
+      resolve(user)
+    }, reject)
+  })
+}
+
+router.beforeEach(async (to, from) => {
   const userContext = useUserContext()
   const adminStore = useAdmin()
+
+  await getCurrentUser()
 
   // admin path guard
   if (
