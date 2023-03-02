@@ -28,6 +28,4 @@ onMounted(async () => {
   padding-top: 1rem;
   border-top: solid var(--color-border) 1px;
 }
-
-
 </style>

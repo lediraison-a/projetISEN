@@ -2,7 +2,6 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { useUserContext } from '@/stores/userContextStore'
 import { useAppAlert } from '@/stores/appAlertStore'
-import router from '@/router'
 
 export const useAdmin = defineStore('admin', () => {
   const userList = ref([])
@@ -16,12 +15,7 @@ export const useAdmin = defineStore('admin', () => {
   }
 
   function checkAdmin(resp) {
-    isSelfAdmin.value = false
-    if (resp.status === 403) {
-      router.push('/')
-    } else if (resp.status === 200) {
-      isSelfAdmin.value = true
-    }
+    isSelfAdmin.value = resp.status === 200
   }
 
   async function fetchIsSelfAdmin() {
