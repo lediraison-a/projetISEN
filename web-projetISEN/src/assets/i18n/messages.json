@@ -82,11 +82,11 @@
       "downloadApp": "Télécharger l'application",
       "signInStart": "Connectez vous pour commencer",
       "or": "ou",
-      "noAllergen": "Pas d'allergenes",
-      "addAnAllergen": "Ajouter un allergen",
+      "noAllergen": "Pas d'allergènes",
+      "addAnAllergen": "Ajouter un allergène",
       "cancel": "Annuler",
       "allergens": "Mes allergènes",
-      "accountSettings": "Parametres du compte",
+      "accountSettings": "Paramètres du compte",
       "deleteAccount" : "Supprimer le compte",
       "passwordChange": "Demander un changement de mot de passe",
       "email": "mail",
@@ -99,13 +99,13 @@
       "downloadQrcode": "Scanner le QR code avec votre smartphone pour télécharger l'application",
       "headerUser": "Utilisateur",
       "yes": "Oui",
-      "welcomeConnected": "Bienvenu sur Dish, l'application qui vous permet d'identifier des allergenes dans les produits de la vie courante.",
-      "welcomeNotConnected": "Bienvenu sur Dish, l'application qui vous permet d'identifier des allergenes dans les produits de la vie courante.",
+      "welcomeConnected": "Bienvenu sur Dish, l'application qui vous permet d'identifier des allergènes dans les produits de la vie courante.",
+      "welcomeNotConnected": "Bienvenu sur Dish, l'application qui vous permet d'identifier des allergènes dans les produits de la vie courante.",
       "guide": "foire aux questions",
       "homeGuide1": "Visitez la ",
       "smartphoneApp": "L'application smartphone",
-      "explainDownload1": "Pour detecter les allergenes présent dans les produits, Dish propose un application smartphone. L'application est disponible sous la forme d'un fichier .apk à installer sur votre appareil.",
-      "explainDownload2": "The app is available for android smartphoL'application est diponible pour les téléphones android. Cliquez sur le bouton suivant pour télécharger l'application.es.",
+      "explainDownload1": "Pour détecter les allergènes présent dans les produits, Dish propose un application smartphone. L'application est disponible sous la forme d'un fichier .apk à installer sur votre appareil.",
+      "explainDownload2": "L'application est disponible pour les téléphones android. Cliquez sur le bouton suivant pour télécharger l'application.es.",
       "homeGuide2": " pour en savoir plus.",
       "sourceCode": "Code source",
       "loggedAsAdmin": "Connecté en tant qu'administrateur",
@@ -124,13 +124,13 @@
       "passwordResetConfirmMsg": "Demander un nouveau mot de passe ? Vous receverez un mail contenent un lien pour réinitialiser votre mot de passe."
     },
     "alert": {
-      "errorFetchingAllergens": "Érreur récupération des allergens",
-      "errorDeletingUser": "Érreur supression du compte",
-      "okDeletingUser": "Compte suprimé",
+      "errorFetchingAllergens": "Erreur récupération des allergens",
+      "errorDeletingUser": "Erreur suppression du compte",
+      "okDeletingUser": "Compte supprimé",
       "okMailSent": "Mail de réinitialisation de mot de passe envoyé",
       "okLoggedOut": "Déconnexion ok",
       "errorFetchUserList": "Erreur lors de la récupération de la liste des utilisateurs",
-      "errorDeactivateUser": "Erreur lors de la déséctivation de l'utilisateur",
+      "errorDeactivateUser": "Erreur lors de la désactivation de l'utilisateur",
       "errorReactivateUser": "Erreur lors de la réactivation de l'utilisateur",
       "errorUpdatingUsers": "Erreur lors de la mise a jour des utilisateurs",
       "okUserAllergensUpdate": "Allergènes de l'utilisateur mis à jour",
@@ -150,7 +150,7 @@
     "contact": {
       "title": "Formulaire de contact",
       "subject": "Sujet",
-      "send": "Envoyer"
+      "send": "Contacter"
     }
   }
 }

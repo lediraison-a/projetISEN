@@ -50,6 +50,8 @@ onMounted(() => {
 .dl-link {
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 #canvas {
@@ -64,8 +66,8 @@ onMounted(() => {
 }
 
 .dl-icon {
-  width: 1.8rem;
-  height: 1.8rem;
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
 .dl-link-text {
