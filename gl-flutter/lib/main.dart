@@ -10,7 +10,6 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:quickalert/quickalert.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
-import 'package:flutter/services.dart' show rootBundle;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,11 +22,7 @@ Future<String> loadAsset() async {
 }
 
 String allergenData = "";
-
-String barcodeNutella = "3017620422003";
-
 String apiBaseUrl = "http://vps-6d160f31.vps.ovh.net:8082/dishapi/";
-
 String? firebaseToken = "";
 final FirebaseAuth auth = FirebaseAuth.instance;
 
@@ -80,11 +75,9 @@ class ForgottenPasswordScreen extends StatefulWidget {
       _ForgottenPasswordScreenState();
 }
 
-// Activité Mot de passe oublié
+// Password forgotten activity
 class _ForgottenPasswordScreenState extends State<ForgottenPasswordScreen> {
   final mailTextController = TextEditingController();
-
-  //void sendResetPasswordMail(String mail) {}
 
   @override
   Widget build(BuildContext context) {
@@ -104,88 +97,89 @@ class _ForgottenPasswordScreenState extends State<ForgottenPasswordScreen> {
           ),
           child: Center(
               child: Card(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15)),
-                child: SizedBox(
-                  height: 150,
-                  width: 250,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      // ignore: prefer_const_constructors
-                      Container(
-                        margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                        child: TextField(
-                          controller: mailTextController,
-                          obscureText: false,
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(),
-                            labelText: 'Adresse mail',
-                          ),
-                        ),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+            child: SizedBox(
+              height: 150,
+              width: 250,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  // ignore: prefer_const_constructors
+                  Container(
+                    margin: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 10),
+                    child: TextField(
+                      controller: mailTextController,
+                      obscureText: false,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'Adresse mail',
                       ),
-                      ElevatedButton(
-                          style: ButtonStyle(
-                              shape: MaterialStateProperty.all<
-                                      RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(15)))),
-                          onPressed: () => {
-                                showDialog<void>(
-                                  context: context,
-                                  barrierDismissible:
-                                      false, // user must tap button!
-                                  builder: (BuildContext context) {
-                                    return AlertDialog(
-                                      title: const Text('Confirmation'),
-                                      content: SingleChildScrollView(
-                                        child: ListBody(
-                                          children: const <Widget>[
-                                            Text(
-                                                'Si l\'adresse mail renseignée est associée à un compte existant, un mail contenant les instructions pour réinitialiser son mot de passe lui sera envoyé.'),
-                                            Text('Souhaitez-vous continuer ?'),
-                                          ],
-                                        ),
-                                      ),
-                                      actions: <Widget>[
-                                        TextButton(
-                                          child: const Text("Annuler"),
-                                          onPressed: () =>
-                                              Navigator.of(context).pop(),
-                                        ),
-                                        TextButton(
-                                          child: const Text('Confirmer'),
-                                          onPressed: () {
-                                            auth.sendPasswordResetEmail(
-                                                email: mailTextController.text);
-                                            Navigator.of(context).pop();
-                                          },
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                )
-                              },
-                          child: const Text("Envoyer"))
-                    ],
+                    ),
                   ),
-                ),
-              )),
+                  ElevatedButton(
+                      style: ButtonStyle(
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(15)))),
+                      onPressed: () => {
+                            showDialog<void>(
+                              context: context,
+                              barrierDismissible:
+                                  false, // user must tap button!
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: const Text('Confirmation'),
+                                  content: SingleChildScrollView(
+                                    child: ListBody(
+                                      children: const <Widget>[
+                                        Text(
+                                            'Si l\'adresse mail renseignée est associée à un compte existant, un mail contenant les instructions pour réinitialiser son mot de passe lui sera envoyé.'),
+                                        Text('Souhaitez-vous continuer ?'),
+                                      ],
+                                    ),
+                                  ),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      child: const Text("Annuler"),
+                                      onPressed: () =>
+                                          Navigator.of(context).pop(),
+                                    ),
+                                    TextButton(
+                                      child: const Text('Confirmer'),
+                                      onPressed: () {
+                                        auth.sendPasswordResetEmail(
+                                            email: mailTextController.text);
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                  ],
+                                );
+                              },
+                            )
+                          },
+                      child: const Text("Envoyer"))
+                ],
+              ),
+            ),
+          )),
         ));
   }
 }
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
-
   final String title;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-// Activité principale au lancement de l'app
+// Login activity
 class _MyHomePageState extends State<MyHomePage> {
   static Future<User?> signInUsingEmailPassword({
     required String email,
@@ -210,7 +204,6 @@ class _MyHomePageState extends State<MyHomePage> {
           confirmBtnText: "Retour",
           confirmBtnColor: buildMaterialColor(const Color(0xff00bd7e)),
         );
-        print('FirebaseAuthException: No user found for that email.');
       } else if (e.code == 'wrong-password') {
         QuickAlert.show(
           title: "Oups ...",
@@ -220,7 +213,6 @@ class _MyHomePageState extends State<MyHomePage> {
           confirmBtnText: "Retour",
           confirmBtnColor: buildMaterialColor(const Color(0xff00bd7e)),
         );
-        print('FirebaseAuthException: Wrong password provided.');
       } else if (e.code == 'user-disabled') {
         QuickAlert.show(
           title: "Oups ...",
@@ -230,8 +222,6 @@ class _MyHomePageState extends State<MyHomePage> {
           confirmBtnText: "Retour",
           confirmBtnColor: buildMaterialColor(const Color(0xff00bd7e)),
         );
-        print(
-            "FirebaseAuthException: The user account has been disabled by an administrator.");
       }
     }
     return user;
@@ -242,15 +232,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
         appBar: AppBar(
-          // Here we take the value from the MyHomePage object that was created by
-          // the App.build method, and use it to set our appbar title.
           title: Text(widget.title),
         ),
         body: Container(
@@ -284,13 +267,11 @@ class _MyHomePageState extends State<MyHomePage> {
                             controller: usernameTextController,
                             obscureText: false,
                             decoration: InputDecoration(
-                              border: const OutlineInputBorder(),
-                              labelText: 'Adresse mail',
-                              suffixIcon: IconButton(
-                                  onPressed: usernameTextController.clear,
-                                  icon: const Icon(Icons.clear)
-                              )
-                            ),
+                                border: const OutlineInputBorder(),
+                                labelText: 'Adresse mail',
+                                suffixIcon: IconButton(
+                                    onPressed: usernameTextController.clear,
+                                    icon: const Icon(Icons.clear))),
                           ),
                         ),
                         const SizedBox(
@@ -302,13 +283,11 @@ class _MyHomePageState extends State<MyHomePage> {
                             controller: passwordTextController,
                             obscureText: true,
                             decoration: InputDecoration(
-                              border: const OutlineInputBorder(),
-                              labelText: 'Mot de passe',
-                              suffixIcon: IconButton(
-                                  onPressed: passwordTextController.clear,
-                                  icon: const Icon(Icons.clear)
-                              )
-                            ),
+                                border: const OutlineInputBorder(),
+                                labelText: 'Mot de passe',
+                                suffixIcon: IconButton(
+                                    onPressed: passwordTextController.clear,
+                                    icon: const Icon(Icons.clear))),
                           ),
                         ),
                         const SizedBox(height: 8),
@@ -325,7 +304,6 @@ class _MyHomePageState extends State<MyHomePage> {
                                             borderRadius:
                                                 BorderRadius.circular(15)))),
                                 onPressed: () async {
-                                  print("Login button pressed");
                                   User? firebaseUser =
                                       await signInUsingEmailPassword(
                                           email: usernameTextController.text,
@@ -333,11 +311,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                           context: context);
 
                                   if (firebaseUser == null) {
-                                    print("firebaseUser null");
                                   } else {
-                                    print(
-                                        "firebaseUser ${usernameTextController.text} connected");
-
                                     MyApp.firebaseUser = firebaseUser;
                                     Navigator.push(
                                         context,
@@ -379,11 +353,9 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-// Activité de scan
+// Scan activity
 class ScanScreen extends StatefulWidget {
   const ScanScreen({super.key});
-
-  //final String title;
 
   @override
   State<ScanScreen> createState() => _ScanScreenState();
@@ -392,10 +364,8 @@ class ScanScreen extends StatefulWidget {
 class _ScanScreenState extends State<ScanScreen> {
   String _scanBarcode = "";
 
-  // Test d'allergènes
   Future<void> testAllergies(
       String? firebaseToken, String barcodeScanRes, bool isUnique) async {
-
     // Load allergen data for allergens translation
     allergenData = await loadAsset();
 
@@ -408,7 +378,7 @@ class _ScanScreenState extends State<ScanScreen> {
       'Authorization': 'Bearer $firebaseToken'
     };
 
-    // taper l'API pour avoir les allergènes de l'utilisateur
+    // Ask the API for user allergens
     var request =
         http.Request('GET', Uri.parse('${apiBaseUrl}api/v1/user/allergens'));
     request.headers.addAll(headers);
@@ -416,15 +386,12 @@ class _ScanScreenState extends State<ScanScreen> {
     if (response.statusCode == 200) {
       // response.stream.bytesToString() = allergènes de l'utilisateur
       userAllergens = json.decode(await response.stream.bytesToString());
-      // convertir en minuscules
+      // convert to lowerCase for testing
       userAllergens =
           userAllergens.map((allergen) => allergen.toLowerCase()).toList();
-      print("User allergens: $userAllergens");
-    } else {
-      print(response.reasonPhrase);
     }
 
-    // demander les allergènes du produit $barcodeScanRes à l'API
+    // Ask the API for product allergens
     var productRequestHeaders = {
       'accept': 'application/json',
       'Authorization': 'Bearer $firebaseToken'
@@ -434,28 +401,25 @@ class _ScanScreenState extends State<ScanScreen> {
     productRequest.headers.addAll(productRequestHeaders);
     http.StreamedResponse productResponse = await productRequest.send();
 
-    // Si l'API renvoie un statusCode 200, la requête est bien passée
+    // If API returns 200, barcode is good and process
+    // else show an error QuickAlert or toast
     if (productResponse.statusCode == 200) {
       String productResponseString =
           await productResponse.stream.bytesToString();
       Map valueMap = json.decode(productResponseString);
       var valuesReturned = valueMap.values.toList();
-      // String productName = valuesReturned[0];
-      // String productBarcode = valuesReturned[1];
       productAllergens = valuesReturned[2];
       productAllergens =
           productAllergens.map((allergen) => allergen.toLowerCase()).toList();
-      print("Product allergens: $productAllergens");
 
-      // Comparer
+      // Check if user and product have allergens in common
       userAllergens.forEach((element) {
         if (productAllergens.contains(element)) {
           isSafeToEat = false;
         }
       });
 
-      // Boîte de dialogue après chaque scan
-      // Afficher le dialogue si le scan est continu, afficher le toast sinon
+      // Show alert or toast after each scan
       if (isSafeToEat) {
         if (isUnique) {
           QuickAlert.show(
@@ -518,8 +482,6 @@ class _ScanScreenState extends State<ScanScreen> {
         }
       }
     }
-    // mail admin: matg29@protonmail.com
-    // Sinon il y a erreur. Générer un popup d'erreur
     else {
       if (isUnique) {
         QuickAlert.show(
@@ -576,12 +538,10 @@ class _ScanScreenState extends State<ScanScreen> {
       firebaseToken = value.token;
       print("firebaseToken $firebaseToken");
       if (barcodeScanRes == "-1") {
-        print("Nothing scanned");
       } else {
         testAllergies(firebaseToken, barcodeScanRes, isUnique);
       }
     });
-    //return "a";
   }
 
   @override
@@ -601,18 +561,11 @@ class _ScanScreenState extends State<ScanScreen> {
               ),
             ),
           ),
-          //color: Colors.yellow,
           child: Column(
-              //mainAxisAlignment: MainAxisAlignment.center,
-              //crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                //Text("Bonjour ${MyApp.firebaseUser?.displayName} !"),
-                // Text("Contenu du code-barres: $_scanBarcode"),
                 Card(
-                  //margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                   margin: const EdgeInsets.all(20),
                   clipBehavior: Clip.antiAlias,
-                  //elevation: 5,
                   child: Container(
                     margin: const EdgeInsets.all(6),
                     child: Row(
@@ -623,7 +576,6 @@ class _ScanScreenState extends State<ScanScreen> {
                             Align(
                               alignment: Alignment.centerLeft,
                               child: Container(
-                                //color: Colors.black54,
                                 child: const Text("Bienvenue sur Dish!",
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
@@ -634,7 +586,6 @@ class _ScanScreenState extends State<ScanScreen> {
                             Align(
                               alignment: Alignment.centerLeft,
                               child: Container(
-                                //color: Colors.black54,
                                 child: const Text(
                                     "On ne mange pas n'importe quoi !",
                                     style: TextStyle(
@@ -646,7 +597,6 @@ class _ScanScreenState extends State<ScanScreen> {
                             Align(
                               alignment: Alignment.centerLeft,
                               child: Container(
-                                //color: Colors.black54,
                                 child: const Text(
                                     "Le but du projet a été de développer un service en réalité augmentée permettant d'identifier facilement si un produit alimentaire contient des allergènes.",
                                     textAlign: TextAlign.justify),
@@ -655,7 +605,6 @@ class _ScanScreenState extends State<ScanScreen> {
                             Align(
                               alignment: Alignment.centerLeft,
                               child: Container(
-                                //color: Colors.black54,
                                 child: const Text("Développement web",
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
@@ -666,7 +615,6 @@ class _ScanScreenState extends State<ScanScreen> {
                             Align(
                               alignment: Alignment.centerLeft,
                               child: Container(
-                                //color: Colors.black54,
                                 child: const Text(
                                     "Nous avons développé et déployé une application web de gestion des abonnés au service. À partir de cette interface, il est possible de gérer les droits d'utilisation, de télécharger l'application mobile, de configurer ses allergènes, de lire la FAQ associée au service ou encore de contacter les développeurs du service. Chaque client doit avoir un compte sur le serveur pour pouvoir utiliser le service avec son smartphone.",
                                     textAlign: TextAlign.justify),
@@ -675,7 +623,6 @@ class _ScanScreenState extends State<ScanScreen> {
                             Align(
                               alignment: Alignment.centerLeft,
                               child: Container(
-                                //color: Colors.black54,
                                 child: const Text("Développement Android",
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
@@ -686,7 +633,6 @@ class _ScanScreenState extends State<ScanScreen> {
                             Align(
                               alignment: Alignment.centerLeft,
                               child: Container(
-                                //color: Colors.black54,
                                 child: const Text(
                                     "Nous avons également développé cette application Android pour que les utilisateurs puissent scanner le code-barre des aliments, puis être alertés si ces éléments contiennent des allergènes que l'utilisateur ne tolère pas et qu'il aura renseigné à l'avance sur le portail web du service.",
                                     textAlign: TextAlign.justify),
@@ -700,14 +646,12 @@ class _ScanScreenState extends State<ScanScreen> {
                 ),
                 Expanded(
                   child: Container(
-                      //color: Colors.red,
                       ),
                 ),
                 Center(
                   child: Card(
                     margin: const EdgeInsets.symmetric(
                         vertical: 10, horizontal: 20),
-                    //elevation: 5,
                     child: Column(
                       children: [
                         Row(
@@ -784,8 +728,6 @@ class AllergenDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("userAllergens: $userAllergens");
-    print("productAllergens: $productAllergens");
     return Scaffold(
       appBar: AppBar(
         title: const Text('Détails du scan'),
@@ -805,12 +747,9 @@ class AllergenDetailsScreen extends StatelessWidget {
             child: Container(
               margin: const EdgeInsets.all(10),
               child: Column(
-                //mainAxisAlignment: MainAxisAlignment.center,
-                //crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  createDetailsWidgets(userAllergens, productAllergens)
-                ]
-              ),
+                  children: [
+                    createDetailsWidgets(userAllergens, productAllergens)
+                  ]),
             )),
       ),
     );
@@ -851,48 +790,46 @@ class AllergenDetailsScreen extends StatelessWidget {
     );
 
     userAllergens.forEach((allergen) {
-      if(productAllergens.contains(allergen)) {
+      if (productAllergens.contains(allergen)) {
         allergen = "${allergen[0].toUpperCase()}${allergen.substring(1)}";
-        var textWidget = Text(allergen, style: const TextStyle(color: Colors.red));
-        return userAllergensColumn.add(
-          textWidget
-        );
-      }
-      else {
+        var textWidget =
+            Text(allergen, style: const TextStyle(color: Colors.red));
+        return userAllergensColumn.add(textWidget);
+      } else {
         allergen = "${allergen[0].toUpperCase()}${allergen.substring(1)}";
         var textWidget = Text(allergen);
         return userAllergensColumn.add(textWidget);
       }
     });
 
-  productAllergens.forEach((allergen) {
-    if(userAllergens.contains(allergen)) {
-      allergen = "${allergen[0].toUpperCase()}${allergen.substring(1)}";
-      var textWidget = Text(allergen, style: const TextStyle(color: Colors.red));
-      return productAllergensColumn.add(
-          textWidget
-      );
-    }
-    else {
-      allergen = "${allergen[0].toUpperCase()}${allergen.substring(1)}";
-      var textWidget = Text(allergen);
-      return productAllergensColumn.add(textWidget);
-    }
-  });
+    productAllergens.forEach((allergen) {
+      if (userAllergens.contains(allergen)) {
+        allergen = "${allergen[0].toUpperCase()}${allergen.substring(1)}";
+        var textWidget =
+            Text(allergen, style: const TextStyle(color: Colors.red));
+        return productAllergensColumn.add(textWidget);
+      } else {
+        allergen = "${allergen[0].toUpperCase()}${allergen.substring(1)}";
+        var textWidget = Text(allergen);
+        return productAllergensColumn.add(textWidget);
+      }
+    });
 
-  var row = Row(
-    mainAxisAlignment: MainAxisAlignment.center,
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Expanded(child: Column(
-        children: userAllergensColumn,
-      )),
-      Expanded(child: Column(
-        children: productAllergensColumn,
-      )),
-    ],
-  );
-  
-  return row;
+    var row = Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(
+            child: Column(
+          children: userAllergensColumn,
+        )),
+        Expanded(
+            child: Column(
+          children: productAllergensColumn,
+        )),
+      ],
+    );
+
+    return row;
   }
 }
