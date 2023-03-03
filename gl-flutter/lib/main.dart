@@ -772,9 +772,9 @@ class AllergenDetailsScreen extends StatelessWidget {
                                           BorderRadius.circular(15)))),
                       onPressed: () async {
                         // For some reason, access with hostname is random
-                        //final Uri _url = Uri.parse('http://vps-6d160f31.vps.ovh.net/');
-                        final Uri _url = Uri.parse('http://54.36.181.29/');
-                        if (!await launchUrl(_url, mode: LaunchMode.inAppWebView)) {
+                        final Uri _url = Uri.parse('http://vps-6d160f31.vps.ovh.net/');
+                        //final Uri _url = Uri.parse('http://54.36.181.29/');
+                        if (!await launchUrl(_url, mode: LaunchMode.externalApplication)) {
                           throw Exception('Could not launch $_url');
                         }
                       },
