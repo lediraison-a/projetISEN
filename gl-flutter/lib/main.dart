@@ -23,6 +23,7 @@ Future<String> loadAsset() async {
 }
 
 String allergenData = "";
+
 String apiBaseUrl = "http://vps-6d160f31.vps.ovh.net:8082/dishapi/";
 String? firebaseToken = "";
 final FirebaseAuth auth = FirebaseAuth.instance;
@@ -770,9 +771,10 @@ class AllergenDetailsScreen extends StatelessWidget {
                                       borderRadius:
                                           BorderRadius.circular(15)))),
                       onPressed: () async {
+                        // For some reason, access with hostname is random
                         //final Uri _url = Uri.parse('http://vps-6d160f31.vps.ovh.net/');
                         final Uri _url = Uri.parse('http://54.36.181.29/');
-                        if (!await launchUrl(_url)) {
+                        if (!await launchUrl(_url, mode: LaunchMode.inAppWebView)) {
                           throw Exception('Could not launch $_url');
                         }
                       },
@@ -789,7 +791,7 @@ class AllergenDetailsScreen extends StatelessWidget {
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      child: const Text('Scanner à nouveau'),
+                      child: const Text('Retour'),
                     ),
                   ],
                 )

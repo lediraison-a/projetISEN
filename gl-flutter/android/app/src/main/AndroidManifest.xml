@@ -1,6 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="fr.isen.gl_flutter">
    <application
+        android:networkSecurityConfig="@xml/network_security_config"
         android:label="Dish"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
