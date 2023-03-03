@@ -56,28 +56,20 @@ const router = createRouter({
 const protectedPath = ['user', 'admin', 'download']
 const adminPath = ['admin']
 
-function getCurrentUser() {
-  return new Promise((resolve, reject) => {
-    const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
-      unsubscribe()
-      resolve(user)
-    }, reject)
-  })
-}
-
 router.beforeEach(async (to, from) => {
   const userContext = useUserContext()
   const adminStore = useAdmin()
 
-  await getCurrentUser()
-
   // admin path guard
-  if (
-    adminPath.includes(to.name) &&
-    !(userContext.isConnected && adminStore.isSelfAdmin) &&
-    to.name !== 'not-found'
-  ) {
-    return { name: 'not-found' }
+  if (adminPath.includes(to.name) && to.name !== 'not-found') {
+    await userContext.getCurrentUser()
+    if (!userContext.isConnected) {
+      return { name: 'not-found' }
+    }
+    await adminStore.fetchIsSelfAdmin()
+    if (!adminStore.isSelfAdmin) {
+      return { name: 'not-found' }
+    }
   }
 
   // user path guard
@@ -86,7 +78,10 @@ router.beforeEach(async (to, from) => {
     !userContext.isConnected &&
     to.name !== 'signin'
   ) {
-    return { name: 'signin' }
+    await userContext.getCurrentUser()
+    if (!userContext.isConnected) {
+      return { name: 'signin' }
+    }
   }
 })
 
