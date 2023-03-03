@@ -26,8 +26,7 @@ String apiBaseUrl = "http://vps-6d160f31.vps.ovh.net:8082/dishapi/";
 String? firebaseToken = "";
 final FirebaseAuth auth = FirebaseAuth.instance;
 
-// Création d'une primaryswatch à partir d'un hex de couleur
-// pour la couleur verte de la charte graphique
+// Create primaryswatch from hex
 MaterialColor buildMaterialColor(Color color) {
   List strengths = <double>[.05];
   Map<int, Color> swatch = {};
