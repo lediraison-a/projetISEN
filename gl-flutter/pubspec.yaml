@@ -48,6 +48,7 @@ dependencies:
   tuple: ^2.0.1
   flutter_svg_provider: ^1.0.3
   flutter_lorem: ^2.0.0
+  url_launcher: ^6.1.10
 
 dev_dependencies:
   flutter_test:

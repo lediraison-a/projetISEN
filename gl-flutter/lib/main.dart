@@ -10,6 +10,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:quickalert/quickalert.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -172,6 +173,7 @@ class _ForgottenPasswordScreenState extends State<ForgottenPasswordScreen> {
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
+
   final String title;
 
   @override
@@ -480,8 +482,7 @@ class _ScanScreenState extends State<ScanScreen> {
               fontSize: 16.0);
         }
       }
-    }
-    else {
+    } else {
       if (isUnique) {
         QuickAlert.show(
           text: "Nous avons rencontré une erreur, veuillez réessayer.",
@@ -560,160 +561,156 @@ class _ScanScreenState extends State<ScanScreen> {
               ),
             ),
           ),
-          child: Column(
-              children: [
-                Card(
-                  margin: const EdgeInsets.all(20),
-                  clipBehavior: Clip.antiAlias,
-                  child: Container(
-                    margin: const EdgeInsets.all(6),
-                    child: Row(
+          child: Column(children: [
+            Card(
+              margin: const EdgeInsets.all(20),
+              clipBehavior: Clip.antiAlias,
+              child: Container(
+                margin: const EdgeInsets.all(6),
+                child: Row(
+                  children: [
+                    Expanded(
+                        child: Column(
                       children: [
-                        Expanded(
-                            child: Column(
-                          children: [
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: Container(
-                                child: const Text("Bienvenue sur Dish!",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 25,
-                                    )),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: Container(
-                                child: const Text(
-                                    "On ne mange pas n'importe quoi !",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20,
-                                    )),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: Container(
-                                child: const Text(
-                                    "Le but du projet a été de développer un service en réalité augmentée permettant d'identifier facilement si un produit alimentaire contient des allergènes.",
-                                    textAlign: TextAlign.justify),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: Container(
-                                child: const Text("Développement web",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20,
-                                    )),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: Container(
-                                child: const Text(
-                                    "Nous avons développé et déployé une application web de gestion des abonnés au service. À partir de cette interface, il est possible de gérer les droits d'utilisation, de télécharger l'application mobile, de configurer ses allergènes, de lire la FAQ associée au service ou encore de contacter les développeurs du service. Chaque client doit avoir un compte sur le serveur pour pouvoir utiliser le service avec son smartphone.",
-                                    textAlign: TextAlign.justify),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: Container(
-                                child: const Text("Développement Android",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20,
-                                    )),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: Container(
-                                child: const Text(
-                                    "Nous avons également développé cette application Android pour que les utilisateurs puissent scanner le code-barre des aliments, puis être alertés si ces éléments contiennent des allergènes que l'utilisateur ne tolère pas et qu'il aura renseigné à l'avance sur le portail web du service.",
-                                    textAlign: TextAlign.justify),
-                              ),
-                            ),
-                          ],
-                        ))
-                      ],
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Container(
-                      ),
-                ),
-                Center(
-                  child: Card(
-                    margin: const EdgeInsets.symmetric(
-                        vertical: 10, horizontal: 20),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              "connecté en tant que ${MyApp.firebaseUser?.displayName}",
-                              style: const TextStyle(
-                                fontSize: 12,
-                                fontStyle: FontStyle.italic,
-                              ),
-                            )
-                          ],
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Container(
+                            child: const Text("Bienvenue sur Dish!",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 25,
+                                )),
+                          ),
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Row(
-                              children: [
-                                Column(children: [
-                                  ElevatedButton(
-                                    style: ButtonStyle(
-                                        shape: MaterialStateProperty.all<
-                                                RoundedRectangleBorder>(
-                                            RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        15)))),
-                                    onPressed: () async {
-                                      barcodeScan();
-                                    },
-                                    child: const Text('Scan unique'),
-                                  )
-                                ]),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                Column(children: [
-                                  ElevatedButton(
-                                    style: ButtonStyle(
-                                        shape: MaterialStateProperty.all<
-                                                RoundedRectangleBorder>(
-                                            RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        15)))),
-                                    onPressed: () async {
-                                      startBarcodeScanStream();
-                                    },
-                                    child: const Text('Scan continu'),
-                                  ),
-                                ])
-                              ],
-                            )
-                          ],
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Container(
+                            child:
+                                const Text("On ne mange pas n'importe quoi !",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20,
+                                    )),
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Container(
+                            child: const Text(
+                                "Le but du projet a été de développer un service en réalité augmentée permettant d'identifier facilement si un produit alimentaire contient des allergènes.",
+                                textAlign: TextAlign.justify),
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Container(
+                            child: const Text("Développement web",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                )),
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Container(
+                            child: const Text(
+                                "Nous avons développé et déployé une application web de gestion des abonnés au service. À partir de cette interface, il est possible de gérer les droits d'utilisation, de télécharger l'application mobile, de configurer ses allergènes, de lire la FAQ associée au service ou encore de contacter les développeurs du service. Chaque client doit avoir un compte sur le serveur pour pouvoir utiliser le service avec son smartphone.",
+                                textAlign: TextAlign.justify),
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Container(
+                            child: const Text("Développement Android",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                )),
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Container(
+                            child: const Text(
+                                "Nous avons également développé cette application Android pour que les utilisateurs puissent scanner le code-barre des aliments, puis être alertés si ces éléments contiennent des allergènes que l'utilisateur ne tolère pas et qu'il aura renseigné à l'avance sur le portail web du service.",
+                                textAlign: TextAlign.justify),
+                          ),
                         ),
                       ],
+                    ))
+                  ],
+                ),
+              ),
+            ),
+            Expanded(
+              child: Container(),
+            ),
+            Center(
+              child: Card(
+                margin:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          "connecté en tant que ${MyApp.firebaseUser?.displayName}",
+                          style: const TextStyle(
+                            fontSize: 12,
+                            fontStyle: FontStyle.italic,
+                          ),
+                        )
+                      ],
                     ),
-                  ),
-                )
-              ]),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Row(
+                          children: [
+                            Column(children: [
+                              ElevatedButton(
+                                style: ButtonStyle(
+                                    shape: MaterialStateProperty.all<
+                                            RoundedRectangleBorder>(
+                                        RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(15)))),
+                                onPressed: () async {
+                                  barcodeScan();
+                                },
+                                child: const Text('Scan unique'),
+                              )
+                            ]),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Column(children: [
+                              ElevatedButton(
+                                style: ButtonStyle(
+                                    shape: MaterialStateProperty.all<
+                                            RoundedRectangleBorder>(
+                                        RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(15)))),
+                                onPressed: () async {
+                                  startBarcodeScanStream();
+                                },
+                                child: const Text('Scan continu'),
+                              ),
+                            ])
+                          ],
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            )
+          ]),
         )));
   }
 }
@@ -741,15 +738,65 @@ class AllergenDetailsScreen extends StatelessWidget {
             ),
           ),
         ),
-        child: Card(
-            margin: const EdgeInsets.all(20),
-            child: Container(
-              margin: const EdgeInsets.all(10),
-              child: Column(
+        child: Column(
+          children: [
+            Expanded(
+              child: Card(
+                  margin: const EdgeInsets.all(20),
+                  child: Container(
+                    margin: const EdgeInsets.all(10),
+                    child: Column(children: [
+                      createDetailsWidgets(userAllergens, productAllergens)
+                    ]),
+                  )),
+            ),
+            /*Expanded(
+              child: Container(
+                //color: Colors.red,
+              ),
+            ),*/
+            Center(
+                child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    createDetailsWidgets(userAllergens, productAllergens)
-                  ]),
-            )),
+                    ElevatedButton(
+                      style: ButtonStyle(
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(15)))),
+                      onPressed: () async {
+                        //final Uri _url = Uri.parse('http://vps-6d160f31.vps.ovh.net/');
+                        final Uri _url = Uri.parse('http://54.36.181.29/');
+                        if (!await launchUrl(_url)) {
+                          throw Exception('Could not launch $_url');
+                        }
+                      },
+                      child: const Text('Modifier vos allergènes'),
+                    ),
+                    const SizedBox(width: 20,),
+                    ElevatedButton(
+                      style: ButtonStyle(
+                          shape:
+                          MaterialStateProperty.all<RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                  borderRadius:
+                                  BorderRadius.circular(15)))),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Text('Scanner à nouveau'),
+                    ),
+                  ],
+                )
+              ],
+            ))
+          ],
+        ),
       ),
     );
   }
