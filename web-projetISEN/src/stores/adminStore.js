@@ -32,7 +32,7 @@ export const useAdmin = defineStore('admin', () => {
       redirect: 'follow',
     }
 
-    fetch(
+    return fetch(
       import.meta.env.VITE_API_URL + 'admin/selfadmin',
       requestOptions
     )

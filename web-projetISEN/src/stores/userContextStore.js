@@ -79,6 +79,15 @@ export const useUserContext = defineStore('userContext', () => {
       })
   }
 
+  function getCurrentUser() {
+    return new Promise((resolve, reject) => {
+      const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
+        unsubscribe()
+        resolve(user)
+      }, reject)
+    })
+  }
+
   return {
     email,
     uid,
@@ -89,5 +98,6 @@ export const useUserContext = defineStore('userContext', () => {
     getToken,
     sendEmailReset,
     deleteCurrentUser,
+    getCurrentUser,
   }
 })
